@@ -1,0 +1,491 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		067ED64D23690E9F004FA82D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ED64C23690E9F004FA82D /* AppDelegate.swift */; };
+		067ED64F23690E9F004FA82D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ED64E23690E9F004FA82D /* SceneDelegate.swift */; };
+		067ED65223690E9F004FA82D /* Fitnetic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 067ED65023690E9F004FA82D /* Fitnetic.xcdatamodeld */; };
+		067ED65423690E9F004FA82D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ED65323690E9F004FA82D /* ContentView.swift */; };
+		067ED65623690EA1004FA82D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 067ED65523690EA1004FA82D /* Assets.xcassets */; };
+		067ED65923690EA1004FA82D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 067ED65823690EA1004FA82D /* Preview Assets.xcassets */; };
+		067ED65C23690EA1004FA82D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 067ED65A23690EA1004FA82D /* LaunchScreen.storyboard */; };
+		067ED66723690EA2004FA82D /* FitneticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ED66623690EA2004FA82D /* FitneticTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		067ED66323690EA2004FA82D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 067ED64123690E9F004FA82D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 067ED64823690E9F004FA82D;
+			remoteInfo = Fitnetic;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		067ED64923690E9F004FA82D /* Fitnetic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fitnetic.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		067ED64C23690E9F004FA82D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		067ED64E23690E9F004FA82D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		067ED65123690E9F004FA82D /* Fitnetic.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Fitnetic.xcdatamodel; sourceTree = "<group>"; };
+		067ED65323690E9F004FA82D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		067ED65523690EA1004FA82D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		067ED65823690EA1004FA82D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		067ED65B23690EA1004FA82D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		067ED65D23690EA2004FA82D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		067ED66223690EA2004FA82D /* FitneticTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FitneticTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		067ED66623690EA2004FA82D /* FitneticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitneticTests.swift; sourceTree = "<group>"; };
+		067ED66823690EA2004FA82D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		067ED64623690E9F004FA82D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		067ED65F23690EA2004FA82D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		067ED64023690E9F004FA82D = {
+			isa = PBXGroup;
+			children = (
+				067ED64B23690E9F004FA82D /* Fitnetic */,
+				067ED66523690EA2004FA82D /* FitneticTests */,
+				067ED64A23690E9F004FA82D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		067ED64A23690E9F004FA82D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				067ED64923690E9F004FA82D /* Fitnetic.app */,
+				067ED66223690EA2004FA82D /* FitneticTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		067ED64B23690E9F004FA82D /* Fitnetic */ = {
+			isa = PBXGroup;
+			children = (
+				067ED64C23690E9F004FA82D /* AppDelegate.swift */,
+				067ED64E23690E9F004FA82D /* SceneDelegate.swift */,
+				067ED65323690E9F004FA82D /* ContentView.swift */,
+				067ED65523690EA1004FA82D /* Assets.xcassets */,
+				067ED65A23690EA1004FA82D /* LaunchScreen.storyboard */,
+				067ED65D23690EA2004FA82D /* Info.plist */,
+				067ED65023690E9F004FA82D /* Fitnetic.xcdatamodeld */,
+				067ED65723690EA1004FA82D /* Preview Content */,
+			);
+			path = Fitnetic;
+			sourceTree = "<group>";
+		};
+		067ED65723690EA1004FA82D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				067ED65823690EA1004FA82D /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		067ED66523690EA2004FA82D /* FitneticTests */ = {
+			isa = PBXGroup;
+			children = (
+				067ED66623690EA2004FA82D /* FitneticTests.swift */,
+				067ED66823690EA2004FA82D /* Info.plist */,
+			);
+			path = FitneticTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		067ED64823690E9F004FA82D /* Fitnetic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 067ED66B23690EA2004FA82D /* Build configuration list for PBXNativeTarget "Fitnetic" */;
+			buildPhases = (
+				067ED64523690E9F004FA82D /* Sources */,
+				067ED64623690E9F004FA82D /* Frameworks */,
+				067ED64723690E9F004FA82D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Fitnetic;
+			productName = Fitnetic;
+			productReference = 067ED64923690E9F004FA82D /* Fitnetic.app */;
+			productType = "com.apple.product-type.application";
+		};
+		067ED66123690EA2004FA82D /* FitneticTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 067ED66E23690EA2004FA82D /* Build configuration list for PBXNativeTarget "FitneticTests" */;
+			buildPhases = (
+				067ED65E23690EA2004FA82D /* Sources */,
+				067ED65F23690EA2004FA82D /* Frameworks */,
+				067ED66023690EA2004FA82D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				067ED66423690EA2004FA82D /* PBXTargetDependency */,
+			);
+			name = FitneticTests;
+			productName = FitneticTests;
+			productReference = 067ED66223690EA2004FA82D /* FitneticTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		067ED64123690E9F004FA82D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1110;
+				LastUpgradeCheck = 1110;
+				ORGANIZATIONNAME = "67-442";
+				TargetAttributes = {
+					067ED64823690E9F004FA82D = {
+						CreatedOnToolsVersion = 11.1;
+					};
+					067ED66123690EA2004FA82D = {
+						CreatedOnToolsVersion = 11.1;
+						TestTargetID = 067ED64823690E9F004FA82D;
+					};
+				};
+			};
+			buildConfigurationList = 067ED64423690E9F004FA82D /* Build configuration list for PBXProject "Fitnetic" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 067ED64023690E9F004FA82D;
+			productRefGroup = 067ED64A23690E9F004FA82D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				067ED64823690E9F004FA82D /* Fitnetic */,
+				067ED66123690EA2004FA82D /* FitneticTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		067ED64723690E9F004FA82D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				067ED65C23690EA1004FA82D /* LaunchScreen.storyboard in Resources */,
+				067ED65923690EA1004FA82D /* Preview Assets.xcassets in Resources */,
+				067ED65623690EA1004FA82D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		067ED66023690EA2004FA82D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		067ED64523690E9F004FA82D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				067ED64D23690E9F004FA82D /* AppDelegate.swift in Sources */,
+				067ED65223690E9F004FA82D /* Fitnetic.xcdatamodeld in Sources */,
+				067ED65423690E9F004FA82D /* ContentView.swift in Sources */,
+				067ED64F23690E9F004FA82D /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		067ED65E23690EA2004FA82D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				067ED66723690EA2004FA82D /* FitneticTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		067ED66423690EA2004FA82D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 067ED64823690E9F004FA82D /* Fitnetic */;
+			targetProxy = 067ED66323690EA2004FA82D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		067ED65A23690EA1004FA82D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				067ED65B23690EA1004FA82D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		067ED66923690EA2004FA82D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		067ED66A23690EA2004FA82D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		067ED66C23690EA2004FA82D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Fitnetic/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Fitnetic/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = iOSEngineering.Fitnetic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		067ED66D23690EA2004FA82D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Fitnetic/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Fitnetic/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = iOSEngineering.Fitnetic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		067ED66F23690EA2004FA82D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FitneticTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = iOSEngineering.FitneticTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fitnetic.app/Fitnetic";
+			};
+			name = Debug;
+		};
+		067ED67023690EA2004FA82D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FitneticTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = iOSEngineering.FitneticTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fitnetic.app/Fitnetic";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		067ED64423690E9F004FA82D /* Build configuration list for PBXProject "Fitnetic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				067ED66923690EA2004FA82D /* Debug */,
+				067ED66A23690EA2004FA82D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		067ED66B23690EA2004FA82D /* Build configuration list for PBXNativeTarget "Fitnetic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				067ED66C23690EA2004FA82D /* Debug */,
+				067ED66D23690EA2004FA82D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		067ED66E23690EA2004FA82D /* Build configuration list for PBXNativeTarget "FitneticTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				067ED66F23690EA2004FA82D /* Debug */,
+				067ED67023690EA2004FA82D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		067ED65023690E9F004FA82D /* Fitnetic.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				067ED65123690E9F004FA82D /* Fitnetic.xcdatamodel */,
+			);
+			currentVersion = 067ED65123690E9F004FA82D /* Fitnetic.xcdatamodel */;
+			path = Fitnetic.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 067ED64123690E9F004FA82D /* Project object */;
+}
