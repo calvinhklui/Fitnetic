@@ -18,9 +18,8 @@ struct WorkoutView: View {
         NavigationView {
             ScrollView {
                 Spacer()
-                CardView(title: "Today")
+                TodayView()
                 Spacer()
-                CardView(title: "This Week")
             }
             .navigationBarTitle("Workout", displayMode: .large)
             .background(bgColor)

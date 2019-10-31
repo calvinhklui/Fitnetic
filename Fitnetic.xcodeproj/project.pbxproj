@@ -21,8 +21,8 @@
 		067ED67C23691E32004FA82D /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ED67B23691E32004FA82D /* HexColor.swift */; };
 		067ED67E23691EE1004FA82D /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ED67D23691EE1004FA82D /* Stylesheet.swift */; };
 		067ED68023692161004FA82D /* NavConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ED67F23692161004FA82D /* NavConfig.swift */; };
-		067ED682236925B6004FA82D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ED681236925B6004FA82D /* CardView.swift */; };
 		067ED68423692FF3004FA82D /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ED68323692FF3004FA82D /* HostingController.swift */; };
+		06C295C4236A937300B189E4 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C295C3236A937300B189E4 /* TodayView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +54,8 @@
 		067ED67B23691E32004FA82D /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		067ED67D23691EE1004FA82D /* Stylesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		067ED67F23692161004FA82D /* NavConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavConfig.swift; sourceTree = "<group>"; };
-		067ED681236925B6004FA82D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		067ED68323692FF3004FA82D /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
+		06C295C3236A937300B189E4 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +134,7 @@
 				067ED674236913AA004FA82D /* WorkoutView.swift */,
 				067ED676236913EC004FA82D /* AnalyticsView.swift */,
 				067ED678236913FD004FA82D /* ProfileView.swift */,
-				067ED681236925B6004FA82D /* CardView.swift */,
+				06C295C3236A937300B189E4 /* TodayView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -273,11 +273,11 @@
 				067ED677236913EC004FA82D /* AnalyticsView.swift in Sources */,
 				067ED64F23690E9F004FA82D /* SceneDelegate.swift in Sources */,
 				067ED68023692161004FA82D /* NavConfig.swift in Sources */,
+				06C295C4236A937300B189E4 /* TodayView.swift in Sources */,
 				067ED68423692FF3004FA82D /* HostingController.swift in Sources */,
 				067ED67C23691E32004FA82D /* HexColor.swift in Sources */,
 				067ED679236913FD004FA82D /* ProfileView.swift in Sources */,
 				067ED675236913AA004FA82D /* WorkoutView.swift in Sources */,
-				067ED682236925B6004FA82D /* CardView.swift in Sources */,
 				067ED67E23691EE1004FA82D /* Stylesheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
