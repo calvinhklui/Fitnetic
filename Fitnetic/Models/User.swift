@@ -10,11 +10,21 @@ import Foundation
 import SwiftUI
 
 struct User: Identifiable, Codable {
-    var id = UUID()
-    var username: String
-    var firstName: String
-    var lastName: String
-    var dateOfBirth: Date
-    var gender: String
-    var goal: String
+  var id = UUID()
+  var username: String
+  var firstName: String
+  var lastName: String
+  var dateOfBirth: Date
+  var gender: String
+  var goal: String
+    
+  enum CodingKeys : String, CodingKey {
+    case id = "_id"
+    case username
+    case firstName 
+    case lastName
+    case dateOfBirth
+    case gender
+    case goal
+  }
 }
