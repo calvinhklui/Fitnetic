@@ -34,6 +34,7 @@
 		0697A503236F6418000034B5 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697A501236F6418000034B5 /* Exercise.swift */; };
 		0697A505236F6499000034B5 /* Muscle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697A504236F6499000034B5 /* Muscle.swift */; };
 		0697A506236F6499000034B5 /* Muscle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697A504236F6499000034B5 /* Muscle.swift */; };
+		0697A50C236F6B92000034B5 /* SetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697A50B236F6B92000034B5 /* SetDetailView.swift */; };
 		06C295C4236A937300B189E4 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C295C3236A937300B189E4 /* TodayView.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		0697A4FE236F63B1000034B5 /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		0697A501236F6418000034B5 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		0697A504236F6499000034B5 /* Muscle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Muscle.swift; sourceTree = "<group>"; };
+		0697A50B236F6B92000034B5 /* SetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDetailView.swift; sourceTree = "<group>"; };
 		06C295C3236A937300B189E4 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,9 +155,7 @@
 				067ED674236913AA004FA82D /* WorkoutView.swift */,
 				067ED676236913EC004FA82D /* AnalyticsView.swift */,
 				067ED678236913FD004FA82D /* ProfileView.swift */,
-				06C295C3236A937300B189E4 /* TodayView.swift */,
-				0697A4F4236F5DE9000034B5 /* PreWorkoutView.swift */,
-				0697A4F6236F5EED000034B5 /* SetRowView.swift */,
+				0697A508236F6A49000034B5 /* WorkoutViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -190,6 +190,17 @@
 				067ED68323692FF3004FA82D /* HostingController.swift */,
 			);
 			path = Styles;
+			sourceTree = "<group>";
+		};
+		0697A508236F6A49000034B5 /* WorkoutViews */ = {
+			isa = PBXGroup;
+			children = (
+				06C295C3236A937300B189E4 /* TodayView.swift */,
+				0697A4F4236F5DE9000034B5 /* PreWorkoutView.swift */,
+				0697A4F6236F5EED000034B5 /* SetRowView.swift */,
+				0697A50B236F6B92000034B5 /* SetDetailView.swift */,
+			);
+			path = WorkoutViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,6 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0697A50C236F6B92000034B5 /* SetDetailView.swift in Sources */,
 				067ED64D23690E9F004FA82D /* AppDelegate.swift in Sources */,
 				067ED65223690E9F004FA82D /* Fitnetic.xcdatamodeld in Sources */,
 				067ED65423690E9F004FA82D /* ContentView.swift in Sources */,

@@ -41,11 +41,35 @@ struct TodayView: View {
                 VStack {
                     HStack {
                       VStack(alignment: .leading) {
-                        Text("All Workouts")
+                        Text("Past Workouts")
                               .font(.title)
                               .fontWeight(.black)
                               .foregroundColor(.primary)
-                        Text("Explore your options.")
+                        Text("Explore your history.")
+                              .font(.caption)
+                              .foregroundColor(.secondary)
+                              .lineLimit(3)
+                      }
+                      .layoutPriority(100)
+                      Spacer()
+                    }
+                    .padding(20)
+                }
+            }
+            .cornerRadius(10)
+            .overlay(RoundedRectangle(cornerRadius: 10)
+                .stroke(Color(.sRGB, red: 200/255, green: 200/255, blue: 200/255, opacity: 0.6), lineWidth: 1))
+            .padding(.bottom, 20)
+            
+            NavigationLink(destination: PreWorkoutView()) {
+                VStack {
+                    HStack {
+                      VStack(alignment: .leading) {
+                        Text("Build Your Own Workout")
+                              .font(.title)
+                              .fontWeight(.black)
+                              .foregroundColor(.primary)
+                        Text("Unleash your creativity.")
                               .font(.caption)
                               .foregroundColor(.secondary)
                               .lineLimit(3)
