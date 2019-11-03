@@ -13,7 +13,7 @@ struct TodayView: View {
       VStack {
         HStack {
           VStack(alignment: .leading) {
-            NavigationLink(destination: AnalyticsView()) {
+            NavigationLink(destination: PreWorkoutView()) {
                 VStack {
                     HStack {
                       VStack(alignment: .leading) {
@@ -37,7 +37,7 @@ struct TodayView: View {
                 .stroke(Color(.sRGB, red: 200/255, green: 200/255, blue: 200/255, opacity: 0.6), lineWidth: 1))
             .padding(.bottom, 20)
             
-            NavigationLink(destination: AnalyticsView()) {
+            NavigationLink(destination: PreWorkoutView()) {
                 VStack {
                     HStack {
                       VStack(alignment: .leading) {

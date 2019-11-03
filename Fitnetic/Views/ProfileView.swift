@@ -10,7 +10,14 @@ import SwiftUI
 
 struct ProfileView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            ScrollView {
+                Text("hello world")
+            }
+            .navigationBarTitle("Profile", displayMode: .large)
+            .background(bgColor)
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

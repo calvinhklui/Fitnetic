@@ -9,33 +9,28 @@
 import SwiftUI
 
 struct ContentView: View {
-    init() {
-        UITabBar.appearance().barTintColor = primaryUIColor
-    }
-    
     @State var selectedView = 0
     
     var body: some View {
         TabView(selection: $selectedView) {
             WorkoutView()
                 .tabItem {
-                    Image(systemName: "1.circle")
+                    Image(systemName: "play")
                     Text("Workout")
                 }.tag(0)
             AnalyticsView()
                 .tabItem {
-                    Image(systemName: "2.circle")
+                    Image(systemName: "date")
                     Text("Analytics")
                 }.tag(1)
             ProfileView()
                 .tabItem {
-                    Image(systemName: "3.circle")
+                    Image(systemName: "contact")
                     Text("Profile")
                 }.tag(2)
         }
-        //.edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.top)
         .statusBar(hidden: false)
-        .accentColor(.white)
     }
 }
 
