@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-struct Set: Codable {
+struct WorkoutSet: Codable {
     var exercise: Exercise
     var reps: Int
     var time: Float
