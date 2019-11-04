@@ -10,22 +10,24 @@ import SwiftUI
 
 struct ContentView: View {
     @State var selectedView = 0
+    @State var workouts = WorkoutsParser().getWorkouts()
+    @State var user = UserParser().getUser()
     
     var body: some View {
         TabView(selection: $selectedView) {
             WorkoutView()
                 .tabItem {
-                    Image(systemName: "play")
+                    Image(systemName: "square.fill")
                     Text("Workout")
                 }.tag(0)
             AnalyticsView()
                 .tabItem {
-                    Image(systemName: "date")
+                    Image(systemName: "square.fill")
                     Text("Analytics")
                 }.tag(1)
             ProfileView()
                 .tabItem {
-                    Image(systemName: "contact")
+                    Image(systemName: "square.fill")
                     Text("Profile")
                 }.tag(2)
         }

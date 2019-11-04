@@ -12,9 +12,11 @@ import SwiftUI
 struct Muscle: Identifiable, Codable {
   var id: String
   var name: String
+  var exercises: [Exercise]?
 
   enum CodingKeys : String, CodingKey {
     case id = "_id"
     case name
+    case exercises
   }
 }

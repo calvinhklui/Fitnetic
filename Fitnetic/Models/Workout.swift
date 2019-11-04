@@ -9,9 +9,9 @@
 import Foundation
 import SwiftUI
 
-struct Workout: Identifiable, Codable {
-    var id = UUID()
+struct Workout: Codable {
+    var id: String
     var user: User
-    var date: Date
+    var date: String
     var sets: [WorkoutSet]
 }

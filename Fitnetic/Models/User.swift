@@ -9,8 +9,8 @@
 import Foundation
 import SwiftUI
 
-struct User: Identifiable, Codable {
-  var id = UUID()
+struct User: Codable {
+  var id: String
   var username: String
   var firstName: String
   var lastName: String

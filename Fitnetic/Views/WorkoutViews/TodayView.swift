@@ -9,11 +9,13 @@
 import SwiftUI
 
 struct TodayView: View {
+    @State var recommendation = WorkoutsParser().getWorkouts()![0]
+    
     var body: some View {
       VStack {
         HStack {
           VStack(alignment: .leading) {
-            NavigationLink(destination: PreWorkoutView()) {
+            NavigationLink(destination: PreWorkoutView(recommendation: $recommendation)) {
                 VStack {
                     HStack {
                       VStack(alignment: .leading) {
@@ -37,7 +39,7 @@ struct TodayView: View {
                 .stroke(Color(.sRGB, red: 200/255, green: 200/255, blue: 200/255, opacity: 0.6), lineWidth: 1))
             .padding(.bottom, 20)
             
-            NavigationLink(destination: PreWorkoutView()) {
+            NavigationLink(destination: PreWorkoutView(recommendation: $recommendation)) {
                 VStack {
                     HStack {
                       VStack(alignment: .leading) {
@@ -61,7 +63,7 @@ struct TodayView: View {
                 .stroke(Color(.sRGB, red: 200/255, green: 200/255, blue: 200/255, opacity: 0.6), lineWidth: 1))
             .padding(.bottom, 20)
             
-            NavigationLink(destination: PreWorkoutView()) {
+            NavigationLink(destination: PreWorkoutView(recommendation: $recommendation)) {
                 VStack {
                     HStack {
                       VStack(alignment: .leading) {

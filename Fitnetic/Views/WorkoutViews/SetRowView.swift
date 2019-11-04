@@ -19,9 +19,12 @@ struct SetRowView: View {
     }
 }
 
-//struct SetRowView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SetRowView(set: nil)
-//        .previewLayout(.fixed(width: 300, height: 70))
-//    }
-//}
+struct SetRowView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            SetRowView(set: workoutSets[0])
+            SetRowView(set: workoutSets[0])
+        }
+        .previewLayout(.fixed(width: 300, height: 70))
+    }
+}

@@ -12,7 +12,7 @@ import SwiftUI
 struct Exercise: Codable {
   var id: String
   var name: String
-  var muscles: [Muscle]
+  var muscles: [Muscle]?
   
   enum CodingKeys : String, CodingKey {
     case id = "_id"
