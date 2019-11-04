@@ -10,8 +10,11 @@ import Foundation
 import SwiftUI
 
 struct Muscle: Identifiable, Codable {
-    var id = UUID()
-    var name: String
-    var scientificName: String
-    var group: String
+  var id: String
+  var name: String
+
+  enum CodingKeys : String, CodingKey {
+    case id = "_id"
+    case name
+  }
 }

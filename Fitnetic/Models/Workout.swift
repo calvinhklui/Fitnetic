@@ -13,5 +13,5 @@ struct Workout: Identifiable, Codable {
     var id = UUID()
     var user: User
     var date: Date
-    var sets: [Set]
+    var sets: [WorkoutSet]
 }

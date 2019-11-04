@@ -10,6 +10,13 @@ import Foundation
 import SwiftUI
 
 struct Exercise: Codable {
-    var name: String
-    var muscles: [Muscle]
+  var id: String
+  var name: String
+  var muscles: [Muscle]
+  
+  enum CodingKeys : String, CodingKey {
+    case id = "_id"
+    case name
+    case muscles
+  }
 }
