@@ -9,6 +9,15 @@
 import SwiftUI
 
 struct AnalyticsView: View {
+    @ObservedObject var workoutsViewModel: WorkoutsViewModel
+    @ObservedObject var exercisesViewModel: ExercisesViewModel
+    
+    init(workoutsViewModel: WorkoutsViewModel,
+         exercisesViewModel: ExercisesViewModel) {
+        self.workoutsViewModel = workoutsViewModel
+        self.exercisesViewModel = exercisesViewModel
+    }
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -23,6 +32,7 @@ struct AnalyticsView: View {
 
 struct AnalyticsView_Previews: PreviewProvider {
     static var previews: some View {
-        AnalyticsView()
+        AnalyticsView(workoutsViewModel: WorkoutsViewModel(workoutsParser: WorkoutsParser()),
+                      exercisesViewModel: ExercisesViewModel(exercisesParser: ExercisesParser()))
     }
 }

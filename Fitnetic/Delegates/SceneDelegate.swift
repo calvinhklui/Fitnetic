@@ -24,7 +24,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
-        let contentView = ContentView().environment(\.managedObjectContext, context)
+        
+        let userParser = UserParser()
+        let workoutsParser = WorkoutsParser()
+        let exercisesParser = ExercisesParser()
+        let recommendationParser = RecommendationParser()
+        
+        let userViewModel = UserViewModel(userParser: userParser)
+        let workoutsViewModel = WorkoutsViewModel(workoutsParser: workoutsParser)
+        let exercisesViewModel = ExercisesViewModel(exercisesParser: exercisesParser)
+        let recommendationViewModel = RecommendationViewModel(recommendationParser: recommendationParser)
+        
+        let contentView = ContentView(userViewModel: userViewModel,
+                                      workoutsViewModel: workoutsViewModel,
+                                      exercisesViewModel: exercisesViewModel,
+                                      recommendationViewModel: recommendationViewModel)
+            .environment(\.managedObjectContext, context)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

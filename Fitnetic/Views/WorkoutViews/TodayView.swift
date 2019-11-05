@@ -9,13 +9,24 @@
 import SwiftUI
 
 struct TodayView: View {
-    @State var recommendation = WorkoutsParser().getWorkouts()![0]
+    @ObservedObject var workoutsViewModel: WorkoutsViewModel
+    @ObservedObject var exercisesViewModel: ExercisesViewModel
+    @ObservedObject var recommendationViewModel: RecommendationViewModel
+    
+    init(workoutsViewModel: WorkoutsViewModel,
+         exercisesViewModel: ExercisesViewModel,
+         recommendationViewModel: RecommendationViewModel) {
+        self.workoutsViewModel = workoutsViewModel
+        self.exercisesViewModel = exercisesViewModel
+        self.recommendationViewModel = recommendationViewModel
+    }
     
     var body: some View {
       VStack {
         HStack {
           VStack(alignment: .leading) {
-            NavigationLink(destination: PreWorkoutView(recommendation: $recommendation)) {
+            NavigationLink(destination: PreWorkoutView(exercisesViewModel: self.exercisesViewModel,
+                                                       recommendationViewModel: self.recommendationViewModel)) {
                 VStack {
                     HStack {
                       VStack(alignment: .leading) {
@@ -38,53 +49,6 @@ struct TodayView: View {
             .overlay(RoundedRectangle(cornerRadius: 10)
                 .stroke(Color(.sRGB, red: 200/255, green: 200/255, blue: 200/255, opacity: 0.6), lineWidth: 1))
             .padding(.bottom, 20)
-            
-            NavigationLink(destination: PreWorkoutView(recommendation: $recommendation)) {
-                VStack {
-                    HStack {
-                      VStack(alignment: .leading) {
-                        Text("Past Workouts")
-                              .font(.title)
-                              .fontWeight(.black)
-                              .foregroundColor(.primary)
-                        Text("Explore your history.")
-                              .font(.caption)
-                              .foregroundColor(.secondary)
-                              .lineLimit(3)
-                      }
-                      .layoutPriority(100)
-                      Spacer()
-                    }
-                    .padding(20)
-                }
-            }
-            .cornerRadius(10)
-            .overlay(RoundedRectangle(cornerRadius: 10)
-                .stroke(Color(.sRGB, red: 200/255, green: 200/255, blue: 200/255, opacity: 0.6), lineWidth: 1))
-            .padding(.bottom, 20)
-            
-            NavigationLink(destination: PreWorkoutView(recommendation: $recommendation)) {
-                VStack {
-                    HStack {
-                      VStack(alignment: .leading) {
-                        Text("Build Your Own Workout")
-                              .font(.title)
-                              .fontWeight(.black)
-                              .foregroundColor(.primary)
-                        Text("Unleash your creativity.")
-                              .font(.caption)
-                              .foregroundColor(.secondary)
-                              .lineLimit(3)
-                      }
-                      .layoutPriority(100)
-                      Spacer()
-                    }
-                    .padding(20)
-                }
-            }
-            .cornerRadius(10)
-            .overlay(RoundedRectangle(cornerRadius: 10)
-                .stroke(Color(.sRGB, red: 200/255, green: 200/255, blue: 200/255, opacity: 0.6), lineWidth: 1))
           }
           .layoutPriority(100)
           Spacer()
@@ -97,6 +61,8 @@ struct TodayView: View {
 
 struct TodayView_Previews: PreviewProvider {
     static var previews: some View {
-        TodayView()
+        TodayView(workoutsViewModel: WorkoutsViewModel(workoutsParser: WorkoutsParser()),
+                  exercisesViewModel: ExercisesViewModel(exercisesParser: ExercisesParser()),
+                  recommendationViewModel: RecommendationViewModel(recommendationParser: RecommendationParser()))
     }
 }

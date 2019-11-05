@@ -9,35 +9,29 @@
 import Foundation
 
 class UserParser {
-  var userID: String
-  var userURL: String
-  var user: User?
+    var userURL: String
 
-  init() {
-    self.userID = "5dbf3ac810fe5000041aef80"
-    self.userURL = "https://fitnetic-api.herokuapp.com/users/" + self.userID
-    self.getUserData()
-  }
-
-  func getUserData() {
-    let task = URLSession.shared.dataTask(with: URL(string: self.userURL)!) { (data, response, error) in
-        guard let data = data else {
-          print("Error: No data to decode")
-          return
-        }
-
-        guard let user = try? JSONDecoder().decode(User.self, from: data) else {
-          print("Error: Couldn't decode data into a result")
-          return
-        }
-        
-        self.user = user
+    init() {
+        self.userURL = "https://fitnetic-api.herokuapp.com/users/"
     }
-    
-    task.resume()
-  }
-    
-  func getUser() -> User? {
-    return self.user
-  }
+
+    // Source: https://fluffy.es/return-value-from-a-closure/
+    func getUserData(userID: String, completionHandler: @escaping (User?, Error?) -> Void) {
+        let destinationURL = self.userURL + userID
+        let task = URLSession.shared.dataTask(with: URL(string: destinationURL)!) { (data, response, error) in
+            guard let data = data else {
+                print("Error: No user data to decode")
+                return
+            }
+
+            guard let user = try? JSONDecoder().decode(User.self, from: data) else {
+                print("Error: Couldn't decode user data into a result")
+                return
+            }
+            
+            completionHandler(user, nil)
+        }
+
+        task.resume()
+    }
 }

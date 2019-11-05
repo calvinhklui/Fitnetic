@@ -14,4 +14,11 @@ struct Workout: Codable {
     var user: User
     var date: String
     var sets: [WorkoutSet]
+    
+    enum CodingKeys : String, CodingKey {
+      case id = "_id"
+      case user
+      case date
+      case sets
+    }
 }

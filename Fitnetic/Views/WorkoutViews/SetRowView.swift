@@ -11,10 +11,13 @@ import SwiftUI
 struct SetRowView: View {
     var set: WorkoutSet
     
+    init(set: WorkoutSet) {
+        self.set = set
+    }
+    
     var body: some View {
         HStack {
-            Text(String(set.reps))
-            Text(set.exercise.name)
+            Text(self.set.exercise.name)
         }
     }
 }

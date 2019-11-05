@@ -14,7 +14,7 @@ struct User: Codable {
   var username: String
   var firstName: String
   var lastName: String
-  var dateOfBirth: Date
+  var dateOfBirth: String
   var gender: String
   var goal: String
     

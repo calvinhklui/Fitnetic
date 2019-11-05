@@ -11,8 +11,8 @@ import SwiftUI
 
 struct WorkoutSet: Codable {
     var exercise: Exercise
-    var reps: Int
-    var time: Int
+    var reps: Int?
+    var time: Float?
     var difficulty: Int
 }
 

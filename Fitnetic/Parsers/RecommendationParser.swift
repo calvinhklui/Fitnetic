@@ -9,34 +9,29 @@
 import Foundation
 
 class RecommendationParser {
-  var userID: String
-  var recommendationURL: String
-  var recommendation: Workout?
+    var recommendationURL: String
 
-  init() {
-    self.userID = "5dbf3ac810fe5000041aef80"
-    self.recommendationURL = "https://fitnetic-api.herokuapp.com/recommendations/" + self.userID
-    self.getRecommendationData()
-  }
+    init() {
+        self.recommendationURL = "https://fitnetic-api.herokuapp.com/recommendations/"
+    }
 
-  func getRecommendationData() {
-    let task = URLSession.shared.dataTask(with: URL(string: self.recommendationURL)!) { (data, response, error) in
+    // Source: https://fluffy.es/return-value-from-a-closure/
+    func getRecommendationData(userID: String, completionHandler: @escaping (Workout?, Error?) -> Void) {
+        let destinationURL = self.recommendationURL + userID
+        let task = URLSession.shared.dataTask(with: URL(string: destinationURL)!) { (data, response, error) in
         guard let data = data else {
-          print("Error: No data to decode")
-          return
+            print("Error: No recommendation data to decode")
+            return
         }
 
         guard let workout = try? JSONDecoder().decode(Workout.self, from: data) else {
-          print("Error: Couldn't decode data into a result")
-          return
+            print("Error: Couldn't decode recommendation data into a result")
+            return
         }
-        
-        self.recommendation = workout
+
+        completionHandler(workout, nil)
+        }
+
+        task.resume()
     }
-    task.resume()
-  }
-    
-  func getRecommendation() -> Workout? {
-    return self.recommendation
-  }
 }

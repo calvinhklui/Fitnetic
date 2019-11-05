@@ -9,36 +9,36 @@
 import Foundation
 
 class WorkoutsParser {
-  var userID: String
-  var workoutsURL: String
-  var workouts: [Workout]?
+    var workoutsURL: String
 
-  init() {
-    self.userID = "5dbf3ac810fe5000041aef80"
-    self.workoutsURL = "https://fitnetic-api.herokuapp.com/workouts/" + self.userID
-    self.getWorkoutsData()
-  }
+    init() {
+        self.workoutsURL = "https://fitnetic-api.herokuapp.com/workouts?user="
+    }
 
-  func getWorkoutsData() {
-    let task = URLSession.shared.dataTask(with: URL(string: self.workoutsURL)!) { (data, response, error) in
+    // Source: https://fluffy.es/return-value-from-a-closure/
+    func getWorkoutsData(userID: String, completionHandler: @escaping ([Workout]?, Error?) -> Void) {
+        let destinationURL = self.workoutsURL + userID
+        let task = URLSession.shared.dataTask(with: URL(string: destinationURL)!) { (data, response, error) in
         guard let data = data else {
-          print("Error: No data to decode")
-          return
+            print("Error: No workouts data to decode")
+            return
         }
 
         guard let workouts = try? JSONDecoder().decode([Workout].self, from: data) else {
-          print("Error: Couldn't decode data into a result")
-          return
+            print("Error: Couldn't decode workouts data into a result")
+            return
         }
-        
-        self.workouts = workouts
+            
+        completionHandler(workouts, nil)
+        }
+
+        task.resume()
     }
     
-    task.resume()
-  }
-
-  func getWorkouts() -> [Workout]? {
-    return self.workouts
-  }
-    
+//    // Source: https://www.raywenderlich.com/4161005-mvvm-with-combine-tutorial-for-ios
+//    func returnWorkoutsData(
+//      forCity city: String
+//    ) -> AnyPublisher<WeeklyForecastResponse, WeatherError> {
+//      return forecast(with: makeWeeklyForecastComponents(withCity: city))
+//    }
 }

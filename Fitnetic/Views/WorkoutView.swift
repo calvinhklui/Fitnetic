@@ -9,11 +9,25 @@
 import SwiftUI
 
 struct WorkoutView: View {
+    @ObservedObject var workoutsViewModel: WorkoutsViewModel
+    @ObservedObject var exercisesViewModel: ExercisesViewModel
+    @ObservedObject var recommendationViewModel: RecommendationViewModel
+    
+    init(workoutsViewModel: WorkoutsViewModel,
+         exercisesViewModel: ExercisesViewModel,
+         recommendationViewModel: RecommendationViewModel) {
+        self.workoutsViewModel = workoutsViewModel
+        self.exercisesViewModel = exercisesViewModel
+        self.recommendationViewModel = recommendationViewModel
+    }
+    
     var body: some View {
         NavigationView {
             ScrollView {
                 Spacer()
-                TodayView()
+                TodayView(workoutsViewModel: self.workoutsViewModel,
+                          exercisesViewModel: self.exercisesViewModel,
+                          recommendationViewModel: self.recommendationViewModel)
                 Spacer()
             }
             .navigationBarTitle("Workout", displayMode: .large)
@@ -25,6 +39,8 @@ struct WorkoutView: View {
 
 struct WorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutView()
+        WorkoutView(workoutsViewModel: WorkoutsViewModel(workoutsParser: WorkoutsParser()),
+                    exercisesViewModel: ExercisesViewModel(exercisesParser: ExercisesParser()),
+                    recommendationViewModel: RecommendationViewModel(recommendationParser: RecommendationParser()))
     }
 }

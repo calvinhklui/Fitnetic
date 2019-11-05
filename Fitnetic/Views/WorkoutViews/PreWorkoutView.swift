@@ -9,28 +9,55 @@
 import SwiftUI
 
 struct PreWorkoutView: View {
-    @Binding var recommendation: Workout
+    @ObservedObject var recommendationViewModel: RecommendationViewModel
+    @ObservedObject var exercisesViewModel: ExercisesViewModel
+    
+    init(exercisesViewModel: ExercisesViewModel,
+         recommendationViewModel: RecommendationViewModel) {
+        self.exercisesViewModel = exercisesViewModel
+        self.recommendationViewModel = recommendationViewModel
+    }
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                
-                List(self.recommendation.sets, id: \.reps) {workoutSet in
-                    SetRowView(set: workoutSet)
-                }
-                .navigationBarTitle(Text("Landmarks"))
-                
-                Spacer()
+        ScrollView {
+            Spacer()
+            
+            Text("hello")
+            
+            List(self.recommendationViewModel.recommendation?.sets ?? [], id: \.reps) {set in
+                SetRowView(set: set)
             }
+            
+            Spacer()
+            
+            NavigationLink(destination: SetDetailView()) {
+               VStack {
+                   HStack {
+                     VStack() {
+                       Text("Start")
+                             .font(.title)
+                             .fontWeight(.black)
+                             .foregroundColor(.primary)
+                     }
+                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                     .layoutPriority(100)
+                     Spacer()
+                   }
+                   .padding(20)
+               }
+           }
+           .cornerRadius(10)
+           .overlay(RoundedRectangle(cornerRadius: 10)
+               .stroke(Color(.sRGB, red: 200/255, green: 200/255, blue: 200/255, opacity: 0.6), lineWidth: 1))
+           .padding(.all, 20)
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationBarTitle(Text("Sets"))
     }
 }
 
 struct PreWorkoutView_Previews: PreviewProvider {
-    @State static var recommendation = WorkoutsParser().getWorkouts()![0]
-    
     static var previews: some View {
-        PreWorkoutView(recommendation: $recommendation)
+        PreWorkoutView(exercisesViewModel: ExercisesViewModel(exercisesParser: ExercisesParser()),
+                       recommendationViewModel: RecommendationViewModel(recommendationParser: RecommendationParser()))
     }
 }
