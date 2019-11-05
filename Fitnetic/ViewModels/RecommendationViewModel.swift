@@ -16,7 +16,7 @@ class RecommendationViewModel: ObservableObject, Identifiable {
     
     init(recommendationParser: RecommendationParser) {
         self.recommendationParser = recommendationParser
-        self.fetchRecommendation(userID: "5dbf3ac810fe5000041aef80")
+//        self.fetchRecommendation(userID: "5dbf3ac810fe5000041aef80")
     }
     
     func fetchRecommendation(userID: String) {

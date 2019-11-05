@@ -11,21 +11,38 @@ import SwiftUI
 import Combine
 
 class ExercisesViewModel: ObservableObject, Identifiable {
-    @Published var exercises: [Exercise]?
-    private let exercisesParser: ExercisesParser
-    
-    init(exercisesParser: ExercisesParser) {
-        self.exercisesParser = exercisesParser
-        self.fetchExercises()
+  @Published var exercises = [Exercise]()
+  private let exercisesParser: ExercisesParser
+  
+  init(exercisesParser: ExercisesParser) {
+    self.exercisesParser = exercisesParser
+  }
+  
+  func fetchExercises() {
+    self.exercisesParser.getExercisesData(completionHandler: {exercises, error in
+      if let exercises = exercises {
+        print("printing the data...")
+        print(exercises)
+        self.exercises = exercises
+      }
+    })
+
+  }
+}
+
+
+class ExerciseObserver : ObservableObject {
+  var parser : ExercisesParser
+  @Published var exercises = [Exercise]()
+  
+  init(){
+    self.parser = ExercisesParser()
+    self.parser.getExercisesData {exercises, error in
+      if let exercises = exercises {
+        print("printing the data...")
+        print(exercises)
+        self.exercises = exercises
+      }
     }
-    
-    func fetchExercises() {
-        DispatchQueue.main.async {
-            self.exercisesParser.getExercisesData(completionHandler: {exercises, error in
-                if let exercises = exercises {
-                    self.exercises = exercises
-                }
-            })
-        }
-    }
+  }
 }

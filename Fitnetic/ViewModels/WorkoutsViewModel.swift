@@ -16,7 +16,7 @@ class WorkoutsViewModel: ObservableObject, Identifiable {
     
     init(workoutsParser: WorkoutsParser) {
         self.workoutsParser = workoutsParser
-        self.fetchWorkouts(userID: "5dbf3ac810fe5000041aef80")
+//        self.fetchWorkouts(userID: "5dbf3ac810fe5000041aef80")
     }
     
     func fetchWorkouts(userID: String) {

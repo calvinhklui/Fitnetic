@@ -9,30 +9,36 @@
 import SwiftUI
 
 struct AnalyticsView: View {
-    @ObservedObject var workoutsViewModel: WorkoutsViewModel
-    @ObservedObject var exercisesViewModel: ExercisesViewModel
+  @ObservedObject var workoutsViewModel: WorkoutsViewModel
+  @ObservedObject var exercisesViewModel: ExercisesViewModel
+  @ObservedObject var exerciseObserver : ExerciseObserver
+  
+  init(workoutsViewModel: WorkoutsViewModel,
+       exercisesViewModel: ExercisesViewModel) {
+    self.workoutsViewModel = workoutsViewModel
+    self.exercisesViewModel = ExercisesViewModel(exercisesParser: ExercisesParser())
+    self.exerciseObserver = ExerciseObserver()
     
-    init(workoutsViewModel: WorkoutsViewModel,
-         exercisesViewModel: ExercisesViewModel) {
-        self.workoutsViewModel = workoutsViewModel
-        self.exercisesViewModel = exercisesViewModel
-    }
-    
-    var body: some View {
-        NavigationView {
-            ScrollView {
-                Text("hello world")
-            }
-            .navigationBarTitle("Analytics", displayMode: .large)
-            .background(bgColor)
+  }
+  
+  var body: some View {
+    NavigationView {
+      ScrollView {
+        Text("hello world")
+        ForEach((0 ..< self.exercisesViewModel.exercises.count), id:\.self) { index in
+          Text(self.exerciseObserver.exercises[index].name)
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+      }
+      .navigationBarTitle("Analytics", displayMode: .large)
+      .background(bgColor)
     }
+    .navigationViewStyle(StackNavigationViewStyle())
+  }
 }
 
 struct AnalyticsView_Previews: PreviewProvider {
-    static var previews: some View {
-        AnalyticsView(workoutsViewModel: WorkoutsViewModel(workoutsParser: WorkoutsParser()),
-                      exercisesViewModel: ExercisesViewModel(exercisesParser: ExercisesParser()))
-    }
+  static var previews: some View {
+    AnalyticsView(workoutsViewModel: WorkoutsViewModel(workoutsParser: WorkoutsParser()),
+                  exercisesViewModel: ExercisesViewModel(exercisesParser: ExercisesParser()))
+  }
 }

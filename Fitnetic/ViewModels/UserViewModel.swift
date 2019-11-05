@@ -16,7 +16,7 @@ class UserViewModel: ObservableObject, Identifiable {
     
     init(userParser: UserParser) {
         self.userParser = userParser
-        self.fetchUser(userID: "5dbf3ac810fe5000041aef80")
+//        self.fetchUser(userID: "5dbf3ac810fe5000041aef80")
     }
     
     func fetchUser(userID: String) {
