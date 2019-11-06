@@ -9,25 +9,17 @@
 import SwiftUI
 
 struct SetRowView: View {
-    var set: WorkoutSet
-    
-    init(set: WorkoutSet) {
-        self.set = set
+  var set: WorkoutSet
+  
+  var body: some View {
+    HStack {
+      Text(set.exercise.name)
     }
-    
-    var body: some View {
-        HStack {
-            Text(self.set.exercise.name)
-        }
-    }
+  }
 }
 
-struct SetRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            SetRowView(set: workoutSets[0])
-            SetRowView(set: workoutSets[0])
-        }
-        .previewLayout(.fixed(width: 300, height: 70))
-    }
-}
+//struct SetRowView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    SetRowView(set: RecommendationObserver().recommendation.sets[0])
+//  }
+//}

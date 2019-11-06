@@ -17,7 +17,7 @@ struct User: Codable {
   var dateOfBirth: String
   var gender: String
   var goal: String
-    
+  
   enum CodingKeys : String, CodingKey {
     case id = "_id"
     case username

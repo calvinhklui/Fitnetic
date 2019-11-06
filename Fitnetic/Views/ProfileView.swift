@@ -9,26 +9,26 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @ObservedObject var userViewModel: UserViewModel
-    
-    init(userViewModel: UserViewModel) {
-        self.userViewModel = userViewModel
+  @ObservedObject var userObserver: UserObserver
+  
+  init(userObserver: UserObserver) {
+    self.userObserver = userObserver
+  }
+  
+  var body: some View {
+    NavigationView {
+      ScrollView {
+        Text("hello world")
+      }
+      .navigationBarTitle("Profile", displayMode: .large)
+      .background(bgColor)
     }
-    
-    var body: some View {
-        NavigationView {
-            ScrollView {
-                Text("hello world")
-            }
-            .navigationBarTitle("Profile", displayMode: .large)
-            .background(bgColor)
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
-    }
+    .navigationViewStyle(StackNavigationViewStyle())
+  }
 }
 
 struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView(userViewModel: UserViewModel(userParser: UserParser()))
-    }
+  static var previews: some View {
+    ProfileView(userObserver: UserObserver())
+  }
 }

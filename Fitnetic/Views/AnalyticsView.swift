@@ -9,24 +9,21 @@
 import SwiftUI
 
 struct AnalyticsView: View {
-  @ObservedObject var workoutsViewModel: WorkoutsViewModel
-  @ObservedObject var exercisesViewModel: ExercisesViewModel
-  @ObservedObject var exerciseObserver : ExerciseObserver
+  @ObservedObject var workoutsObserver: WorkoutsObserver
+  @ObservedObject var exercisesObserver: ExercisesObserver
   
-  init(workoutsViewModel: WorkoutsViewModel,
-       exercisesViewModel: ExercisesViewModel) {
-    self.workoutsViewModel = workoutsViewModel
-    self.exercisesViewModel = ExercisesViewModel(exercisesParser: ExercisesParser())
-    self.exerciseObserver = ExerciseObserver()
+  init(workoutsObserver: WorkoutsObserver,
+       exercisesObserver: ExercisesObserver) {
+    self.workoutsObserver = workoutsObserver
+    self.exercisesObserver = exercisesObserver
     
   }
   
   var body: some View {
     NavigationView {
       ScrollView {
-        Text("hello world")
-        ForEach((0 ..< self.exercisesViewModel.exercises.count), id:\.self) { index in
-          Text(self.exerciseObserver.exercises[index].name)
+        ForEach((0 ..< self.exercisesObserver.exercises.count), id:\.self) { index in
+          Text(self.exercisesObserver.exercises[index].name)
         }
       }
       .navigationBarTitle("Analytics", displayMode: .large)
@@ -38,7 +35,7 @@ struct AnalyticsView: View {
 
 struct AnalyticsView_Previews: PreviewProvider {
   static var previews: some View {
-    AnalyticsView(workoutsViewModel: WorkoutsViewModel(workoutsParser: WorkoutsParser()),
-                  exercisesViewModel: ExercisesViewModel(exercisesParser: ExercisesParser()))
+    AnalyticsView(workoutsObserver: WorkoutsObserver(),
+                  exercisesObserver: ExercisesObserver())
   }
 }

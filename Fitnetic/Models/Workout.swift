@@ -10,15 +10,15 @@ import Foundation
 import SwiftUI
 
 struct Workout: Codable {
-    var id: String
-    var user: User
-    var date: String
-    var sets: [WorkoutSet]
-    
-    enum CodingKeys : String, CodingKey {
-      case id = "_id"
-      case user
-      case date
-      case sets
-    }
+  var id: String
+  var user: User
+  var date: String
+  var sets: [WorkoutSet]
+  
+  enum CodingKeys : String, CodingKey {
+    case id = "_id"
+    case user
+    case date
+    case sets
+  }
 }

@@ -9,38 +9,38 @@
 import SwiftUI
 
 struct WorkoutView: View {
-    @ObservedObject var workoutsViewModel: WorkoutsViewModel
-    @ObservedObject var exercisesViewModel: ExercisesViewModel
-    @ObservedObject var recommendationViewModel: RecommendationViewModel
-    
-    init(workoutsViewModel: WorkoutsViewModel,
-         exercisesViewModel: ExercisesViewModel,
-         recommendationViewModel: RecommendationViewModel) {
-        self.workoutsViewModel = workoutsViewModel
-        self.exercisesViewModel = exercisesViewModel
-        self.recommendationViewModel = recommendationViewModel
+  @ObservedObject var workoutsObserver: WorkoutsObserver
+  @ObservedObject var exercisesObserver: ExercisesObserver
+  @ObservedObject var recommendationObserver: RecommendationObserver
+  
+  init(workoutsObserver: WorkoutsObserver,
+       exercisesObserver: ExercisesObserver,
+       recommendationObserver: RecommendationObserver) {
+    self.workoutsObserver = workoutsObserver
+    self.exercisesObserver = exercisesObserver
+    self.recommendationObserver = recommendationObserver
+  }
+  
+  var body: some View {
+    NavigationView {
+      ScrollView {
+        Spacer()
+        TodayView(workoutsObserver: self.workoutsObserver,
+                  exercisesObserver: self.exercisesObserver,
+                  recommendationObserver: self.recommendationObserver)
+        Spacer()
+      }
+      .navigationBarTitle("Workout", displayMode: .large)
+      .background(bgColor)
     }
-    
-    var body: some View {
-        NavigationView {
-            ScrollView {
-                Spacer()
-                TodayView(workoutsViewModel: self.workoutsViewModel,
-                          exercisesViewModel: self.exercisesViewModel,
-                          recommendationViewModel: self.recommendationViewModel)
-                Spacer()
-            }
-            .navigationBarTitle("Workout", displayMode: .large)
-            .background(bgColor)
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
-    }
+    .navigationViewStyle(StackNavigationViewStyle())
+  }
 }
 
 struct WorkoutView_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkoutView(workoutsViewModel: WorkoutsViewModel(workoutsParser: WorkoutsParser()),
-                    exercisesViewModel: ExercisesViewModel(exercisesParser: ExercisesParser()),
-                    recommendationViewModel: RecommendationViewModel(recommendationParser: RecommendationParser()))
-    }
+  static var previews: some View {
+    WorkoutView(workoutsObserver: WorkoutsObserver(),
+                exercisesObserver: ExercisesObserver(),
+                recommendationObserver: RecommendationObserver())
+  }
 }

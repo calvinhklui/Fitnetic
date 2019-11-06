@@ -9,21 +9,17 @@
 import Foundation
 import SwiftUI
 
-struct WorkoutSet: Codable {
-    var exercise: Exercise
-    var reps: Int?
-    var time: Float?
-    var difficulty: Int
+struct WorkoutSet: Codable, Identifiable {
+  var id = UUID()
+  var exercise: Exercise
+  var reps: Int?
+  var time: Float?
+  var difficulty: Int
+  
+  enum CodingKeys : String, CodingKey {
+    case exercise
+    case reps
+    case time
+    case difficulty
+  }
 }
-
-let workoutSets = [
-    WorkoutSet(
-        exercise: Exercise(
-            id: "blah",
-            name: "Push Ups"
-        ),
-        reps: 10,
-        time: 10,
-        difficulty: 0
-    )
-]
