@@ -14,20 +14,20 @@ struct ContentView: View {
   @ObservedObject var userObserver: UserObserver
   @ObservedObject var workoutsObserver: WorkoutsObserver
   @ObservedObject var exercisesObserver: ExercisesObserver
-  @ObservedObject var recommendationObserver: RecommendationObserver
+  @ObservedObject var workoutObserver: WorkoutObserver
   
   init() {
     self.userObserver = UserObserver()
     self.workoutsObserver = WorkoutsObserver()
     self.exercisesObserver = ExercisesObserver()
-    self.recommendationObserver = RecommendationObserver()
+    self.workoutObserver = WorkoutObserver()
   }
   
   var body: some View {
     TabView(selection: $selectedView) {
       WorkoutView(workoutsObserver: self.workoutsObserver,
                   exercisesObserver: self.exercisesObserver,
-                  recommendationObserver: self.recommendationObserver)
+                  workoutObserver: self.workoutObserver)
         .tabItem {
           Image(systemName: "square.fill")
           Text("Workout")

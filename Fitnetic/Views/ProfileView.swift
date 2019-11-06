@@ -18,7 +18,11 @@ struct ProfileView: View {
   var body: some View {
     NavigationView {
       ScrollView {
-        Text("hello world")
+        Spacer()
+        IdentityView(userObserver: self.userObserver)
+        Spacer()
+        AttributesView(userObserver: self.userObserver)
+        Spacer()
       }
       .navigationBarTitle("Profile", displayMode: .large)
       .background(bgColor)

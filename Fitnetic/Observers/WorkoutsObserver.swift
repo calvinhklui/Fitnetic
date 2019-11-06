@@ -21,12 +21,16 @@ class WorkoutsObserver: ObservableObject {
   }
   
   init() {
+    self.fetchData()
+  }
+  
+  func fetchData() -> Void {
     self.cancellable = URLSession.shared.dataTaskPublisher(for: URL(string: self.url)!)
-      .map { $0.data }
-      .decode(type: [Workout].self, decoder: JSONDecoder())
-      .replaceError(with: [])
-      .eraseToAnyPublisher()
-      .receive(on: DispatchQueue.main)
-      .assign(to: \.workouts, on: self)
+    .map { $0.data }
+    .decode(type: [Workout].self, decoder: JSONDecoder())
+    .replaceError(with: [])
+    .eraseToAnyPublisher()
+    .receive(on: DispatchQueue.main)
+    .assign(to: \.workouts, on: self)
   }
 }

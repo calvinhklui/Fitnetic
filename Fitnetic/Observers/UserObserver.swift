@@ -21,13 +21,17 @@ class UserObserver: ObservableObject {
   }
   
   init() {
+    self.fetchData()
+  }
+  
+  func fetchData() -> Void {
     self.cancellable = URLSession.shared.dataTaskPublisher(for: URL(string: self.url)!)
-      .map { $0.data }
-      .decode(type: User.self, decoder: JSONDecoder())
-      .replaceError(with: dummyUser)
-      .eraseToAnyPublisher()
-      .receive(on: DispatchQueue.main)
-      .assign(to: \.user, on: self)
+    .map { $0.data }
+    .decode(type: User.self, decoder: JSONDecoder())
+    .replaceError(with: dummyUser)
+    .eraseToAnyPublisher()
+    .receive(on: DispatchQueue.main)
+    .assign(to: \.user, on: self)
   }
 }
 

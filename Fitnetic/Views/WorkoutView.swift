@@ -11,14 +11,12 @@ import SwiftUI
 struct WorkoutView: View {
   @ObservedObject var workoutsObserver: WorkoutsObserver
   @ObservedObject var exercisesObserver: ExercisesObserver
-  @ObservedObject var recommendationObserver: RecommendationObserver
+  @ObservedObject var workoutObserver: WorkoutObserver
   
-  init(workoutsObserver: WorkoutsObserver,
-       exercisesObserver: ExercisesObserver,
-       recommendationObserver: RecommendationObserver) {
+  init(workoutsObserver: WorkoutsObserver, exercisesObserver: ExercisesObserver, workoutObserver: WorkoutObserver) {
     self.workoutsObserver = workoutsObserver
     self.exercisesObserver = exercisesObserver
-    self.recommendationObserver = recommendationObserver
+    self.workoutObserver = workoutObserver
   }
   
   var body: some View {
@@ -27,7 +25,7 @@ struct WorkoutView: View {
         Spacer()
         TodayView(workoutsObserver: self.workoutsObserver,
                   exercisesObserver: self.exercisesObserver,
-                  recommendationObserver: self.recommendationObserver)
+                  workoutObserver: self.workoutObserver)
         Spacer()
       }
       .navigationBarTitle("Workout", displayMode: .large)
@@ -41,6 +39,6 @@ struct WorkoutView_Previews: PreviewProvider {
   static var previews: some View {
     WorkoutView(workoutsObserver: WorkoutsObserver(),
                 exercisesObserver: ExercisesObserver(),
-                recommendationObserver: RecommendationObserver())
+                workoutObserver: WorkoutObserver())
   }
 }

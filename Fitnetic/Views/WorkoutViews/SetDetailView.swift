@@ -9,13 +9,95 @@
 import SwiftUI
 
 struct SetDetailView: View {
+  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+  
+  @ObservedObject var exercisesObserver: ExercisesObserver
+  @ObservedObject var workoutObserver: WorkoutObserver
+  @State private var setCounter: Int = 0
+  
+  init(exercisesObserver: ExercisesObserver, workoutObserver: WorkoutObserver) {
+    self.exercisesObserver = exercisesObserver
+    self.workoutObserver = workoutObserver
+  }
+  
+  var cancelButton: some View {
+    Button(action: {
+      self.presentationMode.wrappedValue.dismiss()
+    }) {
+      HStack {
+        Text(verbatim: "Cancel")
+          .foregroundColor(.red)
+      }
+    }
+  }
+  
+  @ViewBuilder
   var body: some View {
-    Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    if (self.setCounter < self.workoutObserver.workout.sets.count - 1) {
+      VStack {
+        Text(verbatim: self.workoutObserver.workout.sets[setCounter].exercise.name)
+          .font(.system(size: 40))
+          .fontWeight(.semibold)
+          .foregroundColor(.primary)
+        .padding(.all, 20)
+        
+        Spacer()
+        
+        Text(verbatim: "\(self.workoutObserver.workout.sets[setCounter].reps ?? 0)")
+          .font(.system(size: 100))
+          .fontWeight(.bold)
+          .foregroundColor(.gray)
+        
+        Spacer()
+        
+        Button(action: { self.setCounter = self.setCounter + 1 }) {
+          VStack {
+            HStack {
+              VStack {
+                Text(verbatim: "Done")
+                  .font(.title)
+                  .fontWeight(.black)
+                  .foregroundColor(.primary)
+                  .padding(.bottom, 10)
+                Text(verbatim: "Next Up: \(self.workoutObserver.workout.sets[setCounter + 1].exercise.name)")
+                  .font(.caption)
+                  .foregroundColor(.secondary)
+                  .padding(.bottom, 50)
+              }
+            }
+          }
+        }
+      }
+      .navigationBarBackButtonHidden(true)
+      .navigationBarItems(leading: cancelButton)
+    } else {
+      VStack {
+        Text(verbatim: self.workoutObserver.workout.sets[setCounter].exercise.name)
+          .font(.system(size: 40))
+          .fontWeight(.semibold)
+          .foregroundColor(.primary)
+          .padding(.all, 20)
+        
+        Spacer()
+        
+        Text(verbatim: "\(self.workoutObserver.workout.sets[setCounter].reps ?? 0)")
+          .font(.system(size: 100))
+          .fontWeight(.bold)
+          .foregroundColor(.gray)
+        
+        Spacer()
+        
+        // ADD BUTTON HERE
+      }
+      .navigationBarBackButtonHidden(true)
+      .navigationBarItems(leading: cancelButton)
+    }
   }
 }
 
 struct SetDetailView_Previews: PreviewProvider {
   static var previews: some View {
-    SetDetailView()
+    SetDetailView(exercisesObserver: ExercisesObserver(),
+                  workoutObserver: WorkoutObserver())
   }
 }

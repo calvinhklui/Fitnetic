@@ -12,19 +12,17 @@ struct AnalyticsView: View {
   @ObservedObject var workoutsObserver: WorkoutsObserver
   @ObservedObject var exercisesObserver: ExercisesObserver
   
-  init(workoutsObserver: WorkoutsObserver,
-       exercisesObserver: ExercisesObserver) {
+  init(workoutsObserver: WorkoutsObserver, exercisesObserver: ExercisesObserver) {
     self.workoutsObserver = workoutsObserver
     self.exercisesObserver = exercisesObserver
-    
   }
   
   var body: some View {
     NavigationView {
       ScrollView {
-        ForEach((0 ..< self.exercisesObserver.exercises.count), id:\.self) { index in
-          Text(self.exercisesObserver.exercises[index].name)
-        }
+        Spacer()
+        EmptyView()
+        Spacer()
       }
       .navigationBarTitle("Analytics", displayMode: .large)
       .background(bgColor)
