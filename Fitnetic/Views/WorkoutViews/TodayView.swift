@@ -42,16 +42,26 @@ struct TodayView: View {
     VStack {
       HStack {
         VStack(alignment: .leading) {
+          Text(verbatim: "Today")
+            .font(.title)
+            .fontWeight(.semibold)
+            .foregroundColor(.primary)
+          
+          Divider()
+          .padding(.top, -5)
+          .padding(.bottom, 15)
+          
           NavigationLink(destination: SetListView(exercisesObserver: self.exercisesObserver,
                                                   workoutObserver: self.workoutObserver,
                                                   workout: nil)) {
             VStack {
               HStack {
                 VStack(alignment: .leading) {
-                  Text(verbatim: "Today")
+                  Text(verbatim: "Recommended")
                     .font(.title)
                     .fontWeight(.black)
                     .foregroundColor(.primary)
+                    .padding(.bottom, 5)
                   Text(verbatim: "\(todayExercises.joined(separator: ", "))")
                     .font(.caption)
                     .foregroundColor(.secondary)
@@ -74,11 +84,12 @@ struct TodayView: View {
             VStack {
               HStack {
                 VStack(alignment: .leading) {
-                  Text(verbatim: "Previous Workouts")
+                  Text(verbatim: "History")
                     .font(.title)
                     .fontWeight(.black)
                     .foregroundColor(.primary)
-                  Text(verbatim: "Explore your past.")
+                    .padding(.bottom, 5)
+                  Text(verbatim: "Explore your past workouts.")
                     .font(.caption)
                     .foregroundColor(.secondary)
                     .lineLimit(3)

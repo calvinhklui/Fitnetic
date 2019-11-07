@@ -25,9 +25,10 @@
 		0689318A237362D600111117 /* StatisticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06893189237362D600111117 /* StatisticView.swift */; };
 		0689318C237363D000111117 /* GraphicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0689318B237363D000111117 /* GraphicView.swift */; };
 		0689318E2373F6E200111117 /* AnalyticsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0689318D2373F6E200111117 /* AnalyticsObserver.swift */; };
-		068931902373F8E700111117 /* Graphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0689318F2373F8E700111117 /* Graphic.swift */; };
 		068931922373F8F400111117 /* GraphicObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068931912373F8F400111117 /* GraphicObserver.swift */; };
 		068931942373F90100111117 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068931932373F90100111117 /* Analytics.swift */; };
+		06893198237481D500111117 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06893197237481D500111117 /* CalendarView.swift */; };
+		0689319A2374829B00111117 /* CalendarColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068931992374829B00111117 /* CalendarColumnView.swift */; };
 		069124B92370C352004B2140 /* UserObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069124B82370C352004B2140 /* UserObserver.swift */; };
 		069124BA2370C352004B2140 /* UserObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069124B82370C352004B2140 /* UserObserver.swift */; };
 		069124BF2370C3EF004B2140 /* WorkoutsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069124BE2370C3EF004B2140 /* WorkoutsObserver.swift */; };
@@ -90,9 +91,10 @@
 		06893189237362D600111117 /* StatisticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticView.swift; sourceTree = "<group>"; };
 		0689318B237363D000111117 /* GraphicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicView.swift; sourceTree = "<group>"; };
 		0689318D2373F6E200111117 /* AnalyticsObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsObserver.swift; sourceTree = "<group>"; };
-		0689318F2373F8E700111117 /* Graphic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphic.swift; sourceTree = "<group>"; };
 		068931912373F8F400111117 /* GraphicObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicObserver.swift; sourceTree = "<group>"; };
 		068931932373F90100111117 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
+		06893197237481D500111117 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		068931992374829B00111117 /* CalendarColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarColumnView.swift; sourceTree = "<group>"; };
 		069124B82370C352004B2140 /* UserObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObserver.swift; sourceTree = "<group>"; };
 		069124BE2370C3EF004B2140 /* WorkoutsObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsObserver.swift; sourceTree = "<group>"; };
 		069124C12370C598004B2140 /* ExercisesObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesObserver.swift; sourceTree = "<group>"; };
@@ -205,7 +207,6 @@
 				0697A4FE236F63B1000034B5 /* WorkoutSet.swift */,
 				0697A501236F6418000034B5 /* Exercise.swift */,
 				0697A504236F6499000034B5 /* Muscle.swift */,
-				0689318F2373F8E700111117 /* Graphic.swift */,
 				068931932373F90100111117 /* Analytics.swift */,
 			);
 			path = Models;
@@ -258,6 +259,8 @@
 			children = (
 				06893189237362D600111117 /* StatisticView.swift */,
 				0689318B237363D000111117 /* GraphicView.swift */,
+				06893197237481D500111117 /* CalendarView.swift */,
+				068931992374829B00111117 /* CalendarColumnView.swift */,
 			);
 			path = AnalyticsViews;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				0697A505236F6499000034B5 /* Muscle.swift in Sources */,
 				067ED677236913EC004FA82D /* AnalyticsView.swift in Sources */,
 				067ED64F23690E9F004FA82D /* SceneDelegate.swift in Sources */,
+				06893198237481D500111117 /* CalendarView.swift in Sources */,
 				067ED68023692161004FA82D /* NavConfig.swift in Sources */,
 				0697A4FF236F63B1000034B5 /* WorkoutSet.swift in Sources */,
 				069124CC237267A6004B2140 /* WorkoutRowView.swift in Sources */,
@@ -406,11 +410,11 @@
 				069124BF2370C3EF004B2140 /* WorkoutsObserver.swift in Sources */,
 				0697A4F7236F5EED000034B5 /* SetRowView.swift in Sources */,
 				069124D12372AEEB004B2140 /* IdentityView.swift in Sources */,
-				068931902373F8E700111117 /* Graphic.swift in Sources */,
 				067ED675236913AA004FA82D /* WorkoutView.swift in Sources */,
 				067ED67E23691EE1004FA82D /* Stylesheet.swift in Sources */,
 				069124CA23726706004B2140 /* WorkoutListView.swift in Sources */,
 				069124B92370C352004B2140 /* UserObserver.swift in Sources */,
+				0689319A2374829B00111117 /* CalendarColumnView.swift in Sources */,
 				0697A502236F6418000034B5 /* Exercise.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

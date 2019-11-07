@@ -21,9 +21,10 @@ struct AnalyticsView: View {
     NavigationView {
       ScrollView {
         Spacer()
-        StatisticView()
+        StatisticView(analyticsObserver: self.analyticsObserver)
         Spacer()
-        GraphicView(graphicObserver: self.graphicObserver)
+        GraphicView(analyticsObserver: self.analyticsObserver,
+                    graphicObserver: self.graphicObserver)
       }
       .navigationBarTitle("Analytics", displayMode: .large)
       .background(bgColor)

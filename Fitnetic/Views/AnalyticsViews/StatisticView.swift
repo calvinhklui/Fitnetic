@@ -9,35 +9,74 @@
 import SwiftUI
 
 struct StatisticView: View {
-    var body: some View {
-        VStack {
+  @ObservedObject var analyticsObserver: AnalyticsObserver
+  
+  init(analyticsObserver: AnalyticsObserver) {
+    self.analyticsObserver = analyticsObserver
+  }
+  
+  var body: some View {
+    VStack {
+      HStack {
+        VStack(alignment: .leading) {
+          Text(verbatim: "This Week")
+            .font(.title)
+            .fontWeight(.semibold)
+            .foregroundColor(.primary)
+          
+          Divider()
+          .padding(.top, -5)
+          .padding(.bottom, 5)
+          
           HStack {
             VStack(alignment: .leading) {
-              VStack(alignment: .leading) {
-                Text(verbatim: "Previous Workouts")
-                  .font(.title)
-                  .fontWeight(.black)
-                  .foregroundColor(.primary)
-                Text(verbatim: "Explore your past.")
-                  .font(.caption)
-                  .foregroundColor(.secondary)
-                  .lineLimit(3)
-              }
-              .layoutPriority(100)
-              .cornerRadius(10)
-              .padding(.bottom, 20)
+              Text(verbatim: "\(5)")
+                .font(.title)
+                .fontWeight(.black)
+                .foregroundColor(.primary)
+              Text(verbatim: "Workouts")
+                .font(.caption)
+                .foregroundColor(.secondary)
             }
-            .layoutPriority(100)
+            
             Spacer()
+            
+            VStack(alignment: .leading) {
+              Text(verbatim: "\(5)")
+                .font(.title)
+                .fontWeight(.black)
+                .foregroundColor(.primary)
+              Text(verbatim: "Workouts")
+                .font(.caption)
+                .foregroundColor(.secondary)
+            }
+            
+            Spacer()
+            
+            VStack(alignment: .leading) {
+              Text(verbatim: "\(5)")
+                .font(.title)
+                .fontWeight(.black)
+                .foregroundColor(.primary)
+              Text(verbatim: "Workouts")
+                .font(.caption)
+                .foregroundColor(.secondary)
+            }
           }
-          .padding(20)
+          .padding(.horizontal, 15)
         }
-        .background(Color.white)
+        .layoutPriority(100)
+        .cornerRadius(10)
+        Spacer()
+      }
+      .padding(20)
     }
+    .background(Color.white)
+  }
 }
 
 struct StatisticView_Previews: PreviewProvider {
-    static var previews: some View {
-        StatisticView()
-    }
+  static var previews: some View {
+    StatisticView(analyticsObserver: AnalyticsObserver())
+  }
 }
