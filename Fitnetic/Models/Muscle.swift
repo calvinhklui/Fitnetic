@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-struct Muscle: Identifiable, Codable {
+struct Muscle: Codable, Identifiable {
   var id: String
   var name: String
   var exercises: [Exercise]?

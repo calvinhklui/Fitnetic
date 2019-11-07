@@ -49,7 +49,7 @@ struct TodayView: View {
           
           Divider()
           .padding(.top, -5)
-          .padding(.bottom, 15)
+          .padding(.bottom, 10)
           
           NavigationLink(destination: SetListView(exercisesObserver: self.exercisesObserver,
                                                   workoutObserver: self.workoutObserver,
@@ -76,7 +76,7 @@ struct TodayView: View {
           .cornerRadius(10)
           .overlay(RoundedRectangle(cornerRadius: 10)
           .stroke(Color(.sRGB, red: 200/255, green: 200/255, blue: 200/255, opacity: 0.6), lineWidth: 1))
-          .padding(.bottom, 20)
+          .padding(.bottom, 15)
           
           NavigationLink(destination: WorkoutListView(workoutsObserver: self.workoutsObserver,
                                                       exercisesObserver: self.exercisesObserver,
@@ -103,7 +103,7 @@ struct TodayView: View {
           .cornerRadius(10)
           .overlay(RoundedRectangle(cornerRadius: 10)
           .stroke(Color(.sRGB, red: 200/255, green: 200/255, blue: 200/255, opacity: 0.6), lineWidth: 1))
-          .padding(.bottom, 20)
+          .padding(.bottom, 10)
         }
         .layoutPriority(100)
         Spacer()

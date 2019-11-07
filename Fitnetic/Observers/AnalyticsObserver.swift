@@ -13,7 +13,7 @@ import Combine
 // Source: https://theswiftdev.com/2019/08/15/urlsession-and-the-combine-framework/
 class AnalyticsObserver: ObservableObject {
   private var cancellable: AnyCancellable?
-  private var url: String = "https://fitnetic-api.herokuapp.com/analytics?user=" + "5dbf3ac810fe5000041aef80"
+  private var url: String = "https://fitnetic-api.herokuapp.com/analytics/summary/" + "5dbf3ac810fe5000041aef80"
   @Published var analytics: Analytics = dummyAnalytics {
     didSet {
       print("Fetched Analytics!")
@@ -36,5 +36,10 @@ class AnalyticsObserver: ObservableObject {
 }
 
 let dummyAnalytics = Analytics(
-  id: "abcdefg"
+  numWorkouts: 0,
+  numDaysWorkedOut: 0,
+  numSets: 0,
+  numMusclesHit: 0,
+  workoutDatesList: [],
+  workoutBoolList: []
 )

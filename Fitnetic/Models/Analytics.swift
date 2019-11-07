@@ -9,10 +9,20 @@
 import Foundation
 import SwiftUI
 
-struct Analytics: Identifiable, Codable {
-  var id: String
+struct Analytics: Codable {
+  var numWorkouts: Int
+  var numDaysWorkedOut: Int
+  var numSets: Int
+  var numMusclesHit: Int
+  var workoutDatesList: [String]
+  var workoutBoolList: [Bool]
 
   enum CodingKeys : String, CodingKey {
-    case id = "_id"
+    case numWorkouts
+    case numDaysWorkedOut
+    case numSets
+    case numMusclesHit
+    case workoutDatesList
+    case workoutBoolList
   }
 }

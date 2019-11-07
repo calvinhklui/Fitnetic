@@ -13,17 +13,35 @@ struct WeekView: View {
   
   @ObservedObject var analyticsObserver: AnalyticsObserver
   
-  var daysList = [
-     ["month": "November", "day": 3, "workedOut": false],
-     ["month": "November", "day": 4, "workedOut": false],
-     ["month": "November", "day": 5, "workedOut": true],
-     ["month": "November", "day": 6, "workedOut": false],
-     ["month": "November", "day": 7, "workedOut": true]
-   ]
+  var daysList: [[String : Any]] = []
    
-  
   init(analyticsObserver: AnalyticsObserver) {
     self.analyticsObserver = analyticsObserver
+    
+    var start = 0
+    if (self.analyticsObserver.analytics.workoutDatesList.count > 2) { start = 2 }
+    
+    for i in start ..< self.analyticsObserver.analytics.workoutDatesList.count {
+      let workoutDate = self.analyticsObserver.analytics.workoutDatesList[i]
+      let workoutBool = self.analyticsObserver.analytics.workoutBoolList[i]
+      
+      let dateFormatter = DateFormatter()
+      dateFormatter.dateFormat = "yyyy-MM-dd"
+      dateFormatter.locale = Locale(identifier: "en_US")
+      let date = dateFormatter.date(from: workoutDate)
+      
+      var month: String = ""
+      var dateOfMonth: String = ""
+      if let date = date {
+        dateFormatter.dateFormat = "LLLL"
+        month = dateFormatter.string(from: date)
+      
+        dateFormatter.dateFormat = "dd"
+        dateOfMonth = dateFormatter.string(from: date)
+      }
+      
+      daysList.append(["month": month, "day": Int(dateOfMonth)!, "workedOut": workoutBool])
+    }
   }
   
   var body: some View {

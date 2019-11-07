@@ -30,7 +30,7 @@ struct StatisticView: View {
           
           HStack {
             VStack(alignment: .leading) {
-              Text(verbatim: "\(5)")
+              Text(verbatim: "\(self.analyticsObserver.analytics.numWorkouts)")
                 .font(.title)
                 .fontWeight(.black)
                 .foregroundColor(.primary)
@@ -42,7 +42,7 @@ struct StatisticView: View {
             Spacer()
             
             VStack(alignment: .leading) {
-              Text(verbatim: "\(21)")
+              Text(verbatim: "\(self.analyticsObserver.analytics.numSets)")
                 .font(.title)
                 .fontWeight(.black)
                 .foregroundColor(.primary)
@@ -54,7 +54,7 @@ struct StatisticView: View {
             Spacer()
             
             VStack(alignment: .leading) {
-              Text(verbatim: "\(8)")
+              Text(verbatim: "\(self.analyticsObserver.analytics.numMusclesHit)")
                 .font(.title)
                 .fontWeight(.black)
                 .foregroundColor(.primary)
