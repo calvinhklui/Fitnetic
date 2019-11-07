@@ -15,12 +15,16 @@ struct ContentView: View {
   @ObservedObject var workoutsObserver: WorkoutsObserver
   @ObservedObject var exercisesObserver: ExercisesObserver
   @ObservedObject var workoutObserver: WorkoutObserver
+  @ObservedObject var analyticsObserver: AnalyticsObserver
+  @ObservedObject var graphicObserver: GraphicObserver
   
   init() {
     self.userObserver = UserObserver()
     self.workoutsObserver = WorkoutsObserver()
     self.exercisesObserver = ExercisesObserver()
     self.workoutObserver = WorkoutObserver()
+    self.analyticsObserver = AnalyticsObserver()
+    self.graphicObserver = GraphicObserver()
   }
   
   var body: some View {
@@ -32,8 +36,8 @@ struct ContentView: View {
           Image(systemName: "square.fill")
           Text("Workout")
       }.tag(0)
-      AnalyticsView(workoutsObserver: self.workoutsObserver,
-                    exercisesObserver: self.exercisesObserver)
+      AnalyticsView(analyticsObserver: self.analyticsObserver,
+                    graphicObserver: self.graphicObserver)
         .tabItem {
           Image(systemName: "square.fill")
           Text("Analytics")

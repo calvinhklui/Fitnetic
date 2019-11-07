@@ -9,20 +9,21 @@
 import SwiftUI
 
 struct AnalyticsView: View {
-  @ObservedObject var workoutsObserver: WorkoutsObserver
-  @ObservedObject var exercisesObserver: ExercisesObserver
+  @ObservedObject var analyticsObserver: AnalyticsObserver
+  @ObservedObject var graphicObserver: GraphicObserver
   
-  init(workoutsObserver: WorkoutsObserver, exercisesObserver: ExercisesObserver) {
-    self.workoutsObserver = workoutsObserver
-    self.exercisesObserver = exercisesObserver
+  init(analyticsObserver: AnalyticsObserver, graphicObserver: GraphicObserver) {
+    self.analyticsObserver = analyticsObserver
+    self.graphicObserver = graphicObserver
   }
   
   var body: some View {
     NavigationView {
       ScrollView {
         Spacer()
-        EmptyView()
+        StatisticView()
         Spacer()
+        GraphicView(graphicObserver: self.graphicObserver)
       }
       .navigationBarTitle("Analytics", displayMode: .large)
       .background(bgColor)
@@ -33,7 +34,7 @@ struct AnalyticsView: View {
 
 struct AnalyticsView_Previews: PreviewProvider {
   static var previews: some View {
-    AnalyticsView(workoutsObserver: WorkoutsObserver(),
-                  exercisesObserver: ExercisesObserver())
+    AnalyticsView(analyticsObserver: AnalyticsObserver(),
+                  graphicObserver: GraphicObserver())
   }
 }

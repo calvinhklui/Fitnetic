@@ -22,6 +22,12 @@
 		067ED67E23691EE1004FA82D /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ED67D23691EE1004FA82D /* Stylesheet.swift */; };
 		067ED68023692161004FA82D /* NavConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ED67F23692161004FA82D /* NavConfig.swift */; };
 		067ED68423692FF3004FA82D /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ED68323692FF3004FA82D /* HostingController.swift */; };
+		0689318A237362D600111117 /* StatisticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06893189237362D600111117 /* StatisticView.swift */; };
+		0689318C237363D000111117 /* GraphicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0689318B237363D000111117 /* GraphicView.swift */; };
+		0689318E2373F6E200111117 /* AnalyticsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0689318D2373F6E200111117 /* AnalyticsObserver.swift */; };
+		068931902373F8E700111117 /* Graphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0689318F2373F8E700111117 /* Graphic.swift */; };
+		068931922373F8F400111117 /* GraphicObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068931912373F8F400111117 /* GraphicObserver.swift */; };
+		068931942373F90100111117 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068931932373F90100111117 /* Analytics.swift */; };
 		069124B92370C352004B2140 /* UserObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069124B82370C352004B2140 /* UserObserver.swift */; };
 		069124BA2370C352004B2140 /* UserObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069124B82370C352004B2140 /* UserObserver.swift */; };
 		069124BF2370C3EF004B2140 /* WorkoutsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069124BE2370C3EF004B2140 /* WorkoutsObserver.swift */; };
@@ -81,6 +87,12 @@
 		067ED67D23691EE1004FA82D /* Stylesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		067ED67F23692161004FA82D /* NavConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavConfig.swift; sourceTree = "<group>"; };
 		067ED68323692FF3004FA82D /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
+		06893189237362D600111117 /* StatisticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticView.swift; sourceTree = "<group>"; };
+		0689318B237363D000111117 /* GraphicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicView.swift; sourceTree = "<group>"; };
+		0689318D2373F6E200111117 /* AnalyticsObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsObserver.swift; sourceTree = "<group>"; };
+		0689318F2373F8E700111117 /* Graphic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphic.swift; sourceTree = "<group>"; };
+		068931912373F8F400111117 /* GraphicObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicObserver.swift; sourceTree = "<group>"; };
+		068931932373F90100111117 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		069124B82370C352004B2140 /* UserObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObserver.swift; sourceTree = "<group>"; };
 		069124BE2370C3EF004B2140 /* WorkoutsObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsObserver.swift; sourceTree = "<group>"; };
 		069124C12370C598004B2140 /* ExercisesObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesObserver.swift; sourceTree = "<group>"; };
@@ -174,13 +186,13 @@
 		067ED67123691248004FA82D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0697A508236F6A49000034B5 /* WorkoutViews */,
 				069124D42372B376004B2140 /* AnalyticsViews */,
 				069124CF2372AECB004B2140 /* ProfileViews */,
 				067ED65323690E9F004FA82D /* ContentView.swift */,
 				067ED674236913AA004FA82D /* WorkoutView.swift */,
 				067ED676236913EC004FA82D /* AnalyticsView.swift */,
 				067ED678236913FD004FA82D /* ProfileView.swift */,
-				0697A508236F6A49000034B5 /* WorkoutViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -193,6 +205,8 @@
 				0697A4FE236F63B1000034B5 /* WorkoutSet.swift */,
 				0697A501236F6418000034B5 /* Exercise.swift */,
 				0697A504236F6499000034B5 /* Muscle.swift */,
+				0689318F2373F8E700111117 /* Graphic.swift */,
+				068931932373F90100111117 /* Analytics.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -224,6 +238,8 @@
 				069124BE2370C3EF004B2140 /* WorkoutsObserver.swift */,
 				069124C12370C598004B2140 /* ExercisesObserver.swift */,
 				069124C42370C5EE004B2140 /* WorkoutObserver.swift */,
+				0689318D2373F6E200111117 /* AnalyticsObserver.swift */,
+				068931912373F8F400111117 /* GraphicObserver.swift */,
 			);
 			path = Observers;
 			sourceTree = "<group>";
@@ -240,6 +256,8 @@
 		069124D42372B376004B2140 /* AnalyticsViews */ = {
 			isa = PBXGroup;
 			children = (
+				06893189237362D600111117 /* StatisticView.swift */,
+				0689318B237363D000111117 /* GraphicView.swift */,
 			);
 			path = AnalyticsViews;
 			sourceTree = "<group>";
@@ -360,11 +378,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0697A50C236F6B92000034B5 /* SetDetailView.swift in Sources */,
+				0689318A237362D600111117 /* StatisticView.swift in Sources */,
+				0689318E2373F6E200111117 /* AnalyticsObserver.swift in Sources */,
 				067ED64D23690E9F004FA82D /* AppDelegate.swift in Sources */,
 				069124CE23729DC3004B2140 /* WorkoutSummaryView.swift in Sources */,
 				067ED65223690E9F004FA82D /* Fitnetic.xcdatamodeld in Sources */,
 				069124C22370C598004B2140 /* ExercisesObserver.swift in Sources */,
 				067ED65423690E9F004FA82D /* ContentView.swift in Sources */,
+				068931942373F90100111117 /* Analytics.swift in Sources */,
 				069124C52370C5EE004B2140 /* WorkoutObserver.swift in Sources */,
 				0697A4FC236F631B000034B5 /* Workout.swift in Sources */,
 				0697A4F5236F5DE9000034B5 /* SetListView.swift in Sources */,
@@ -374,15 +395,18 @@
 				067ED68023692161004FA82D /* NavConfig.swift in Sources */,
 				0697A4FF236F63B1000034B5 /* WorkoutSet.swift in Sources */,
 				069124CC237267A6004B2140 /* WorkoutRowView.swift in Sources */,
+				0689318C237363D000111117 /* GraphicView.swift in Sources */,
 				06C295C4236A937300B189E4 /* TodayView.swift in Sources */,
 				069124D32372B012004B2140 /* AttributesView.swift in Sources */,
 				0697A4F9236F627F000034B5 /* User.swift in Sources */,
 				067ED68423692FF3004FA82D /* HostingController.swift in Sources */,
+				068931922373F8F400111117 /* GraphicObserver.swift in Sources */,
 				067ED67C23691E32004FA82D /* HexColor.swift in Sources */,
 				067ED679236913FD004FA82D /* ProfileView.swift in Sources */,
 				069124BF2370C3EF004B2140 /* WorkoutsObserver.swift in Sources */,
 				0697A4F7236F5EED000034B5 /* SetRowView.swift in Sources */,
 				069124D12372AEEB004B2140 /* IdentityView.swift in Sources */,
+				068931902373F8E700111117 /* Graphic.swift in Sources */,
 				067ED675236913AA004FA82D /* WorkoutView.swift in Sources */,
 				067ED67E23691EE1004FA82D /* Stylesheet.swift in Sources */,
 				069124CA23726706004B2140 /* WorkoutListView.swift in Sources */,

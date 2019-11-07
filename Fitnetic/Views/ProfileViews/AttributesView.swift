@@ -19,12 +19,14 @@ struct AttributesView: View {
     let oldDate = userObserver.user.dateOfBirth.replacingOccurrences(of: ".", with: "+")
     
     let dateFormatterISO8601 = ISO8601DateFormatter()
-    let date = dateFormatterISO8601.date(from: oldDate)!
-
-    let dateFormatter = DateFormatter()
-    dateFormatter.locale = Locale(identifier: "en_US")
-    dateFormatter.setLocalizedDateFormatFromTemplate("MMMMdy")
-    dateText = dateFormatter.string(from: date)
+    let date = dateFormatterISO8601.date(from: oldDate)
+    
+    if let date = date {
+      let dateFormatter = DateFormatter()
+      dateFormatter.locale = Locale(identifier: "en_US")
+      dateFormatter.setLocalizedDateFormatFromTemplate("MMMMdy")
+      dateText = dateFormatter.string(from: date)
+    }
   }
   
   var body: some View {

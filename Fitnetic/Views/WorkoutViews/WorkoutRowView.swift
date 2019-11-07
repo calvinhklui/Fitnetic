@@ -20,12 +20,14 @@ struct WorkoutRowView: View {
     let oldDate = workout.date.replacingOccurrences(of: ".", with: "+")
     
     let dateFormatterISO8601 = ISO8601DateFormatter()
-    let date = dateFormatterISO8601.date(from: oldDate)!
-
-    let dateFormatter = DateFormatter()
-    dateFormatter.locale = Locale(identifier: "en_US")
-    dateFormatter.setLocalizedDateFormatFromTemplate("MMMMd")
-    dateText = dateFormatter.string(from: date)
+    let date = dateFormatterISO8601.date(from: oldDate)
+    
+    if let date = date {
+      let dateFormatter = DateFormatter()
+      dateFormatter.locale = Locale(identifier: "en_US")
+      dateFormatter.setLocalizedDateFormatFromTemplate("MMMMd")
+      dateText = dateFormatter.string(from: date)
+    }
     
     // format workout sets for display
     for i in 0 ..< workout.sets.count {

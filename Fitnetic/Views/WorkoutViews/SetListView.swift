@@ -9,6 +9,10 @@
 import SwiftUI
 
 struct SetListView: View {
+  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+  @State var isPreWorkout: Bool = true
+  @State private var showPopover: Bool = false
+  
   @ObservedObject var workoutObserver: WorkoutObserver
   @ObservedObject var exercisesObserver: ExercisesObserver
   var workout: Workout
@@ -37,26 +41,70 @@ struct SetListView: View {
       .padding(.horizontal, 20)
       .padding(.top, 20)
       
+      Spacer()
+      
       ScrollView {
-        NavigationLink(destination: SetDetailView(exercisesObserver: self.exercisesObserver,
-                                                  workoutObserver: self.workoutObserver)) {
-          VStack {
-            HStack {
-              VStack() {
-                Text("Start")
-                  .font(.title)
-                  .fontWeight(.black)
-                  .foregroundColor(.primary)
+        if (self.isPreWorkout) {
+          Button(action: {
+            self.showPopover = true
+            self.isPreWorkout = false
+          }) {
+            VStack {
+              HStack {
+                VStack {
+                  Text(verbatim: "Start")
+                    .font(.title)
+                    .fontWeight(.black)
+                    .foregroundColor(.primary)
+                    .padding(.bottom, 10)
+                }
               }
-              .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
             }
-            .padding(20)
           }
+        } else {
+          Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+            self.workoutObserver.postData()
+          }) {
+            VStack {
+              HStack {
+                VStack {
+                  Text(verbatim: "Save")
+                    .font(.title)
+                    .fontWeight(.black)
+                    .foregroundColor(.primary)
+                    .padding(.bottom, 10)
+                }
+              }
+            }
+          }
+          .navigationBarBackButtonHidden(true)
         }
-        .cornerRadius(10)
-        .overlay(RoundedRectangle(cornerRadius: 10)
-        .stroke(Color(.sRGB, red: 200/255, green: 200/255, blue: 200/255, opacity: 0.6), lineWidth: 1))
-        .padding(.all, 40)
+        
+        ScrollView { EmptyView() }
+          .popover(
+            isPresented: self.$showPopover,
+            arrowEdge: .bottom
+          ) {
+            VStack {
+              HStack {
+                Button(action: {
+                  self.isPreWorkout = true
+                  self.showPopover = false
+                }) {
+                  HStack {
+                    Text(verbatim: "Cancel")
+                      .foregroundColor(.red)
+                  }
+                }
+                .padding(20)
+                
+                Spacer()
+              }
+              SetDetailView(exercisesObserver: self.exercisesObserver,
+                            workoutObserver: self.workoutObserver)
+            }
+        }
       }
       .onAppear(perform: { self.workoutObserver.setWorkout(self.workout) })
       .navigationBarTitle(Text("Sets"))

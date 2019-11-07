@@ -20,17 +20,6 @@ struct SetDetailView: View {
     self.workoutObserver = workoutObserver
   }
   
-  var cancelButton: some View {
-    Button(action: {
-      self.presentationMode.wrappedValue.dismiss()
-    }) {
-      HStack {
-        Text(verbatim: "Cancel")
-          .foregroundColor(.red)
-      }
-    }
-  }
-  
   @ViewBuilder
   var body: some View {
     if (self.setCounter < self.workoutObserver.workout.sets.count - 1) {
@@ -59,7 +48,7 @@ struct SetDetailView: View {
                   .fontWeight(.black)
                   .foregroundColor(.primary)
                   .padding(.bottom, 10)
-                Text(verbatim: "Next Up: \(self.workoutObserver.workout.sets[setCounter + 1].exercise.name)")
+                Text(verbatim: "Next: \(self.workoutObserver.workout.sets[setCounter + 1].exercise.name)")
                   .font(.caption)
                   .foregroundColor(.secondary)
                   .padding(.bottom, 50)
@@ -68,8 +57,6 @@ struct SetDetailView: View {
           }
         }
       }
-      .navigationBarBackButtonHidden(true)
-      .navigationBarItems(leading: cancelButton)
     } else {
       VStack {
         Text(verbatim: self.workoutObserver.workout.sets[setCounter].exercise.name)
@@ -87,10 +74,24 @@ struct SetDetailView: View {
         
         Spacer()
         
-        // ADD BUTTON HERE
+        Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
+          VStack {
+            HStack {
+              VStack {
+                Text(verbatim: "Done")
+                  .font(.title)
+                  .fontWeight(.black)
+                  .foregroundColor(.primary)
+                  .padding(.bottom, 10)
+                Text(verbatim: "Last Set!")
+                  .font(.caption)
+                  .foregroundColor(.secondary)
+                  .padding(.bottom, 50)
+              }
+            }
+          }
+        }
       }
-      .navigationBarBackButtonHidden(true)
-      .navigationBarItems(leading: cancelButton)
     }
   }
 }
