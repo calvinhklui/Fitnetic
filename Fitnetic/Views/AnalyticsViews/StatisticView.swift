@@ -42,11 +42,11 @@ struct StatisticView: View {
             Spacer()
             
             VStack(alignment: .leading) {
-              Text(verbatim: "\(5)")
+              Text(verbatim: "\(21)")
                 .font(.title)
                 .fontWeight(.black)
                 .foregroundColor(.primary)
-              Text(verbatim: "Workouts")
+              Text(verbatim: "Exercises")
                 .font(.caption)
                 .foregroundColor(.secondary)
             }
@@ -54,11 +54,11 @@ struct StatisticView: View {
             Spacer()
             
             VStack(alignment: .leading) {
-              Text(verbatim: "\(5)")
+              Text(verbatim: "\(8)")
                 .font(.title)
                 .fontWeight(.black)
                 .foregroundColor(.primary)
-              Text(verbatim: "Workouts")
+              Text(verbatim: "Muscles")
                 .font(.caption)
                 .foregroundColor(.secondary)
             }

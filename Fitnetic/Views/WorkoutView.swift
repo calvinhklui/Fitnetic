@@ -12,11 +12,13 @@ struct WorkoutView: View {
   @ObservedObject var workoutsObserver: WorkoutsObserver
   @ObservedObject var exercisesObserver: ExercisesObserver
   @ObservedObject var workoutObserver: WorkoutObserver
+  @ObservedObject var analyticsObserver: AnalyticsObserver
   
-  init(workoutsObserver: WorkoutsObserver, exercisesObserver: ExercisesObserver, workoutObserver: WorkoutObserver) {
+  init(workoutsObserver: WorkoutsObserver, exercisesObserver: ExercisesObserver, workoutObserver: WorkoutObserver, analyticsObserver: AnalyticsObserver) {
     self.workoutsObserver = workoutsObserver
     self.exercisesObserver = exercisesObserver
     self.workoutObserver = workoutObserver
+    self.analyticsObserver = analyticsObserver
   }
   
   var body: some View {
@@ -26,6 +28,8 @@ struct WorkoutView: View {
         TodayView(workoutsObserver: self.workoutsObserver,
                   exercisesObserver: self.exercisesObserver,
                   workoutObserver: self.workoutObserver)
+        Spacer()
+        WeekView(analyticsObserver: self.analyticsObserver)
         Spacer()
       }
       .navigationBarTitle("Workout", displayMode: .large)
@@ -39,6 +43,7 @@ struct WorkoutView_Previews: PreviewProvider {
   static var previews: some View {
     WorkoutView(workoutsObserver: WorkoutsObserver(),
                 exercisesObserver: ExercisesObserver(),
-                workoutObserver: WorkoutObserver())
+                workoutObserver: WorkoutObserver(),
+                analyticsObserver: AnalyticsObserver())
   }
 }

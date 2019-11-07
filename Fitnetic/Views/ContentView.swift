@@ -31,12 +31,14 @@ struct ContentView: View {
     TabView(selection: $selectedView) {
       WorkoutView(workoutsObserver: self.workoutsObserver,
                   exercisesObserver: self.exercisesObserver,
-                  workoutObserver: self.workoutObserver)
+                  workoutObserver: self.workoutObserver,
+                  analyticsObserver: self.analyticsObserver)
         .tabItem {
           Image(systemName: "timer")
           Text("Workout")
       }.tag(0)
-      AnalyticsView(analyticsObserver: self.analyticsObserver,
+      AnalyticsView(workoutsObserver: self.workoutsObserver,
+                    analyticsObserver: self.analyticsObserver,
                     graphicObserver: self.graphicObserver)
         .tabItem {
           Image(systemName: "calendar")
