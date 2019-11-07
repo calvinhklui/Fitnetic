@@ -34,7 +34,7 @@ struct GraphicView: View {
         Image(uiImage: self.graphicObserver.imageFromData())
         .resizable()
         .aspectRatio(contentMode: .fit)
-          .padding(20)
+        .padding(20)
       }
     }
     .background(Color.white)

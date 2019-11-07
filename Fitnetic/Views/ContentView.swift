@@ -33,18 +33,18 @@ struct ContentView: View {
                   exercisesObserver: self.exercisesObserver,
                   workoutObserver: self.workoutObserver)
         .tabItem {
-          Image(systemName: "square.fill")
+          Image(systemName: "timer")
           Text("Workout")
       }.tag(0)
       AnalyticsView(analyticsObserver: self.analyticsObserver,
                     graphicObserver: self.graphicObserver)
         .tabItem {
-          Image(systemName: "square.fill")
+          Image(systemName: "calendar")
           Text("Analytics")
       }.tag(1)
       ProfileView(userObserver: self.userObserver)
         .tabItem {
-          Image(systemName: "square.fill")
+          Image(systemName: "person")
           Text("Profile")
       }.tag(2)
     }
