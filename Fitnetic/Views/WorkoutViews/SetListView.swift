@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SetListView: View {
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+  @State var isEditMode: EditMode = .inactive
   @State var isPreWorkout: Bool = true
   @State private var showPopover: Bool = false
   
@@ -36,8 +37,10 @@ struct SetListView: View {
           SetRowView(set: self.workout.sets[i])
         }
         .onMove(perform: move)
+        .onDelete(perform: delete)
       }
       .navigationBarItems(trailing: EditButton())
+      .environment(\.editMode, self.$isEditMode)
       .padding(.horizontal, 20)
       .padding(.top, 20)
       
@@ -114,6 +117,11 @@ struct SetListView: View {
   // Source: https://www.hackingwithswift.com/quick-start/swiftui/how-to-let-users-move-rows-in-a-list
   func move(from source: IndexSet, to destination: Int) {
       self.workoutObserver.workout.sets.move(fromOffsets: source, toOffset: destination)
+  }
+  
+  // Source: https://www.hackingwithswift.com/quick-start/swiftui/how-to-enable-editing-on-a-list-using-editbutton
+  func delete(at offsets: IndexSet) {
+      self.workoutObserver.workout.sets.remove(atOffsets: offsets)
   }
 }
 

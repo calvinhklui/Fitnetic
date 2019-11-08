@@ -35,6 +35,7 @@
 		068931A22374BF8D00111117 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068931A12374BF8D00111117 /* CalendarView.swift */; };
 		068931A42374FF4200111117 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068931A32374FF4200111117 /* WelcomeView.swift */; };
 		068931A6237501A200111117 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068931A5237501A200111117 /* SignUpView.swift */; };
+		068931A82375382B00111117 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068931A72375382B00111117 /* EditProfileView.swift */; };
 		069124B92370C352004B2140 /* UserObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069124B82370C352004B2140 /* UserObserver.swift */; };
 		069124BA2370C352004B2140 /* UserObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069124B82370C352004B2140 /* UserObserver.swift */; };
 		069124BF2370C3EF004B2140 /* WorkoutsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069124BE2370C3EF004B2140 /* WorkoutsObserver.swift */; };
@@ -107,6 +108,7 @@
 		068931A12374BF8D00111117 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		068931A32374FF4200111117 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		068931A5237501A200111117 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		068931A72375382B00111117 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		069124B82370C352004B2140 /* UserObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObserver.swift; sourceTree = "<group>"; };
 		069124BE2370C3EF004B2140 /* WorkoutsObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsObserver.swift; sourceTree = "<group>"; };
 		069124C12370C598004B2140 /* ExercisesObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesObserver.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 			children = (
 				069124D02372AEEB004B2140 /* IdentityView.swift */,
 				069124D22372B012004B2140 /* AttributesView.swift */,
+				068931A72375382B00111117 /* EditProfileView.swift */,
 			);
 			path = ProfileViews;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				067ED68023692161004FA82D /* NavConfig.swift in Sources */,
 				0697A4FF236F63B1000034B5 /* WorkoutSet.swift in Sources */,
 				069124CC237267A6004B2140 /* WorkoutRowView.swift in Sources */,
+				068931A82375382B00111117 /* EditProfileView.swift in Sources */,
 				0689318C237363D000111117 /* GraphicView.swift in Sources */,
 				06C295C4236A937300B189E4 /* TodayView.swift in Sources */,
 				068931A02374BC6E00111117 /* CalendarHeaderView.swift in Sources */,

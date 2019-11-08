@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct ProfileView: View {
+  @State var isEditMode: EditMode = .inactive
+  
   @ObservedObject var userObserver: UserObserver
   
   init(userObserver: UserObserver) {
@@ -18,13 +20,19 @@ struct ProfileView: View {
   var body: some View {
     NavigationView {
       ScrollView {
-        Spacer()
-        IdentityView(userObserver: self.userObserver)
-        Spacer()
-        AttributesView(userObserver: self.userObserver)
-        Spacer()
+        if self.isEditMode == .inactive {
+            Spacer()
+            IdentityView(userObserver: self.userObserver)
+            Spacer()
+            AttributesView(userObserver: self.userObserver)
+            Spacer()
+        } else {
+          EditProfileView(userObserver: self.userObserver)
+        }
       }
       .navigationBarTitle("Profile", displayMode: .large)
+      .navigationBarItems(trailing: EditButton())
+      .environment(\.editMode, self.$isEditMode)
       .background(bgColor)
     }
     .navigationViewStyle(StackNavigationViewStyle())

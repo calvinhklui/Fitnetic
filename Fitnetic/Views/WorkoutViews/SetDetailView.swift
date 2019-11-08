@@ -8,12 +8,19 @@
 
 import SwiftUI
 
+class TimerStruct: ObservableObject {
+  var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+}
+
 struct SetDetailView: View {
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
   
   @ObservedObject var exercisesObserver: ExercisesObserver
   @ObservedObject var workoutObserver: WorkoutObserver
   @State private var setCounter: Int = 0
+  
+  @State var timeRemaining = -1
+  var timer = TimerStruct()
   
   init(exercisesObserver: ExercisesObserver, workoutObserver: WorkoutObserver) {
     self.exercisesObserver = exercisesObserver
@@ -22,7 +29,7 @@ struct SetDetailView: View {
   
   @ViewBuilder
   var body: some View {
-    if (self.setCounter < self.workoutObserver.workout.sets.count - 1) {
+    if (timeRemaining == -1 && self.setCounter < self.workoutObserver.workout.sets.count - 1) {
       VStack {
         Text(verbatim: self.workoutObserver.workout.sets[setCounter].exercise.name)
           .font(.system(size: 40))
@@ -39,7 +46,10 @@ struct SetDetailView: View {
         
         Spacer()
         
-        Button(action: { self.setCounter = self.setCounter + 1 }) {
+        Button(action: {
+          self.timeRemaining = 5
+          self.timer.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+        }) {
           VStack {
             HStack {
               VStack {
@@ -57,7 +67,53 @@ struct SetDetailView: View {
           }
         }
       }
-    } else {
+    } else if (timeRemaining >= 0 && self.setCounter < self.workoutObserver.workout.sets.count - 1) {
+      VStack {
+        Text(verbatim: "Rest Timer")
+          .font(.system(size: 40))
+          .fontWeight(.semibold)
+          .foregroundColor(.primary)
+        .padding(.all, 20)
+        
+        Spacer()
+        
+        Text(verbatim: "\(timeRemaining)")
+          .font(.system(size: 100))
+          .fontWeight(.bold)
+          .foregroundColor(.gray)
+          .onReceive(timer.timer) { _ in
+              if self.timeRemaining > 0 {
+                  self.timeRemaining -= 1
+              } else if self.timeRemaining == 0 {
+                self.setCounter = self.setCounter + 1
+                self.timeRemaining = -1
+            }
+          }
+        
+        Spacer()
+        
+        Button(action: {
+          self.timeRemaining = -1
+          self.setCounter = self.setCounter + 1
+        }) {
+          VStack {
+            HStack {
+              VStack {
+                Text(verbatim: "I'm Ready")
+                  .font(.title)
+                  .fontWeight(.black)
+                  .foregroundColor(.primary)
+                  .padding(.bottom, 10)
+                Text(verbatim: "Next: \(self.workoutObserver.workout.sets[setCounter + 1].exercise.name)")
+                  .font(.caption)
+                  .foregroundColor(.secondary)
+                  .padding(.bottom, 50)
+              }
+            }
+          }
+        }
+      }
+  } else {
       VStack {
         Text(verbatim: self.workoutObserver.workout.sets[setCounter].exercise.name)
           .font(.system(size: 40))

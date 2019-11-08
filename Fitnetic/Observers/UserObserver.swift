@@ -78,6 +78,49 @@ class UserObserver: ObservableObject {
     } catch { print("Failed to Post User!") }
   }
   
+  func updateData() -> Void {
+    do {
+      let headers = [
+        "Content-Type": "application/json",
+        "Accept": "/",
+        "Cache-Control": "no-cache",
+        "Host": "fitnetic-api.herokuapp.com",
+        "Accept-Encoding": "gzip, deflate",
+        "Connection": "keep-alive"
+      ]
+      
+      let userDict = [
+        "username": self.user.username,
+        "firstName": self.user.firstName,
+        "lastName": self.user.lastName,
+        "dateOfBirth": self.user.dateOfBirth,
+        "gender": self.user.gender,
+        "goal": self.user.goal
+      ] as [String : Any]
+      
+      print(userDict)
+      
+      let jsonData = try JSONSerialization.data(withJSONObject: userDict, options: .prettyPrinted)
+    
+      var request = URLRequest(url: URL(string: self.postURL + self.user.id)!)
+      request.httpMethod = "PATCH"
+      request.allHTTPHeaderFields = headers
+      request.httpBody = jsonData as Data
+      
+      self.cancellable = URLSession.shared.dataTaskPublisher(for: request as URLRequest)
+      .map { $0.data }
+      .decode(type: User.self, decoder: JSONDecoder())
+      .replaceError(with: dummyUser)
+      .eraseToAnyPublisher()
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { user in
+        self.user = user
+        globalUserID = user.id
+        print("Posted User! \(user.id)")
+      })
+    } catch { print("Failed to Post User!") }
+  }
+  
   func setUser(_ user: User) -> Void {
     self.user = user
   }
