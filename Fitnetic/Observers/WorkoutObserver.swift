@@ -16,11 +16,7 @@ class WorkoutObserver: ObservableObject {
   private var cancellable: AnyCancellable?
   private var fetchURL: String = "https://fitnetic-api.herokuapp.com/recommendations/"
   private var postURL: String = "https://fitnetic-api.herokuapp.com/workouts/"
-  @Published var workout: Workout = dummyRecommendation {
-    didSet {
-      print("Set Workout! \(self.workout.id)")
-    }
-  }
+  @Published var workout: Workout = dummyRecommendation
   
   init() {
     self.fetchData()
@@ -78,9 +74,7 @@ class WorkoutObserver: ObservableObject {
       .replaceError(with: dummyRecommendation)
       .eraseToAnyPublisher()
       .receive(on: DispatchQueue.main)
-      .sink(receiveValue: { workout in
-        print("Posted Workout! \(workout.id)")
-      })
+      .assign(to: \.workout, on: self)
     } catch { print("Failed to Post Workout!") }
   }
   

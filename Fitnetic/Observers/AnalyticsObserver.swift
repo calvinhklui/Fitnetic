@@ -14,11 +14,7 @@ import Combine
 class AnalyticsObserver: ObservableObject {
   private var cancellable: AnyCancellable?
   private var url: String = "https://fitnetic-api.herokuapp.com/analytics/summary/"
-  @Published var analytics: Analytics = dummyAnalytics {
-    didSet {
-      print("Fetched Analytics!")
-    }
-  }
+  @Published var analytics: Analytics = dummyAnalytics
   
   init() {
     self.fetchData()

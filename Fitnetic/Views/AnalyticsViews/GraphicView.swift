@@ -13,12 +13,10 @@ struct GraphicView: View {
   
   @ObservedObject var workoutsObserver: WorkoutsObserver
   @ObservedObject var analyticsObserver: AnalyticsObserver
-  @ObservedObject var graphicObserver: GraphicObserver
   
-  init(workoutsObserver: WorkoutsObserver, analyticsObserver: AnalyticsObserver, graphicObserver: GraphicObserver) {
+  init(workoutsObserver: WorkoutsObserver, analyticsObserver: AnalyticsObserver) {
     self.workoutsObserver = workoutsObserver
     self.analyticsObserver = analyticsObserver
-    self.graphicObserver = graphicObserver
   }
   
   var body: some View {
@@ -33,10 +31,7 @@ struct GraphicView: View {
       if selectedTab == 0 {
         CalendarView(workoutsObserver: self.workoutsObserver)
       } else {
-        Image(uiImage: self.graphicObserver.imageFromData())
-        .resizable()
-        .aspectRatio(contentMode: .fit)
-        .padding(20)
+        Text("Coming Soon")
       }
     }
     .background(Color.white)
@@ -46,7 +41,6 @@ struct GraphicView: View {
 struct GraphicView_Previews: PreviewProvider {
   static var previews: some View {
     GraphicView(workoutsObserver: WorkoutsObserver(),
-                analyticsObserver: AnalyticsObserver(),
-                graphicObserver: GraphicObserver())
+                analyticsObserver: AnalyticsObserver())
   }
 }

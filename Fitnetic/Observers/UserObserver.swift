@@ -15,11 +15,7 @@ class UserObserver: ObservableObject {
   private var cancellable: AnyCancellable?
   private var fetchURL: String = "https://fitnetic-api.herokuapp.com/users/"
   private var postURL: String = "https://fitnetic-api.herokuapp.com/users/"
-  @Published var user: User = dummyUser {
-    didSet {
-      print("Fetched User Data for \(self.user.username)!")
-    }
-  }
+  @Published var user: User = dummyUser
   
   init() {
     self.fetchData()
@@ -55,8 +51,6 @@ class UserObserver: ObservableObject {
         "goal": self.user.goal
       ] as [String : Any]
       
-      print(userDict)
-      
       let jsonData = try JSONSerialization.data(withJSONObject: userDict, options: .prettyPrinted)
     
       var request = URLRequest(url: URL(string: self.postURL)!)
@@ -73,7 +67,6 @@ class UserObserver: ObservableObject {
       .sink(receiveValue: { user in
         self.user = user
         globalUserID = user.id
-        print("Posted User! \(user.id)")
       })
     } catch { print("Failed to Post User!") }
   }
@@ -116,7 +109,6 @@ class UserObserver: ObservableObject {
       .sink(receiveValue: { user in
         self.user = user
         globalUserID = user.id
-        print("Posted User! \(user.id)")
       })
     } catch { print("Failed to Post User!") }
   }

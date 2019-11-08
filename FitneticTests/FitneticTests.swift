@@ -9,15 +9,89 @@
 import XCTest
 @testable import Fitnetic
 
-class FitneticTests: XCTestCase {
+var globalUserID: String = "5dbf3ac810fe5000041aef80"
 
+class FitneticTests: XCTestCase {
     override func setUp() {
+        super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    func testUserObserver() {
+        let test_user_observer = UserObserver()
+      
+        XCTAssertNotNil(test_user_observer)
+        XCTAssertNotNil(test_user_observer.user)
+        XCTAssert((test_user_observer.user.lastName as Any) is String)
+        XCTAssert((test_user_observer.user.id as Any) is String)
+        XCTAssert((test_user_observer.user.dateOfBirth as Any) is String)
+        XCTAssert((test_user_observer.user.goal as Any) is String)
+      
+        test_user_observer.setUser(dummyUser)
+        XCTAssertEqual(test_user_observer.user.id, "edcba123")
+      
+      test_user_observer.postData()
+      XCTAssertEqual(test_user_observer.user.username, "calvinhklui")
+      
+      test_user_observer.updateData()
+      XCTAssertEqual(test_user_observer.user.username, "calvinhklui")
+    }
+  
+    func testExercisesObserver() {
+        let test_exercise_observer = ExercisesObserver()
+        XCTAssertNotNil(test_exercise_observer)
+        XCTAssertNotNil(test_exercise_observer.exercises)
+        for exercise in test_exercise_observer.exercises {
+          XCTAssert((exercise.id as Any) is String)
+          XCTAssert((exercise.name as Any) is String)
+          XCTAssert((exercise.muscles as Any) is [Muscle])
+        }
+        
+        test_exercise_observer.fetchData()
+    }
+    
+    func testWorkoutsObserver() {
+      let test_workouts_observer = WorkoutsObserver()
+      XCTAssertNotNil(test_workouts_observer)
+      XCTAssertNotNil(test_workouts_observer.workouts)
+      for workout in test_workouts_observer.workouts {
+        XCTAssert((workout.id as Any) is String)
+        XCTAssert((workout.user as Any) is User)
+        XCTAssert((workout.date as Any) is String)
+        XCTAssert((workout.sets as Any) is [WorkoutSet])
+      }
+      
+    }
+  
+    func testWorkoutObserver() {
+      let test_workout_observer = WorkoutObserver()
+      XCTAssertNotNil(test_workout_observer)
+      XCTAssertNotNil(test_workout_observer.workout)
+      XCTAssert((test_workout_observer.workout as Any) is Workout)
+      
+      let dummyRecommendation = Workout(
+        id: "abcde123",
+        user: dummyUser,
+        date: "11/05/2019",
+        sets: []
+      )
+      test_workout_observer.setWorkout(dummyRecommendation)
+      XCTAssertEqual(test_workout_observer.workout.id, "abcde123")
+      
+      test_workout_observer.postData()
+      XCTAssertEqual(test_workout_observer.workout.id, "abcde123")
+    }
+  
+    func testAnalyticsObserver() {
+      let test_analytic_observer = AnalyticsObserver()
+      XCTAssertNotNil(test_analytic_observer)
+      XCTAssertNotNil(test_analytic_observer.analytics)
+      XCTAssert((test_analytic_observer.analytics as Any) is Analytics)
+  }
 
     func testExample() {
         // This is an example of a functional test case.

@@ -14,11 +14,7 @@ import Combine
 class ExercisesObserver: ObservableObject {
   private var cancellable: AnyCancellable?
   private var url: String = "https://fitnetic-api.herokuapp.com/exercises/"
-  @Published var exercises: [Exercise] = [Exercise]() {
-    didSet {
-      print("Fetched \(self.exercises.count) Exercises!")
-    }
-  }
+  @Published var exercises: [Exercise] = [Exercise]()
   
   init() {
     self.fetchData()

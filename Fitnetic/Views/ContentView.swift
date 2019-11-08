@@ -16,7 +16,6 @@ struct ContentView: View {
   @ObservedObject var exercisesObserver: ExercisesObserver
   @ObservedObject var workoutObserver: WorkoutObserver
   @ObservedObject var analyticsObserver: AnalyticsObserver
-  @ObservedObject var graphicObserver: GraphicObserver
   
   init() {
     self.userObserver = UserObserver()
@@ -24,7 +23,6 @@ struct ContentView: View {
     self.exercisesObserver = ExercisesObserver()
     self.workoutObserver = WorkoutObserver()
     self.analyticsObserver = AnalyticsObserver()
-    self.graphicObserver = GraphicObserver()
   }
   
   var body: some View {
@@ -39,8 +37,7 @@ struct ContentView: View {
           Text("Workout")
       }.tag(0)
       AnalyticsView(workoutsObserver: self.workoutsObserver,
-                    analyticsObserver: self.analyticsObserver,
-                    graphicObserver: self.graphicObserver)
+                    analyticsObserver: self.analyticsObserver)
         .tabItem {
           Image(systemName: "calendar")
           Text("Analytics")
