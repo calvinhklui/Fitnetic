@@ -9,6 +9,8 @@
 import UIKit
 import SwiftUI
 
+var globalUserID: String = "5dbf3ac810fe5000041aef80"
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -24,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
-        
+      
         let contentView = ContentView()
             .environment(\.managedObjectContext, context)
 

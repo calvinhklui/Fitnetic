@@ -33,6 +33,8 @@
 		0689319E2374A4F500111117 /* WeekColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0689319D2374A4F500111117 /* WeekColumnView.swift */; };
 		068931A02374BC6E00111117 /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0689319F2374BC6E00111117 /* CalendarHeaderView.swift */; };
 		068931A22374BF8D00111117 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068931A12374BF8D00111117 /* CalendarView.swift */; };
+		068931A42374FF4200111117 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068931A32374FF4200111117 /* WelcomeView.swift */; };
+		068931A6237501A200111117 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068931A5237501A200111117 /* SignUpView.swift */; };
 		069124B92370C352004B2140 /* UserObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069124B82370C352004B2140 /* UserObserver.swift */; };
 		069124BA2370C352004B2140 /* UserObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069124B82370C352004B2140 /* UserObserver.swift */; };
 		069124BF2370C3EF004B2140 /* WorkoutsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069124BE2370C3EF004B2140 /* WorkoutsObserver.swift */; };
@@ -103,6 +105,8 @@
 		0689319D2374A4F500111117 /* WeekColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekColumnView.swift; sourceTree = "<group>"; };
 		0689319F2374BC6E00111117 /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
 		068931A12374BF8D00111117 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		068931A32374FF4200111117 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		068931A5237501A200111117 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		069124B82370C352004B2140 /* UserObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObserver.swift; sourceTree = "<group>"; };
 		069124BE2370C3EF004B2140 /* WorkoutsObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsObserver.swift; sourceTree = "<group>"; };
 		069124C12370C598004B2140 /* ExercisesObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesObserver.swift; sourceTree = "<group>"; };
@@ -203,6 +207,8 @@
 				067ED674236913AA004FA82D /* WorkoutView.swift */,
 				067ED676236913EC004FA82D /* AnalyticsView.swift */,
 				067ED678236913FD004FA82D /* ProfileView.swift */,
+				068931A32374FF4200111117 /* WelcomeView.swift */,
+				068931A5237501A200111117 /* SignUpView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -402,6 +408,7 @@
 				067ED65423690E9F004FA82D /* ContentView.swift in Sources */,
 				068931942373F90100111117 /* Analytics.swift in Sources */,
 				069124C52370C5EE004B2140 /* WorkoutObserver.swift in Sources */,
+				068931A6237501A200111117 /* SignUpView.swift in Sources */,
 				068931A22374BF8D00111117 /* CalendarView.swift in Sources */,
 				0697A4FC236F631B000034B5 /* Workout.swift in Sources */,
 				0697A4F5236F5DE9000034B5 /* SetListView.swift in Sources */,
@@ -423,6 +430,7 @@
 				067ED67C23691E32004FA82D /* HexColor.swift in Sources */,
 				067ED679236913FD004FA82D /* ProfileView.swift in Sources */,
 				0689319E2374A4F500111117 /* WeekColumnView.swift in Sources */,
+				068931A42374FF4200111117 /* WelcomeView.swift in Sources */,
 				069124BF2370C3EF004B2140 /* WorkoutsObserver.swift in Sources */,
 				0697A4F7236F5EED000034B5 /* SetRowView.swift in Sources */,
 				069124D12372AEEB004B2140 /* IdentityView.swift in Sources */,

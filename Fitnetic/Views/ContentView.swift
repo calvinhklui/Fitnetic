@@ -32,7 +32,8 @@ struct ContentView: View {
       WorkoutView(workoutsObserver: self.workoutsObserver,
                   exercisesObserver: self.exercisesObserver,
                   workoutObserver: self.workoutObserver,
-                  analyticsObserver: self.analyticsObserver)
+                  analyticsObserver: self.analyticsObserver,
+                  userObserver: self.userObserver)
         .tabItem {
           Image(systemName: "timer")
           Text("Workout")

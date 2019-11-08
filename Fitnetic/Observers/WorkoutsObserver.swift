@@ -13,7 +13,7 @@ import Combine
 // Source: https://theswiftdev.com/2019/08/15/urlsession-and-the-combine-framework/
 class WorkoutsObserver: ObservableObject {
   private var cancellable: AnyCancellable?
-  private var url: String = "https://fitnetic-api.herokuapp.com/workouts?user=" + "5dbf3ac810fe5000041aef80"
+  private var url: String = "https://fitnetic-api.herokuapp.com/workouts?user="
   @Published var workouts: [Workout] = [Workout]() {
     didSet {
       print("Fetched \(self.workouts.count) Workouts!")
@@ -25,7 +25,7 @@ class WorkoutsObserver: ObservableObject {
   }
   
   func fetchData() -> Void {
-    self.cancellable = URLSession.shared.dataTaskPublisher(for: URL(string: self.url)!)
+    self.cancellable = URLSession.shared.dataTaskPublisher(for: URL(string: self.url + globalUserID)!)
     .map { $0.data }
     .decode(type: [Workout].self, decoder: JSONDecoder())
     .replaceError(with: [])
