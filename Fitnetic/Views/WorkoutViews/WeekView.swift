@@ -68,7 +68,7 @@ struct WeekView: View {
           .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
         }
         .padding(20)
-        .background(Color.white)
+        .background(Color(UIColor.systemBackground))
       }
     }
   }

@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct CalendarColumnView: View {
+  @Environment (\.colorScheme) var colorScheme:ColorScheme
+  
   var day: String
   var workedOut: Bool
   var validDay: Bool
@@ -18,7 +20,7 @@ struct CalendarColumnView: View {
       self.day = String(day)
       self.validDay = true
     } else {
-      self.day = "0"
+      self.day = " "
       self.validDay = false
     }
     self.workedOut = workedOut
@@ -30,13 +32,13 @@ struct CalendarColumnView: View {
       .font(.system(size: 15))
       .fontWeight(workedOut ? .semibold : .regular)
       .lineLimit(1)
-      .foregroundColor(validDay ? .black : .white)
+      .foregroundColor(.primary)
       .frame(width: 30, height: 30)
     }
     .overlay(Circle()
-    .stroke(workedOut ? Color(.sRGB, red: 0/255, green: 0/255, blue: 0/255, opacity: 1) :
-      (validDay ? Color(.sRGB, red: 200/255, green: 200/255, blue: 200/255, opacity: 0.4) :
-        Color(.sRGB, red: 0/255, green: 0/255, blue: 0/255, opacity: 0)),
+    .stroke(workedOut ? (colorScheme == .dark ? Color(UIColor.white) : Color(UIColor.black)) :
+           (validDay ? Color(UIColor.systemGray6) :
+           (colorScheme == .dark ? Color(UIColor.black) : Color(UIColor.white))),
             lineWidth: 2)
     .frame(width: 30, height: 30)
     )

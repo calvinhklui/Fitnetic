@@ -110,7 +110,7 @@ struct TodayView: View {
       }
       .padding(20)
     }
-    .background(Color.white)
+    .background(Color(UIColor.systemBackground))
     .onAppear(perform: workoutObserver.fetchData)
   }
 }

@@ -27,7 +27,7 @@ struct AnalyticsView: View {
                     analyticsObserver: self.analyticsObserver)
       }
       .navigationBarTitle("Analytics", displayMode: .large)
-      .background(bgColor)
+      .background(Color(UIColor.systemGray6))
     }
     .navigationViewStyle(StackNavigationViewStyle())
   }

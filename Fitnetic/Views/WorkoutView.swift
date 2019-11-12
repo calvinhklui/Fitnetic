@@ -44,7 +44,7 @@ struct WorkoutView: View {
                       workoutObserver: self.workoutObserver,
                       analyticsObserver: self.analyticsObserver) }
       .navigationBarTitle("Workout", displayMode: .large)
-      .background(bgColor)
+      .background(Color(UIColor.systemGray6))
     }
     .navigationViewStyle(StackNavigationViewStyle())
   }

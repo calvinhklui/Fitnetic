@@ -33,7 +33,7 @@ struct ProfileView: View {
       .navigationBarTitle("Profile", displayMode: .large)
       .navigationBarItems(trailing: EditButton())
       .environment(\.editMode, self.$isEditMode)
-      .background(bgColor)
+      .background(Color(UIColor.systemGray6))
     }
     .navigationViewStyle(StackNavigationViewStyle())
   }

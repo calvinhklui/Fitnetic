@@ -61,7 +61,7 @@ struct AttributesView: View {
       }
       .layoutPriority(100)
       .padding(20)
-    }.background(Color.white)
+    }.background(Color(UIColor.systemBackground))
   }
 }
 

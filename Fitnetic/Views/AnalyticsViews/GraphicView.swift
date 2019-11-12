@@ -34,7 +34,7 @@ struct GraphicView: View {
         Text("Coming Soon")
       }
     }
-    .background(Color.white)
+    .background(Color(UIColor.systemBackground))
   }
 }
 
