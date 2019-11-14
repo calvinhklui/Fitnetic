@@ -26,7 +26,7 @@ struct AnalyticsView: View {
         GraphicView(workoutsObserver: self.workoutsObserver,
                     analyticsObserver: self.analyticsObserver)
       }
-      .navigationBarTitle("Analytics", displayMode: .large)
+      .navigationBarTitle("Record", displayMode: .large)
       .background(Color(UIColor.systemGray6))
     }
     .navigationViewStyle(StackNavigationViewStyle())

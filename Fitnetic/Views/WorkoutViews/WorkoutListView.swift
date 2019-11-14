@@ -22,14 +22,13 @@ struct WorkoutListView: View {
   var body: some View {
     ScrollView {
       ForEach((0 ..< self.workoutsObserver.workouts.count), id:\.self) { i in
-        NavigationLink(destination: SetListView(exercisesObserver: self.exercisesObserver,
+        NavigationLink(destination: TodayDetailView(exercisesObserver: self.exercisesObserver,
                                                 workoutObserver: self.workoutObserver,
                                                 workout: self.workoutsObserver.workouts[i])) {
           WorkoutRowView(workout: self.workoutsObserver.workouts[i])
         }
+        .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
         .cornerRadius(10)
-        .overlay(RoundedRectangle(cornerRadius: 10)
-        .stroke(Color(.sRGB, red: 200/255, green: 200/255, blue: 200/255, opacity: 0.6), lineWidth: 1))
         .padding(.horizontal, 20)
         .padding(.top, 20)
       }

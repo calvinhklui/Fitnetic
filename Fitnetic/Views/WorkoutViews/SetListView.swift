@@ -9,119 +9,61 @@
 import SwiftUI
 
 struct SetListView: View {
-  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
   @State var isEditMode: EditMode = .inactive
-  @State var isPreWorkout: Bool = true
-  @State private var showPopover: Bool = false
   
   @ObservedObject var workoutObserver: WorkoutObserver
   @ObservedObject var exercisesObserver: ExercisesObserver
   var workout: Workout
   
-  init(exercisesObserver: ExercisesObserver, workoutObserver: WorkoutObserver, workout: Workout?) {
+  init(exercisesObserver: ExercisesObserver, workoutObserver: WorkoutObserver, workout: Workout) {
     self.exercisesObserver = exercisesObserver
     self.workoutObserver = workoutObserver
+    self.workout = workout
     
-    // logic for workout (selected vs. recommended)
-    if let workout = workout {
-      self.workout = workout
-    } else {
-      self.workout = workoutObserver.workout
-    }
+    print("Received Workout: \(self.workout.id)")
+    
+    UITableView.appearance().backgroundColor = UIColor.systemBackground
   }
   
   var body: some View {
-    VStack {
-      List {
-        ForEach((0 ..< self.workout.sets.count), id:\.self) { i in
-          SetRowView(set: self.workout.sets[i])
-        }
-        .onMove(perform: move)
-        .onDelete(perform: delete)
-      }
-      .navigationBarItems(trailing: EditButton())
-      .environment(\.editMode, self.$isEditMode)
-      .padding(.horizontal, 20)
-      .padding(.top, 20)
+    VStack(alignment: .leading) {
+      Text(verbatim: "Sets")
+        .font(.title)
+        .fontWeight(.semibold)
+        .foregroundColor(.primary)
       
-      Spacer()
+      Divider()
+        .padding(.top, -5)
       
-      ScrollView {
-        if (self.isPreWorkout) {
-          Button(action: {
-            self.showPopover = true
-            self.isPreWorkout = false
-          }) {
-            VStack {
-              HStack {
-                VStack {
-                  Text(verbatim: "Start")
-                    .font(.title)
-                    .fontWeight(.black)
-                    .foregroundColor(.primary)
-                    .padding(.bottom, 10)
-                }
-              }
-            }
+      VStack {
+        Section {
+          ForEach(self.workout.sets) { set in
+            SetRowView(set: set)
           }
-        } else {
-          Button(action: {
-            self.presentationMode.wrappedValue.dismiss()
-            self.workoutObserver.postData()
-          }) {
-            VStack {
-              HStack {
-                VStack {
-                  Text(verbatim: "Save")
-                    .font(.title)
-                    .fontWeight(.black)
-                    .foregroundColor(.primary)
-                    .padding(.bottom, 10)
-                }
-              }
-            }
-          }
-          .navigationBarBackButtonHidden(true)
+          .onMove(perform: move)
+          .onDelete(perform: delete)
         }
-        
-        ScrollView { EmptyView() }
-          .popover(
-            isPresented: self.$showPopover,
-            arrowEdge: .bottom
-          ) {
-            VStack {
-              HStack {
-                Button(action: {
-                  self.isPreWorkout = true
-                  self.showPopover = false
-                }) {
-                  HStack {
-                    Text(verbatim: "Cancel")
-                      .foregroundColor(.red)
-                  }
-                }
-                .padding(20)
-                
-                Spacer()
-              }
-              SetDetailView(exercisesObserver: self.exercisesObserver,
-                            workoutObserver: self.workoutObserver)
-            }
-        }
+        .navigationBarItems(trailing: EditButton())
+        .environment(\.editMode, self.$isEditMode)
       }
-      .onAppear(perform: { self.workoutObserver.setWorkout(self.workout) })
-      .navigationBarTitle(Text("Sets"))
+      
     }
+    .padding(20)
+    .background(Color(UIColor.systemBackground))
+    .onAppear(perform: {
+      self.workoutObserver.setWorkout(self.workout)
+      print("Assigned Workout: \(self.workoutObserver.workout.id)")
+    })
   }
   
   // Source: https://www.hackingwithswift.com/quick-start/swiftui/how-to-let-users-move-rows-in-a-list
   func move(from source: IndexSet, to destination: Int) {
-      self.workoutObserver.workout.sets.move(fromOffsets: source, toOffset: destination)
+    self.workoutObserver.workout.sets.move(fromOffsets: source, toOffset: destination)
   }
   
   // Source: https://www.hackingwithswift.com/quick-start/swiftui/how-to-enable-editing-on-a-list-using-editbutton
   func delete(at offsets: IndexSet) {
-      self.workoutObserver.workout.sets.remove(atOffsets: offsets)
+    self.workoutObserver.workout.sets.remove(atOffsets: offsets)
   }
 }
 
@@ -129,6 +71,6 @@ struct SetListView_Previews: PreviewProvider {
   static var previews: some View {
     SetListView(exercisesObserver: ExercisesObserver(),
                 workoutObserver: WorkoutObserver(),
-                workout: nil)
+                workout: dummyRecommendation)
   }
 }

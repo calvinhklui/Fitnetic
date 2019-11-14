@@ -23,6 +23,9 @@ struct ContentView: View {
     self.exercisesObserver = ExercisesObserver()
     self.workoutObserver = WorkoutObserver()
     self.analyticsObserver = AnalyticsObserver()
+    
+    UISegmentedControl.appearance().selectedSegmentTintColor = UIColor.systemBlue
+    UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
   }
   
   var body: some View {
@@ -40,7 +43,7 @@ struct ContentView: View {
                     analyticsObserver: self.analyticsObserver)
         .tabItem {
           Image(systemName: "calendar")
-          Text("Analytics")
+          Text("Record")
       }.tag(1)
       ProfileView(userObserver: self.userObserver)
         .tabItem {

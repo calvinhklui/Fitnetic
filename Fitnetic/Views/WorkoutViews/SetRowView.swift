@@ -15,6 +15,8 @@ struct SetRowView: View {
   init(set: WorkoutSet) {
     self.set = set
     
+    print("Displayed Workout Set: \(set)")
+    
     // format number (either reps or time)
     let reps = set.reps
     let time = set.time
@@ -33,6 +35,7 @@ struct SetRowView: View {
       Text(number)
         .font(.title)
         .foregroundColor(.gray)
+//        .keyboardType(.numberPad)
       Text(set.exercise.name)
     }
     .padding(.vertical, 10)

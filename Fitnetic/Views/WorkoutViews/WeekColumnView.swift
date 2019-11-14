@@ -16,22 +16,25 @@ struct WeekColumnView: View {
   var body: some View {
     VStack {
       Text(verbatim: String(month.prefix(3)))
+      .foregroundColor(Color(UIColor.white))
       
       Text(verbatim: "\(day)")
       .font(.system(size: 25))
       .fontWeight(.semibold)
+      .foregroundColor(Color(UIColor.white))
       
       Spacer()
       
       if workedOut {
         Image(systemName: "checkmark.circle")
+        .foregroundColor(.white)
         .padding(.top, 15)
         .padding(.bottom, 5)
       }
     }
     .padding(10)
-    .overlay(RoundedRectangle(cornerRadius: 10)
-    .stroke(Color(.sRGB, red: 200/255, green: 200/255, blue: 200/255, opacity: 0.6), lineWidth: 1))
+    .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+    .cornerRadius(10)
   }
 }
 

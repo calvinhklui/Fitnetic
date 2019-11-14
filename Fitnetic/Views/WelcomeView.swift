@@ -23,13 +23,13 @@ struct WelcomeView: View {
         Spacer()
         
         Text("Fitnetic")
-        .font(.system(size: 70))
+        .font(Font(UIFont(name: "SirinStencil-Regular", size: 70)!))
         .fontWeight(.black)
-        .foregroundColor(.secondary)
+        .foregroundColor(.white)
         .padding(.bottom, 10)
         Text(verbatim: "Your personal fitness app.")
         .font(.headline)
-        .foregroundColor(.secondary)
+          .foregroundColor(.white)
         
         Spacer()
         
@@ -40,11 +40,11 @@ struct WelcomeView: View {
                 Text(verbatim: "Sign Up")
                   .font(.title)
                   .fontWeight(.black)
-                  .foregroundColor(.primary)
+                  .foregroundColor(.white)
                   .padding(.bottom, 5)
                 Text(verbatim: "Create a new account.")
                   .font(.caption)
-                  .foregroundColor(.secondary)
+                  .foregroundColor(.white)
                   .lineLimit(3)
               }
               .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
@@ -73,11 +73,11 @@ struct WelcomeView: View {
                 Text(verbatim: "Sign In")
                   .font(.title)
                   .fontWeight(.black)
-                  .foregroundColor(.primary)
+                  .foregroundColor(.white)
                   .padding(.bottom, 10)
                 Text(verbatim: "Use an existing account.")
                 .font(.caption)
-                .foregroundColor(.secondary)
+                .foregroundColor(.white)
                 .lineLimit(3)
               }
             }
@@ -86,6 +86,9 @@ struct WelcomeView: View {
         
         Spacer()
       }
+      .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+      .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+      .edgesIgnoringSafeArea(.all)
     }
     .navigationViewStyle(StackNavigationViewStyle())
   }

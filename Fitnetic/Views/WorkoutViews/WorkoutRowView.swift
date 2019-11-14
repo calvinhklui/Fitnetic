@@ -51,11 +51,11 @@ struct WorkoutRowView: View {
           Text(dateText)
             .font(.title)
             .fontWeight(.black)
-            .foregroundColor(.primary)
+            .foregroundColor(.white)
             .padding(.bottom, 10)
           Text(setsText)
             .font(.caption)
-            .foregroundColor(.secondary)
+            .foregroundColor(.white)
         }
         .layoutPriority(100)
         Spacer()

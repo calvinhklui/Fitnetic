@@ -25,15 +25,19 @@ struct StatisticView: View {
             .foregroundColor(.primary)
           
           Divider()
-          .padding(.top, -5)
-          .padding(.bottom, 5)
+            .padding(.top, -5)
+            .padding(.bottom, 5)
           
           HStack {
             VStack(alignment: .leading) {
-              Text(verbatim: "\(self.analyticsObserver.analytics.numWorkouts)")
-                .font(.title)
-                .fontWeight(.black)
-                .foregroundColor(.primary)
+              HStack {
+                Text(verbatim: "\(self.analyticsObserver.analytics.numWorkouts)")
+                  .font(.title)
+                  .fontWeight(.black)
+                  .foregroundColor(.primary)
+                Image(systemName: "arrowtriangle.down.fill")
+                  .foregroundColor(.red)
+              }
               Text(verbatim: "Workouts")
                 .font(.caption)
                 .foregroundColor(.secondary)
@@ -42,10 +46,14 @@ struct StatisticView: View {
             Spacer()
             
             VStack(alignment: .leading) {
-              Text(verbatim: "\(self.analyticsObserver.analytics.numSets)")
-                .font(.title)
-                .fontWeight(.black)
-                .foregroundColor(.primary)
+              HStack {
+                Text(verbatim: "\(self.analyticsObserver.analytics.numSets)")
+                  .font(.title)
+                  .fontWeight(.black)
+                  .foregroundColor(.primary)
+                Image(systemName: "arrowtriangle.up.fill")
+                  .foregroundColor(.green)
+              }
               Text(verbatim: "Exercises")
                 .font(.caption)
                 .foregroundColor(.secondary)
@@ -54,10 +62,14 @@ struct StatisticView: View {
             Spacer()
             
             VStack(alignment: .leading) {
-              Text(verbatim: "\(self.analyticsObserver.analytics.numMusclesHit)")
-                .font(.title)
-                .fontWeight(.black)
-                .foregroundColor(.primary)
+              HStack {
+                Text(verbatim: "\(self.analyticsObserver.analytics.numMusclesHit)")
+                  .font(.title)
+                  .fontWeight(.black)
+                  .foregroundColor(.primary)
+                Image(systemName: "arrowtriangle.right.fill")
+                  .foregroundColor(Color(UIColor.systemBackground))
+              }
               Text(verbatim: "Muscles")
                 .font(.caption)
                 .foregroundColor(.secondary)

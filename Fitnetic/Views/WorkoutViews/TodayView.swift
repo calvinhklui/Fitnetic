@@ -48,62 +48,74 @@ struct TodayView: View {
             .foregroundColor(.primary)
           
           Divider()
-          .padding(.top, -5)
-          .padding(.bottom, 10)
+            .padding(.top, -5)
+            .padding(.bottom, 10)
           
-          NavigationLink(destination: SetListView(exercisesObserver: self.exercisesObserver,
-                                                  workoutObserver: self.workoutObserver,
-                                                  workout: nil)) {
-            VStack {
-              HStack {
-                VStack(alignment: .leading) {
-                  Text(verbatim: "Recommended")
-                    .font(.title)
-                    .fontWeight(.black)
-                    .foregroundColor(.primary)
-                    .padding(.bottom, 5)
-                  Text(verbatim: "\(todayExercises.joined(separator: ", "))")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .lineLimit(3)
-                }
-                .layoutPriority(100)
-                Spacer()
-              }
-              .padding(20)
-            }
+          NavigationLink(destination: TodayDetailView(exercisesObserver: self.exercisesObserver,
+                                                      workoutObserver: self.workoutObserver,
+                                                      workout: nil)) {
+                                                        VStack {
+                                                          HStack {
+                                                            VStack(alignment: .leading) {
+                                                              Text(verbatim: "Recommended")
+                                                                .font(.title)
+                                                                .fontWeight(.black)
+                                                                .foregroundColor(Color(UIColor.white))
+                                                                .padding(.bottom, 5)
+                                                              Text(verbatim: "\(todayExercises.joined(separator: ", "))")
+                                                                .font(.caption)
+                                                                .fontWeight(.bold)
+                                                                .foregroundColor(Color(hex: "888888"))
+                                                                .lineLimit(3)
+                                                            }
+                                                            .layoutPriority(100)
+                                                            Spacer()
+                                                          }
+                                                        }
           }
+          .padding(.top, 80)
+          .padding(.horizontal, 20)
+          .padding(.bottom, 20)
+          .background(
+            Image("recommendedFaded")
+              .resizable()
+              .scaledToFill()
+          )
           .cornerRadius(10)
-          .overlay(RoundedRectangle(cornerRadius: 10)
-          .stroke(Color(.sRGB, red: 200/255, green: 200/255, blue: 200/255, opacity: 0.6), lineWidth: 1))
+          // .shadow(radius: 5, x: 5, y: 5)
           .padding(.bottom, 15)
           
           NavigationLink(destination: WorkoutListView(workoutsObserver: self.workoutsObserver,
                                                       exercisesObserver: self.exercisesObserver,
                                                       workoutObserver: self.workoutObserver)) {
-            VStack {
-              HStack {
-                VStack(alignment: .leading) {
-                  Text(verbatim: "History")
-                    .font(.title)
-                    .fontWeight(.black)
-                    .foregroundColor(.primary)
-                    .padding(.bottom, 5)
-                  Text(verbatim: "Explore your past workouts.")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .lineLimit(3)
-                }
-                .layoutPriority(100)
-                Spacer()
-              }
-              .padding(20)
-            }
+                                                        VStack {
+                                                          HStack {
+                                                            VStack(alignment: .leading) {
+                                                              Text(verbatim: "History")
+                                                                .font(.title)
+                                                                .fontWeight(.black)
+                                                                .foregroundColor(Color(UIColor.white))
+                                                                .padding(.bottom, 5)
+                                                              Text(verbatim: "Explore your past workouts.")
+                                                                .font(.caption)
+                                                                .fontWeight(.bold)
+                                                                .foregroundColor(Color(hex: "888888"))
+                                                                .lineLimit(3)
+                                                            }
+                                                            .layoutPriority(100)
+                                                            Spacer()
+                                                          }
+                                                        }
           }
+          .padding(20)
+          .background(
+            Image("historyFaded")
+              .resizable()
+              .scaledToFill()
+          )
           .cornerRadius(10)
-          .overlay(RoundedRectangle(cornerRadius: 10)
-          .stroke(Color(.sRGB, red: 200/255, green: 200/255, blue: 200/255, opacity: 0.6), lineWidth: 1))
-          .padding(.bottom, 10)
+          // .shadow(radius: 5, x: 5, y: 5)
+          .padding(.bottom, 15)
         }
         .layoutPriority(100)
         Spacer()

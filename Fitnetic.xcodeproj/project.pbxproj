@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0603A273237CF80D0076E420 /* TodayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603A272237CF80D0076E420 /* TodayDetailView.swift */; };
+		0603A279237D251C0076E420 /* SirinStencil-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0603A278237D251C0076E420 /* SirinStencil-Regular.ttf */; };
+		0603A27A237D25270076E420 /* SirinStencil-Regular.ttf in Sources */ = {isa = PBXBuildFile; fileRef = 0603A278237D251C0076E420 /* SirinStencil-Regular.ttf */; };
 		067ED64D23690E9F004FA82D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ED64C23690E9F004FA82D /* AppDelegate.swift */; };
 		067ED64F23690E9F004FA82D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ED64E23690E9F004FA82D /* SceneDelegate.swift */; };
 		067ED65223690E9F004FA82D /* Fitnetic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 067ED65023690E9F004FA82D /* Fitnetic.xcdatamodeld */; };
@@ -75,6 +78,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0603A272237CF80D0076E420 /* TodayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayDetailView.swift; sourceTree = "<group>"; };
+		0603A278237D251C0076E420 /* SirinStencil-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SirinStencil-Regular.ttf"; sourceTree = "<group>"; };
 		067ED64923690E9F004FA82D /* Fitnetic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fitnetic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		067ED64C23690E9F004FA82D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		067ED64E23690E9F004FA82D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +150,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0603A274237D233A0076E420 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0603A278237D251C0076E420 /* SirinStencil-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		067ED64023690E9F004FA82D = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +179,7 @@
 		067ED64B23690E9F004FA82D /* Fitnetic */ = {
 			isa = PBXGroup;
 			children = (
+				0603A274237D233A0076E420 /* Fonts */,
 				067ED6732369127F004FA82D /* Delegates */,
 				067ED67223691279004FA82D /* Models */,
 				069124B72370C325004B2140 /* Observers */,
@@ -285,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				06C295C3236A937300B189E4 /* TodayView.swift */,
+				0603A272237CF80D0076E420 /* TodayDetailView.swift */,
 				0697A4F4236F5DE9000034B5 /* SetListView.swift */,
 				0697A4F6236F5EED000034B5 /* SetRowView.swift */,
 				0697A50B236F6B92000034B5 /* SetDetailView.swift */,
@@ -380,6 +395,7 @@
 			files = (
 				067ED65C23690EA1004FA82D /* LaunchScreen.storyboard in Resources */,
 				067ED65923690EA1004FA82D /* Preview Assets.xcassets in Resources */,
+				0603A279237D251C0076E420 /* SirinStencil-Regular.ttf in Resources */,
 				067ED65623690EA1004FA82D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -398,6 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0603A27A237D25270076E420 /* SirinStencil-Regular.ttf in Sources */,
 				0697A50C236F6B92000034B5 /* SetDetailView.swift in Sources */,
 				0689318A237362D600111117 /* StatisticView.swift in Sources */,
 				0689318E2373F6E200111117 /* AnalyticsObserver.swift in Sources */,
@@ -416,6 +433,7 @@
 				0689319C23749E6D00111117 /* WeekView.swift in Sources */,
 				067ED677236913EC004FA82D /* AnalyticsView.swift in Sources */,
 				067ED64F23690E9F004FA82D /* SceneDelegate.swift in Sources */,
+				0603A273237CF80D0076E420 /* TodayDetailView.swift in Sources */,
 				06893198237481D500111117 /* CalendarRowView.swift in Sources */,
 				067ED68023692161004FA82D /* NavConfig.swift in Sources */,
 				0697A4FF236F63B1000034B5 /* WorkoutSet.swift in Sources */,
