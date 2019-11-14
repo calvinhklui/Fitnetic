@@ -15,12 +15,12 @@ struct SetListView: View {
   @ObservedObject var exercisesObserver: ExercisesObserver
   var workout: Workout
   
+  @State var listItems = ["Item 1", "Item 2", "Item 3"]
+  
   init(exercisesObserver: ExercisesObserver, workoutObserver: WorkoutObserver, workout: Workout) {
     self.exercisesObserver = exercisesObserver
     self.workoutObserver = workoutObserver
     self.workout = workout
-    
-    print("Received Workout: \(self.workout.id)")
     
     UITableView.appearance().backgroundColor = UIColor.systemBackground
   }
@@ -35,24 +35,21 @@ struct SetListView: View {
       Divider()
         .padding(.top, -5)
       
-      VStack {
-        Section {
-          ForEach(self.workout.sets) { set in
-            SetRowView(set: set)
-          }
-          .onMove(perform: move)
-          .onDelete(perform: delete)
+      List {
+        ForEach(self.workoutObserver.workout.sets) { set in
+          SetRowView(set: set)
         }
-        .navigationBarItems(trailing: EditButton())
-        .environment(\.editMode, self.$isEditMode)
+        .onMove(perform: move)
+        .onDelete(perform: delete)
       }
+      .navigationBarItems(trailing: EditButton())
+      .environment(\.editMode, self.$isEditMode)
       
     }
     .padding(20)
     .background(Color(UIColor.systemBackground))
     .onAppear(perform: {
       self.workoutObserver.setWorkout(self.workout)
-      print("Assigned Workout: \(self.workoutObserver.workout.id)")
     })
   }
   

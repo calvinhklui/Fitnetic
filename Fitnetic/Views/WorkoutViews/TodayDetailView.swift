@@ -13,8 +13,6 @@ struct TodayDetailView: View {
   
   @State var isPreWorkout: Bool = true
   @State private var showPopover: Bool = false
-  @State private var restTimerDuration: String = "0"
-  var restTimerDurations = ["0", "1", "2", "5"]
   
   @ObservedObject var workoutObserver: WorkoutObserver
   @ObservedObject var exercisesObserver: ExercisesObserver
@@ -30,40 +28,15 @@ struct TodayDetailView: View {
       self.workout = workoutObserver.workout  // use recommended workout
     }
     
-    print("Selected Workout: \(self.workout.id)")
-    
     UITableView.appearance().backgroundColor = UIColor.systemBackground
   }
   
   var body: some View {
-    ScrollView {
+    VStack {
       Spacer()
       
       SetListView(exercisesObserver: self.exercisesObserver, workoutObserver: self.workoutObserver, workout: self.workout)
-      
-      Spacer()
-      
-      VStack(alignment: .leading) {
-        Text(verbatim: "Rest Timer")
-          .font(.title)
-          .fontWeight(.semibold)
-          .foregroundColor(.primary)
-        
-        Divider()
-          .padding(.top, -5)
-        
-        Text(verbatim: "Duration: \(restTimerDuration):00")
-        
-        Picker(selection: $restTimerDuration, label: Text("")) {
-          ForEach(0 ..< restTimerDurations.count) {
-            Text("\(self.restTimerDurations[$0]):00")
-          }
-        }
-        .pickerStyle(WheelPickerStyle())
-        
-      }
-      .padding(20)
-      .background(Color(UIColor.systemBackground))
+        .frame(height: 480)
       
       Spacer()
       .padding(.bottom, 10)
@@ -138,8 +111,8 @@ struct TodayDetailView: View {
                       workoutObserver: self.workoutObserver)
       }
     }
-    .background(Color(UIColor.systemGray6))
     .navigationBarTitle(Text("Today"))
+    .background(Color(UIColor.systemGray6))
   }
 }
 

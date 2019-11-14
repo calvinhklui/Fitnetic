@@ -27,6 +27,24 @@ struct AnalyticsView: View {
                     analyticsObserver: self.analyticsObserver)
       }
       .navigationBarTitle("Record", displayMode: .large)
+      .navigationBarItems(trailing:
+        Button(action: {
+          self.workoutsObserver.fetchData()
+          self.analyticsObserver.fetchData()
+        }) {
+          VStack {
+            HStack {
+              VStack {
+                Image(systemName: "arrow.clockwise.circle.fill")
+                  .font(.system(size: 35))
+                  .foregroundColor(Color(UIColor.systemBlue))
+              }
+            }
+          }
+          .padding(.top, 95)
+          .padding(.bottom, 5)
+        }
+      )
       .background(Color(UIColor.systemGray6))
     }
     .navigationViewStyle(StackNavigationViewStyle())

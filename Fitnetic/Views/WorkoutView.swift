@@ -44,6 +44,27 @@ struct WorkoutView: View {
                       workoutObserver: self.workoutObserver,
                       analyticsObserver: self.analyticsObserver) }
       .navigationBarTitle("Workout", displayMode: .large)
+      .navigationBarItems(trailing:
+        Button(action: {
+          self.userObserver.fetchData()
+          self.workoutsObserver.fetchData()
+          self.exercisesObserver.fetchData()
+          self.workoutObserver.fetchData()
+          self.analyticsObserver.fetchData()
+        }) {
+          VStack {
+            HStack {
+              VStack {
+                Image(systemName: "arrow.clockwise.circle.fill")
+                  .font(.system(size: 35))
+                  .foregroundColor(Color(UIColor.systemBlue))
+              }
+            }
+          }
+          .padding(.top, 95)
+          .padding(.bottom, 5)
+        }
+      )
       .background(Color(UIColor.systemGray6))
     }
     .navigationViewStyle(StackNavigationViewStyle())

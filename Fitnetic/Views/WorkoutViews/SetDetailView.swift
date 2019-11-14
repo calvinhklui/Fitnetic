@@ -46,25 +46,75 @@ struct SetDetailView: View {
         
         Spacer()
         
+        Text(verbatim: "Rest Timer")
+        .font(.headline)
+        .fontWeight(.semibold)
+        .foregroundColor(.primary)
+        .padding(.bottom, 15)
+        
+        HStack {
         Button(action: {
-          self.timeRemaining = 5
+          self.timeRemaining = 30
           self.timer.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
         }) {
           VStack {
             HStack {
               VStack {
-                Text(verbatim: "Done")
-                  .font(.title)
-                  .fontWeight(.black)
+                Text(verbatim: "0:30")
+                  .font(.headline)
+                  .foregroundColor(Color(UIColor.white))
+                  .padding(.horizontal, 20)
+                  .padding(.vertical, 10)
                   .foregroundColor(.primary)
-                  .padding(.bottom, 10)
-                Text(verbatim: "Next: \(self.workoutObserver.workout.sets[setCounter + 1].exercise.name)")
-                  .font(.caption)
-                  .foregroundColor(.secondary)
+                  .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+                  .cornerRadius(30)
                   .padding(.bottom, 50)
               }
             }
           }
+        }
+          
+        Button(action: {
+          self.timeRemaining = 60
+          self.timer.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+        }) {
+          VStack {
+            HStack {
+              VStack {
+                Text(verbatim: "1:00")
+                  .font(.headline)
+                  .foregroundColor(Color(UIColor.white))
+                  .padding(.horizontal, 20)
+                  .padding(.vertical, 10)
+                  .foregroundColor(.primary)
+                  .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+                  .cornerRadius(30)
+                  .padding(.bottom, 50)
+              }
+            }
+          }
+        }
+          
+        Button(action: {
+          self.timeRemaining = 120
+          self.timer.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+        }) {
+          VStack {
+            HStack {
+              VStack {
+                Text(verbatim: "2:00")
+                  .font(.headline)
+                  .foregroundColor(Color(UIColor.white))
+                  .padding(.horizontal, 20)
+                  .padding(.vertical, 10)
+                  .foregroundColor(.primary)
+                  .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+                  .cornerRadius(30)
+                  .padding(.bottom, 50)
+              }
+            }
+          }
+        }
         }
       }
     } else if (timeRemaining >= 0 && self.setCounter < self.workoutObserver.workout.sets.count - 1) {
@@ -102,11 +152,16 @@ struct SetDetailView: View {
                 Text(verbatim: "I'm Ready")
                   .font(.title)
                   .fontWeight(.black)
+                  .foregroundColor(Color(UIColor.white))
+                  .padding(.horizontal, 30)
+                  .padding(.vertical, 15)
                   .foregroundColor(.primary)
-                  .padding(.bottom, 10)
+                  .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+                  .cornerRadius(30)
                 Text(verbatim: "Next: \(self.workoutObserver.workout.sets[setCounter + 1].exercise.name)")
                   .font(.caption)
                   .foregroundColor(.secondary)
+                  .padding(.top, 10)
                   .padding(.bottom, 50)
               }
             }

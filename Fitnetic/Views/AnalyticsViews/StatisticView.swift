@@ -51,8 +51,8 @@ struct StatisticView: View {
                   .font(.title)
                   .fontWeight(.black)
                   .foregroundColor(.primary)
-                Image(systemName: "arrowtriangle.up.fill")
-                  .foregroundColor(.green)
+                Image(systemName: "arrowtriangle.right.fill")
+                  .foregroundColor(Color(UIColor.systemBackground))
               }
               Text(verbatim: "Exercises")
                 .font(.caption)
@@ -67,8 +67,8 @@ struct StatisticView: View {
                   .font(.title)
                   .fontWeight(.black)
                   .foregroundColor(.primary)
-                Image(systemName: "arrowtriangle.right.fill")
-                  .foregroundColor(Color(UIColor.systemBackground))
+                Image(systemName: "arrowtriangle.up.fill")
+                  .foregroundColor(.green)
               }
               Text(verbatim: "Muscles")
                 .font(.caption)
