@@ -48,6 +48,7 @@ struct AnalyticsView: View {
       .background(Color(UIColor.systemGray6))
     }
     .navigationViewStyle(StackNavigationViewStyle())
+    .onAppear(perform: analyticsObserver.fetchSVG)
   }
 }
 

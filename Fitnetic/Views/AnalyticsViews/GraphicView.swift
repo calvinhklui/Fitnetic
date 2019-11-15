@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct GraphicView: View {
-  @State private var selectedTab = 0
+  @State private var selectedTab = 1
   
   @ObservedObject var workoutsObserver: WorkoutsObserver
   @ObservedObject var analyticsObserver: AnalyticsObserver
@@ -31,7 +31,9 @@ struct GraphicView: View {
       if selectedTab == 0 {
         CalendarView(workoutsObserver: self.workoutsObserver)
       } else {
-        Text("Coming Soon")
+        Image(uiImage: self.analyticsObserver.heatmap ?? UIImage(systemName: "photo")!)
+        .resizable()
+        .aspectRatio(contentMode: .fit)
       }
     }
     .background(Color(UIColor.systemBackground))

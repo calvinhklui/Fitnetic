@@ -24,6 +24,9 @@ struct ContentView: View {
     self.workoutObserver = WorkoutObserver()
     self.analyticsObserver = AnalyticsObserver()
     
+    analyticsObserver.fetchSVG()
+    print("Fetching...")
+    
     UISegmentedControl.appearance().selectedSegmentTintColor = UIColor.systemBlue
     UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
   }

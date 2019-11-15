@@ -9,12 +9,15 @@
 import Foundation
 import SwiftUI
 import Combine
+import SVGKit
 
 // Source: https://theswiftdev.com/2019/08/15/urlsession-and-the-combine-framework/
 class AnalyticsObserver: ObservableObject {
   private var cancellable: AnyCancellable?
   private var url: String = "https://fitnetic-api.herokuapp.com/analytics/summary/"
+  private var urlSVG: String = "https://fitnetic-api.herokuapp.com/heatmap/"
   @Published var analytics: Analytics = dummyAnalytics
+  @Published var heatmap: UIImage?
   
   init() {
     self.fetchData()
@@ -28,6 +31,17 @@ class AnalyticsObserver: ObservableObject {
     .eraseToAnyPublisher()
     .receive(on: DispatchQueue.main)
     .assign(to: \.analytics, on: self)
+  }
+  
+  func fetchSVG() -> Void {
+    self.cancellable = URLSession.shared.dataTaskPublisher(for: URL(string: self.urlSVG + globalUserID)!)
+    .map { $0.data }
+    .replaceError(with: Data())
+    .eraseToAnyPublisher()
+    .receive(on: DispatchQueue.main)
+    .sink(receiveValue: { data in
+      self.heatmap = SVGKImage(data: data).uiImage
+    })
   }
 }
 
