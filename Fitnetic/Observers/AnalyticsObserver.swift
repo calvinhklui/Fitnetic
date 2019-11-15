@@ -51,5 +51,8 @@ let dummyAnalytics = Analytics(
   numSets: 0,
   numMusclesHit: 0,
   workoutDatesList: [],
-  workoutBoolList: []
+  workoutBoolList: [],
+  numWorkoutsTrend: 0,
+  numSetsTrend: 0,
+  numMusclesHitTrend: 0
 )

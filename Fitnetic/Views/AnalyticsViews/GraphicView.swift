@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct GraphicView: View {
-  @State private var selectedTab = 1
+  @State private var selectedTab = 0
   
   @ObservedObject var workoutsObserver: WorkoutsObserver
   @ObservedObject var analyticsObserver: AnalyticsObserver

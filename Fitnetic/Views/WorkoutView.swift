@@ -16,13 +16,15 @@ struct WorkoutView: View {
   @ObservedObject var workoutObserver: WorkoutObserver
   @ObservedObject var analyticsObserver: AnalyticsObserver
   @ObservedObject var userObserver: UserObserver
+  var workedOutToday: Bool
   
-  init(workoutsObserver: WorkoutsObserver, exercisesObserver: ExercisesObserver, workoutObserver: WorkoutObserver, analyticsObserver: AnalyticsObserver, userObserver: UserObserver) {
+  init(workoutsObserver: WorkoutsObserver, exercisesObserver: ExercisesObserver, workoutObserver: WorkoutObserver, analyticsObserver: AnalyticsObserver, userObserver: UserObserver, workedOutToday: Bool) {
     self.workoutsObserver = workoutsObserver
     self.exercisesObserver = exercisesObserver
     self.workoutObserver = workoutObserver
     self.analyticsObserver = analyticsObserver
     self.userObserver = userObserver
+    self.workedOutToday = workedOutToday
   }
   
   var body: some View {
@@ -36,38 +38,43 @@ struct WorkoutView: View {
         WeekView(analyticsObserver: self.analyticsObserver)
         Spacer()
       }.popover(
-          isPresented: self.$showWelcome,
-          arrowEdge: .bottom
+        isPresented: self.$showWelcome,
+        arrowEdge: .bottom
       ) { WelcomeView(userObserver: self.userObserver,
                       workoutsObserver: self.workoutsObserver,
                       exercisesObserver: self.exercisesObserver,
                       workoutObserver: self.workoutObserver,
                       analyticsObserver: self.analyticsObserver) }
-      .navigationBarTitle("Workout", displayMode: .large)
-      .navigationBarItems(trailing:
-        Button(action: {
-          self.userObserver.fetchData()
-          self.workoutsObserver.fetchData()
-          self.exercisesObserver.fetchData()
-          self.workoutObserver.fetchData()
-          self.analyticsObserver.fetchData()
-        }) {
+        .navigationBarTitle("Workout", displayMode: .large)
+        .navigationBarItems(trailing:
           VStack {
             HStack {
               VStack {
-                Image(systemName: "arrow.clockwise.circle.fill")
-                  .font(.system(size: 35))
-                  .foregroundColor(Color(UIColor.systemBlue))
+                if (workedOutToday) {
+                  Image(systemName: "checkmark.circle.fill")
+                    .font(.system(size: 30))
+                    .foregroundColor(Color(UIColor.systemBlue))
+                } else {
+                  Image(systemName: "circle")
+                    .font(.system(size: 30))
+                    .foregroundColor(Color(UIColor.systemBlue))
+                }
               }
             }
           }
           .padding(.top, 95)
           .padding(.bottom, 5)
-        }
       )
-      .background(Color(UIColor.systemGray6))
+        .background(Color(UIColor.systemGray6))
     }
     .navigationViewStyle(StackNavigationViewStyle())
+    .onAppear(perform: {
+      self.workoutsObserver.fetchData()
+      self.exercisesObserver.fetchData()
+      self.workoutObserver.fetchData()
+      self.analyticsObserver.fetchData()
+      self.userObserver.fetchData()
+    })
   }
 }
 
@@ -77,6 +84,7 @@ struct WorkoutView_Previews: PreviewProvider {
                 exercisesObserver: ExercisesObserver(),
                 workoutObserver: WorkoutObserver(),
                 analyticsObserver: AnalyticsObserver(),
-                userObserver: UserObserver())
+                userObserver: UserObserver(),
+                workedOutToday: false)
   }
 }

@@ -36,6 +36,9 @@ struct ProfileView: View {
       .background(Color(UIColor.systemGray6))
     }
     .navigationViewStyle(StackNavigationViewStyle())
+    .onAppear(perform: {
+      self.userObserver.fetchData()
+    })
   }
 }
 

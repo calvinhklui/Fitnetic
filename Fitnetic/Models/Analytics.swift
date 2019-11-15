@@ -16,6 +16,10 @@ struct Analytics: Codable {
   var numMusclesHit: Int
   var workoutDatesList: [String]
   var workoutBoolList: [Bool]
+  
+  var numWorkoutsTrend: Int
+  var numSetsTrend: Int
+  var numMusclesHitTrend: Int
 
   enum CodingKeys : String, CodingKey {
     case numWorkouts
@@ -24,5 +28,9 @@ struct Analytics: Codable {
     case numMusclesHit
     case workoutDatesList
     case workoutBoolList
+    
+    case numWorkoutsTrend
+    case numSetsTrend
+    case numMusclesHitTrend
   }
 }

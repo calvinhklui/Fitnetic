@@ -35,8 +35,16 @@ struct StatisticView: View {
                   .font(.title)
                   .fontWeight(.black)
                   .foregroundColor(.primary)
-                Image(systemName: "arrowtriangle.down.fill")
+                if (self.analyticsObserver.analytics.numWorkoutsTrend == -1) {
+                  Image(systemName: "arrowtriangle.down.fill")
                   .foregroundColor(.red)
+                } else if (self.analyticsObserver.analytics.numWorkoutsTrend == 1) {
+                  Image(systemName: "arrowtriangle.up.fill")
+                  .foregroundColor(.green)
+                } else {
+                  Image(systemName: "arrowtriangle.right.fill")
+                  .foregroundColor(Color(UIColor.systemBackground))
+                }
               }
               Text(verbatim: "Workouts")
                 .font(.caption)
@@ -51,8 +59,16 @@ struct StatisticView: View {
                   .font(.title)
                   .fontWeight(.black)
                   .foregroundColor(.primary)
-                Image(systemName: "arrowtriangle.right.fill")
+                if (self.analyticsObserver.analytics.numSetsTrend == -1) {
+                  Image(systemName: "arrowtriangle.down.fill")
+                  .foregroundColor(.red)
+                } else if (self.analyticsObserver.analytics.numSetsTrend == 1) {
+                  Image(systemName: "arrowtriangle.up.fill")
+                  .foregroundColor(.green)
+                } else {
+                  Image(systemName: "arrowtriangle.right.fill")
                   .foregroundColor(Color(UIColor.systemBackground))
+                }
               }
               Text(verbatim: "Exercises")
                 .font(.caption)
@@ -67,8 +83,16 @@ struct StatisticView: View {
                   .font(.title)
                   .fontWeight(.black)
                   .foregroundColor(.primary)
-                Image(systemName: "arrowtriangle.up.fill")
+                if (self.analyticsObserver.analytics.numMusclesHitTrend == -1) {
+                  Image(systemName: "arrowtriangle.down.fill")
+                  .foregroundColor(.red)
+                } else if (self.analyticsObserver.analytics.numMusclesHitTrend == 1) {
+                  Image(systemName: "arrowtriangle.up.fill")
                   .foregroundColor(.green)
+                } else {
+                  Image(systemName: "arrowtriangle.right.fill")
+                  .foregroundColor(Color(UIColor.systemBackground))
+                }
               }
               Text(verbatim: "Muscles")
                 .font(.caption)

@@ -24,11 +24,16 @@ struct ContentView: View {
     self.workoutObserver = WorkoutObserver()
     self.analyticsObserver = AnalyticsObserver()
     
-    analyticsObserver.fetchSVG()
-    print("Fetching...")
-    
     UISegmentedControl.appearance().selectedSegmentTintColor = UIColor.systemBlue
     UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+  }
+  
+  func getWorkedOutToday() -> Bool {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    let todayStringFormatted = dateFormatter.string(from: Date())
+    
+    return self.analyticsObserver.analytics.workoutDatesList.contains(todayStringFormatted)
   }
   
   var body: some View {
@@ -37,13 +42,15 @@ struct ContentView: View {
                   exercisesObserver: self.exercisesObserver,
                   workoutObserver: self.workoutObserver,
                   analyticsObserver: self.analyticsObserver,
-                  userObserver: self.userObserver)
+                  userObserver: self.userObserver,
+                  workedOutToday: self.getWorkedOutToday())
         .tabItem {
           Image(systemName: "timer")
           Text("Workout")
       }.tag(0)
       AnalyticsView(workoutsObserver: self.workoutsObserver,
-                    analyticsObserver: self.analyticsObserver)
+                    analyticsObserver: self.analyticsObserver,
+                    workedOutToday: self.getWorkedOutToday())
         .tabItem {
           Image(systemName: "calendar")
           Text("Record")

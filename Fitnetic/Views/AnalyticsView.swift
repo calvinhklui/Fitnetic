@@ -11,10 +11,12 @@ import SwiftUI
 struct AnalyticsView: View {
   @ObservedObject var workoutsObserver: WorkoutsObserver
   @ObservedObject var analyticsObserver: AnalyticsObserver
+  var workedOutToday: Bool
   
-  init(workoutsObserver: WorkoutsObserver, analyticsObserver: AnalyticsObserver) {
+  init(workoutsObserver: WorkoutsObserver, analyticsObserver: AnalyticsObserver, workedOutToday: Bool) {
     self.workoutsObserver = workoutsObserver
     self.analyticsObserver = analyticsObserver
+    self.workedOutToday = workedOutToday
   }
   
   var body: some View {
@@ -28,33 +30,39 @@ struct AnalyticsView: View {
       }
       .navigationBarTitle("Record", displayMode: .large)
       .navigationBarItems(trailing:
-        Button(action: {
-          self.workoutsObserver.fetchData()
-          self.analyticsObserver.fetchData()
-        }) {
           VStack {
             HStack {
               VStack {
-                Image(systemName: "arrow.clockwise.circle.fill")
-                  .font(.system(size: 35))
-                  .foregroundColor(Color(UIColor.systemBlue))
+                if (workedOutToday) {
+                  Image(systemName: "checkmark.circle.fill")
+                    .font(.system(size: 30))
+                    .foregroundColor(Color(UIColor.systemBlue))
+                } else {
+                  Image(systemName: "circle")
+                    .font(.system(size: 30))
+                    .foregroundColor(Color(UIColor.systemBlue))
+                }
               }
             }
           }
           .padding(.top, 95)
           .padding(.bottom, 5)
-        }
       )
       .background(Color(UIColor.systemGray6))
     }
     .navigationViewStyle(StackNavigationViewStyle())
-    .onAppear(perform: analyticsObserver.fetchSVG)
+    .onAppear(perform: {
+      self.workoutsObserver.fetchData()
+      self.analyticsObserver.fetchData()
+      self.analyticsObserver.fetchSVG()
+    })
   }
 }
 
 struct AnalyticsView_Previews: PreviewProvider {
   static var previews: some View {
     AnalyticsView(workoutsObserver: WorkoutsObserver(),
-                  analyticsObserver: AnalyticsObserver())
+                  analyticsObserver: AnalyticsObserver(),
+                  workedOutToday: false)
   }
 }
