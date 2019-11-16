@@ -33,9 +33,13 @@ struct WorkoutView: View {
         Spacer()
         TodayView(workoutsObserver: self.workoutsObserver,
                   exercisesObserver: self.exercisesObserver,
-                  workoutObserver: self.workoutObserver)
+                  workoutObserver: self.workoutObserver,
+                  userObserver: self.userObserver)
         Spacer()
-        WeekView(analyticsObserver: self.analyticsObserver)
+        WeekView(workoutsObserver: self.workoutsObserver,
+                 exercisesObserver: self.exercisesObserver,
+                 workoutObserver: self.workoutObserver,
+                 analyticsObserver: self.analyticsObserver)
         Spacer()
       }.popover(
         isPresented: self.$showWelcome,

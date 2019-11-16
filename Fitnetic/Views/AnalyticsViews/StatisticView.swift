@@ -24,6 +24,10 @@ struct StatisticView: View {
             .fontWeight(.semibold)
             .foregroundColor(.primary)
           
+          Text(verbatim: "By the numbers.")
+          .font(.headline)
+          .foregroundColor(Color(UIColor.systemGray2))
+          
           Divider()
             .padding(.top, -5)
             .padding(.bottom, 5)

@@ -12,17 +12,20 @@ struct TodayView: View {
   @ObservedObject var workoutsObserver: WorkoutsObserver
   @ObservedObject var exercisesObserver: ExercisesObserver
   @ObservedObject var workoutObserver: WorkoutObserver
+  @ObservedObject var userObserver: UserObserver
   var todayExercises: [String] = []
   
   init(workoutsObserver: WorkoutsObserver,
        exercisesObserver: ExercisesObserver,
-       workoutObserver: WorkoutObserver) {
+       workoutObserver: WorkoutObserver,
+       userObserver: UserObserver) {
     self.workoutsObserver = workoutsObserver
     self.exercisesObserver = exercisesObserver
     self.workoutObserver = workoutObserver
+    self.userObserver = userObserver
     
     // format exercise names for display
-    let workout = self.workoutObserver.workout
+    let workout = workoutObserver.workout
     for i in 0 ..< workout.sets.count {
       if (!self.todayExercises.contains(workout.sets[i].exercise.name.capitalized)) {
         self.todayExercises.append(workout.sets[i].exercise.name.capitalized)
@@ -47,13 +50,17 @@ struct TodayView: View {
             .fontWeight(.semibold)
             .foregroundColor(.primary)
           
+          Text(verbatim: "Start your workout now.")
+            .font(.headline)
+            .foregroundColor(Color(UIColor.systemGray2))
+          
           Divider()
             .padding(.top, -5)
             .padding(.bottom, 10)
           
           NavigationLink(destination: TodayDetailView(exercisesObserver: self.exercisesObserver,
                                                       workoutObserver: self.workoutObserver,
-                                                      workout: nil)) {
+                                                      workout: self.workoutObserver.workout)) {
                                                         VStack {
                                                           HStack {
                                                             VStack(alignment: .leading) {
@@ -81,9 +88,8 @@ struct TodayView: View {
               .resizable()
               .scaledToFill()
           )
-          .cornerRadius(10)
-          // .shadow(radius: 5, x: 5, y: 5)
-          .padding(.bottom, 15)
+            .cornerRadius(10)
+            .padding(.bottom, 15)
           
           NavigationLink(destination: WorkoutListView(workoutsObserver: self.workoutsObserver,
                                                       exercisesObserver: self.exercisesObserver,
@@ -113,9 +119,8 @@ struct TodayView: View {
               .resizable()
               .scaledToFill()
           )
-          .cornerRadius(10)
-          // .shadow(radius: 5, x: 5, y: 5)
-          .padding(.bottom, 15)
+            .cornerRadius(10)
+            .padding(.bottom, 15)
         }
         .layoutPriority(100)
         Spacer()
@@ -130,6 +135,7 @@ struct TodayView_Previews: PreviewProvider {
   static var previews: some View {
     TodayView(workoutsObserver: WorkoutsObserver(),
               exercisesObserver: ExercisesObserver(),
-              workoutObserver: WorkoutObserver())
+              workoutObserver: WorkoutObserver(),
+              userObserver: UserObserver())
   }
 }

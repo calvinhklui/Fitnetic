@@ -23,8 +23,8 @@ struct WorkoutListView: View {
     ScrollView {
       ForEach((0 ..< self.workoutsObserver.workouts.count), id:\.self) { i in
         NavigationLink(destination: TodayDetailView(exercisesObserver: self.exercisesObserver,
-                                                workoutObserver: self.workoutObserver,
-                                                workout: self.workoutsObserver.workouts[i])) {
+                                                    workoutObserver: self.workoutObserver,
+                                                    workout: self.workoutsObserver.workouts[i])) {
           WorkoutRowView(workout: self.workoutsObserver.workouts[i])
         }
         .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))

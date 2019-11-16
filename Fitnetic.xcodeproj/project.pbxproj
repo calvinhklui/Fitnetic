@@ -68,6 +68,7 @@
 		0697A505236F6499000034B5 /* Muscle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697A504236F6499000034B5 /* Muscle.swift */; };
 		0697A506236F6499000034B5 /* Muscle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697A504236F6499000034B5 /* Muscle.swift */; };
 		0697A50C236F6B92000034B5 /* SetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697A50B236F6B92000034B5 /* SetDetailView.swift */; };
+		06A7960B237F870000730627 /* ExerciseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A7960A237F870000730627 /* ExerciseListView.swift */; };
 		06C295C4236A937300B189E4 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C295C3236A937300B189E4 /* TodayView.swift */; };
 /* End PBXBuildFile section */
 
@@ -151,6 +152,7 @@
 		0697A501236F6418000034B5 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		0697A504236F6499000034B5 /* Muscle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Muscle.swift; sourceTree = "<group>"; };
 		0697A50B236F6B92000034B5 /* SetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDetailView.swift; sourceTree = "<group>"; };
+		06A7960A237F870000730627 /* ExerciseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListView.swift; sourceTree = "<group>"; };
 		06C295C3236A937300B189E4 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -335,6 +337,7 @@
 				069124CD23729DC3004B2140 /* WorkoutSummaryView.swift */,
 				0689319B23749E6D00111117 /* WeekView.swift */,
 				0689319D2374A4F500111117 /* WeekColumnView.swift */,
+				06A7960A237F870000730627 /* ExerciseListView.swift */,
 			);
 			path = WorkoutViews;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				068931942373F90100111117 /* Analytics.swift in Sources */,
 				069124C52370C5EE004B2140 /* WorkoutObserver.swift in Sources */,
 				068931A6237501A200111117 /* SignUpView.swift in Sources */,
+				06A7960B237F870000730627 /* ExerciseListView.swift in Sources */,
 				068931A22374BF8D00111117 /* CalendarView.swift in Sources */,
 				0697A4FC236F631B000034B5 /* Workout.swift in Sources */,
 				0697A4F5236F5DE9000034B5 /* SetListView.swift in Sources */,

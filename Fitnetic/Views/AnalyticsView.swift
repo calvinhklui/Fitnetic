@@ -39,8 +39,8 @@ struct AnalyticsView: View {
                     .foregroundColor(Color(UIColor.systemBlue))
                 } else {
                   Image(systemName: "circle")
-                    .font(.system(size: 30))
-                    .foregroundColor(Color(UIColor.systemBlue))
+                  .font(.system(size: 30))
+                  .foregroundColor(Color(UIColor.systemBlue))
                 }
               }
             }

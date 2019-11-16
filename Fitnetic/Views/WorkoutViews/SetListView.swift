@@ -15,8 +15,6 @@ struct SetListView: View {
   @ObservedObject var exercisesObserver: ExercisesObserver
   var workout: Workout
   
-  @State var listItems = ["Item 1", "Item 2", "Item 3"]
-  
   init(exercisesObserver: ExercisesObserver, workoutObserver: WorkoutObserver, workout: Workout) {
     self.exercisesObserver = exercisesObserver
     self.workoutObserver = workoutObserver
@@ -27,10 +25,48 @@ struct SetListView: View {
   
   var body: some View {
     VStack(alignment: .leading) {
-      Text(verbatim: "Sets")
-        .font(.title)
-        .fontWeight(.semibold)
-        .foregroundColor(.primary)
+      HStack {
+        Text(verbatim: "Sets")
+          .font(.title)
+          .fontWeight(.semibold)
+          .foregroundColor(.primary)
+      
+        Spacer()
+        
+        HStack {
+          NavigationLink(destination: ExerciseListView(exercisesObserver: self.exercisesObserver, workoutObserver: self.workoutObserver)) {
+            VStack {
+              HStack {
+                VStack {
+                  Image(systemName: "plus.circle.fill")
+                    .font(.title)
+                    .foregroundColor(Color(UIColor.systemBlue))
+                    .foregroundColor(.primary)
+                }
+              }
+            }
+          }
+          
+          Button(action: {
+            if (self.isEditMode == .inactive) {
+              self.isEditMode = .active
+            } else {
+              self.isEditMode = .inactive
+            }
+          }) {
+            VStack {
+              HStack {
+                VStack {
+                  Image(systemName: "pencil.circle.fill")
+                    .font(.title)
+                    .foregroundColor(Color(UIColor.systemBlue))
+                    .foregroundColor(.primary)
+                }
+              }
+            }
+          }
+        }
+      }
       
       Divider()
         .padding(.top, -5)
@@ -42,23 +78,22 @@ struct SetListView: View {
         .onMove(perform: move)
         .onDelete(perform: delete)
       }
-      .navigationBarItems(trailing: EditButton())
       .environment(\.editMode, self.$isEditMode)
       
     }
     .padding(20)
     .background(Color(UIColor.systemBackground))
     .onAppear(perform: {
-      self.workoutObserver.setWorkout(self.workout)
+      if (self.workoutObserver.workout.id != self.workout.id) {
+        self.workoutObserver.setWorkout(self.workout)
+      }
     })
   }
   
-  // Source: https://www.hackingwithswift.com/quick-start/swiftui/how-to-let-users-move-rows-in-a-list
   func move(from source: IndexSet, to destination: Int) {
     self.workoutObserver.workout.sets.move(fromOffsets: source, toOffset: destination)
   }
   
-  // Source: https://www.hackingwithswift.com/quick-start/swiftui/how-to-enable-editing-on-a-list-using-editbutton
   func delete(at offsets: IndexSet) {
     self.workoutObserver.workout.sets.remove(atOffsets: offsets)
   }

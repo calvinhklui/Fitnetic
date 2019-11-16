@@ -32,8 +32,14 @@ struct ContentView: View {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
     let todayStringFormatted = dateFormatter.string(from: Date())
+    let didWorkoutDatesListIndices = self.analyticsObserver.analytics.workoutDatesList.indices.filter { self.analyticsObserver.analytics.workoutBoolList[$0] }
     
-    return self.analyticsObserver.analytics.workoutDatesList.contains(todayStringFormatted)
+    for i in didWorkoutDatesListIndices {
+      if (self.analyticsObserver.analytics.workoutDatesList[i] == todayStringFormatted) {
+        return true
+      }
+    }
+    return false
   }
   
   var body: some View {

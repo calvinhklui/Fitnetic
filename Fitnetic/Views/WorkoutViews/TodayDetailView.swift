@@ -23,9 +23,9 @@ struct TodayDetailView: View {
     self.workoutObserver = workoutObserver
     
     if let workout = workout {
-      self.workout = workout  // use selected workout from history
+      self.workout = workout  // for selected workout
     } else {
-      self.workout = workoutObserver.workout  // use recommended workout
+      self.workout = workoutObserver.workout // for blank workout
     }
     
     UITableView.appearance().backgroundColor = UIColor.systemBackground
@@ -36,15 +36,17 @@ struct TodayDetailView: View {
       Spacer()
       
       SetListView(exercisesObserver: self.exercisesObserver, workoutObserver: self.workoutObserver, workout: self.workout)
-        .frame(height: 480)
+        .frame(height: 450)
       
       Spacer()
-      .padding(.bottom, 10)
+      .padding(.bottom, 5)
       
       if (self.isPreWorkout) {
         Button(action: {
-          self.showPopover = true
-          self.isPreWorkout = false
+          if (self.workoutObserver.workout.sets.count > 0) {
+            self.showPopover = true
+            self.isPreWorkout = false
+          }
         }) {
           VStack {
             HStack {
@@ -62,7 +64,7 @@ struct TodayDetailView: View {
           .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
           .cornerRadius(30)
         }
-        .padding(.bottom, 20)
+        .padding(.bottom, 35)
       } else {
         Button(action: {
           self.presentationMode.wrappedValue.dismiss()
@@ -84,7 +86,7 @@ struct TodayDetailView: View {
           .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
           .cornerRadius(30)
         }
-        .padding(.bottom, 20)
+        .padding(.bottom, 35)
         .navigationBarBackButtonHidden(true)
       }
     }
@@ -94,18 +96,20 @@ struct TodayDetailView: View {
     ) {
       VStack {
         HStack {
+          Spacer()
+          
           Button(action: {
             self.isPreWorkout = true
             self.showPopover = false
           }) {
             HStack {
-              Text(verbatim: "Cancel")
-                .foregroundColor(.red)
+              Image(systemName: "xmark.circle.fill")
+              .font(.title)
+              .foregroundColor(Color(UIColor.systemRed))
             }
           }
-          .padding(20)
-          
-          Spacer()
+          .padding(.vertical, 20)
+          .padding(.horizontal, 15)
         }
         SetDetailView(exercisesObserver: self.exercisesObserver,
                       workoutObserver: self.workoutObserver)

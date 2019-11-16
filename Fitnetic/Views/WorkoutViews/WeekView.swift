@@ -11,11 +11,17 @@ import SwiftUI
 struct WeekView: View {
   @State private var selectedTab = 0
   
+  @ObservedObject var workoutsObserver: WorkoutsObserver
+  @ObservedObject var exercisesObserver: ExercisesObserver
+  @ObservedObject var workoutObserver: WorkoutObserver
   @ObservedObject var analyticsObserver: AnalyticsObserver
   
   var daysList: [[String : Any]] = []
    
-  init(analyticsObserver: AnalyticsObserver) {
+  init(workoutsObserver: WorkoutsObserver, exercisesObserver: ExercisesObserver, workoutObserver: WorkoutObserver, analyticsObserver: AnalyticsObserver) {
+    self.workoutsObserver = workoutsObserver
+    self.exercisesObserver = exercisesObserver
+    self.workoutObserver = workoutObserver
     self.analyticsObserver = analyticsObserver
     
     var start = 0
@@ -53,15 +59,23 @@ struct WeekView: View {
             .fontWeight(.semibold)
             .foregroundColor(.primary)
           
+          Text(verbatim: "Good habits yield strong results.")
+            .font(.headline)
+            .foregroundColor(Color(UIColor.systemGray2))
+          
           Divider()
             .padding(.top, -5)
             .padding(.bottom, 15)
           
           HStack {
             ForEach((0 ..< self.daysList.count), id:\.self) { i in
-              WeekColumnView(month: self.daysList[i]["month"] as! String,
-                             day: self.daysList[i]["day"] as! Int,
-                             workedOut: self.daysList[i]["workedOut"] as! Bool)
+              NavigationLink(destination: WorkoutListView(workoutsObserver: self.workoutsObserver,
+                                                          exercisesObserver: self.exercisesObserver,
+                                                          workoutObserver: self.workoutObserver)) {
+                                                            WeekColumnView(month: self.daysList[i]["month"] as! String,
+                                                            day: self.daysList[i]["day"] as! Int,
+                                                            workedOut: self.daysList[i]["workedOut"] as! Bool)
+              }
             }
           }
           .padding(.bottom, 30)
@@ -76,6 +90,9 @@ struct WeekView: View {
 
 struct WeekView_Previews: PreviewProvider {
   static var previews: some View {
-    WeekView(analyticsObserver: AnalyticsObserver())
+    WeekView(workoutsObserver: WorkoutsObserver(),
+             exercisesObserver: ExercisesObserver(),
+             workoutObserver: WorkoutObserver(),
+             analyticsObserver: AnalyticsObserver())
   }
 }
