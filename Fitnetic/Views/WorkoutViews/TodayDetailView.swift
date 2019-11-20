@@ -13,6 +13,7 @@ struct TodayDetailView: View {
   
   @State var isPreWorkout: Bool = true
   @State private var showPopover: Bool = false
+  @State private var isCameraMode: Bool = false
   
   @ObservedObject var workoutObserver: WorkoutObserver
   @ObservedObject var exercisesObserver: ExercisesObserver
@@ -94,25 +95,71 @@ struct TodayDetailView: View {
       isPresented: self.$showPopover,
       arrowEdge: .bottom
     ) {
-      VStack {
-        HStack {
-          Spacer()
-          
-          Button(action: {
-            self.isPreWorkout = true
-            self.showPopover = false
-          }) {
-            HStack {
-              Image(systemName: "xmark.circle.fill")
-              .font(.title)
-              .foregroundColor(Color(UIColor.systemRed))
+      if (self.isCameraMode) {
+        VStack {
+          HStack {
+            Button(action: {
+              self.isPreWorkout = true
+              self.showPopover = false
+            }) {
+              HStack {
+                Image(systemName: "xmark.circle.fill")
+                .font(.title)
+                .foregroundColor(Color(UIColor.systemRed))
+              }
             }
+            .padding(.vertical, 20)
+            .padding(.horizontal, 15)
+            
+            Spacer()
+            
+            Button(action: {
+              self.isCameraMode = false
+            }) {
+              HStack {
+                Image(systemName: "camera.fill")
+                .font(.title)
+                  .foregroundColor(.gray)
+              }
+            }
+            .padding(.vertical, 20)
+            .padding(.horizontal, 15)
           }
-          .padding(.vertical, 20)
-          .padding(.horizontal, 15)
+          CameraView()
         }
-        SetDetailView(exercisesObserver: self.exercisesObserver,
-                      workoutObserver: self.workoutObserver)
+      } else {
+        VStack {
+          HStack {
+            Button(action: {
+              self.isPreWorkout = true
+              self.showPopover = false
+            }) {
+              HStack {
+                Image(systemName: "xmark.circle.fill")
+                .font(.title)
+                .foregroundColor(Color(UIColor.systemRed))
+              }
+            }
+            .padding(.vertical, 20)
+            .padding(.horizontal, 15)
+            
+            Spacer()
+            
+            Button(action: {
+              self.isCameraMode = true
+            }) {
+              HStack {
+                Image(systemName: "camera.fill")
+                .font(.title)
+                  .foregroundColor(.gray)
+              }
+            }
+            .padding(.vertical, 20)
+            .padding(.horizontal, 15)
+          }
+          SetDetailView(exercisesObserver: self.exercisesObserver,
+                        workoutObserver: self.workoutObserver)
+        }
       }
     }
     .navigationBarTitle(Text("Today"))

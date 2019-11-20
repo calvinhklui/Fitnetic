@@ -38,13 +38,29 @@ struct EditProfileView: View {
   
   var body: some View {
     VStack {
+      Spacer()
+      IdentityView(userObserver: self.userObserver)
+      Spacer()
+      Form {
         Section {
-          TextField(self.userObserver.user.username, text: $username)
-          TextField(self.userObserver.user.firstName, text: $firstName)
-          TextField(self.userObserver.user.lastName, text: $lastName)
-        }
-        
-        Section {
+          HStack {
+            Text("Username")
+            Spacer()
+            TextField(self.userObserver.user.username, text: $username)
+          }
+          
+          HStack {
+            Text("First Name")
+            Spacer()
+            TextField(self.userObserver.user.firstName, text: $firstName)
+          }
+          
+          HStack {
+            Text("Last Name")
+            Spacer()
+            TextField(self.userObserver.user.lastName, text: $lastName)
+          }
+          
           HStack {
             Text("Gender")
             Spacer()
@@ -54,12 +70,17 @@ struct EditProfileView: View {
               }
             }.pickerStyle(SegmentedPickerStyle())
           }
-          DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) { Text("Birth Date") }
+          
+          DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) { Text("Date of Birth") }
+          
+          HStack {
+            Text("Goal")
+            Spacer()
+            TextField(self.userObserver.user.goal, text: $goal)
+          }
         }
-        
-        Section {
-          TextField(self.userObserver.user.goal, text: $goal)
-        }
+      }
+      .frame(height: 335)
       
       Button(action: {
         let dateFormatter = DateFormatter()
@@ -67,7 +88,7 @@ struct EditProfileView: View {
         dateFormatter.setLocalizedDateFormatFromTemplate("yyyy-MM-dd'T'HH:mm:ssZZZZZ")
         let dateText = dateFormatter.string(from: self.birthDate)
         
-        let newUser = User(
+        let updatedUser = User(
           id: self.userObserver.user.id,
           username: self.username,
           firstName: self.firstName,
@@ -77,21 +98,31 @@ struct EditProfileView: View {
           goal: self.goal
         )
         
-        self.userObserver.setUser(newUser)
+        self.userObserver.setUser(updatedUser)
         self.userObserver.updateData()
         self.showingAlert = true
       }) {
-        Text("Update")
-          .font(.title)
-          .fontWeight(.black)
-          .foregroundColor(.primary)
-          .padding(.bottom, 5)
+        VStack {
+          HStack {
+            VStack {
+              Text(verbatim: "Save")
+                .font(.title)
+                .fontWeight(.black)
+                .foregroundColor(Color(UIColor.white))
+            }
+          }
+        }
+        .padding(.horizontal, 30)
+        .padding(.vertical, 15)
+        .foregroundColor(.primary)
+        .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+        .cornerRadius(30)
+        .padding(.top, 5)
       }
       .alert(isPresented: $showingAlert) {
-          Alert(title: Text("Profile Updated"), message: Text("You're good to go!"), dismissButton: .default(Text("Okay")))
+        Alert(title: Text("Profile Updated"), message: Text("You're good to go!"), dismissButton: .default(Text("Okay")))
       }
     }
-    .navigationBarTitle("Profile")
   }
 }
 

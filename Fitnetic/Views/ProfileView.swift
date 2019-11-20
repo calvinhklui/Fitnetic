@@ -15,6 +15,8 @@ struct ProfileView: View {
   
   init(userObserver: UserObserver) {
     self.userObserver = userObserver
+    
+    UINavigationBar.appearance().titleTextAttributes = [.font: UIFont(name: "SirinStencil-Regular", size: 25)!]
   }
   
   var body: some View {
@@ -30,8 +32,27 @@ struct ProfileView: View {
           EditProfileView(userObserver: self.userObserver)
         }
       }
-      .navigationBarTitle("Profile", displayMode: .large)
-      .navigationBarItems(trailing: EditButton())
+      .navigationBarTitle("Fitnetic", displayMode: .inline)
+      .navigationBarItems(trailing:
+        Button(action: {
+          if (self.isEditMode == .inactive) {
+            self.isEditMode = .active
+          } else {
+            self.isEditMode = .inactive
+          }
+        }) {
+          VStack {
+            HStack {
+              VStack {
+                Image(systemName: "pencil.circle.fill")
+                  .font(.title)
+                  .foregroundColor(Color(UIColor.systemBlue))
+                  .foregroundColor(.primary)
+              }
+            }
+          }
+        }
+      )
       .environment(\.editMode, self.$isEditMode)
       .background(Color(UIColor.systemGray6))
     }

@@ -25,12 +25,24 @@ struct SignUpView: View {
     VStack {
       Form {
         Section {
-          TextField("Username", text: $username)
-          TextField("First Name", text: $firstName)
-          TextField("Last Name", text: $lastName)
-        }
+          HStack {
+            Text("Username")
+            Spacer()
+            TextField(self.userObserver.user.username, text: $username)
+          }
+          
+          HStack {
+            Text("First Name")
+            Spacer()
+            TextField(self.userObserver.user.firstName, text: $firstName)
+          }
+          
+          HStack {
+            Text("Last Name")
+            Spacer()
+            TextField(self.userObserver.user.lastName, text: $lastName)
+          }
         
-        Section {
           HStack {
             Text("Gender")
             Spacer()
@@ -40,11 +52,14 @@ struct SignUpView: View {
               }
             }.pickerStyle(SegmentedPickerStyle())
           }
-          DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) { Text("Birth Date") }
-        }
-        
-        Section {
-          TextField("Goal", text: $goal)
+          
+          DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) { Text("Date of Birth") }
+          
+          HStack {
+            Text("Goal")
+            Spacer()
+            TextField(self.userObserver.user.goal, text: $goal)
+          }
         }
       }
       
@@ -69,11 +84,21 @@ struct SignUpView: View {
         
         self.presentationMode.wrappedValue.dismiss()
       }) {
-        Text("Save")
-          .font(.title)
-          .fontWeight(.black)
-          .foregroundColor(.primary)
-          .padding(.bottom, 5)
+        VStack {
+          HStack {
+            VStack {
+              Text(verbatim: "Save")
+                .font(.title)
+                .fontWeight(.black)
+                .foregroundColor(Color(UIColor.white))
+            }
+          }
+        }
+        .padding(.horizontal, 30)
+        .padding(.vertical, 15)
+        .foregroundColor(.primary)
+        .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+        .cornerRadius(30)
       }
     }
     .navigationBarTitle("Sign Up")

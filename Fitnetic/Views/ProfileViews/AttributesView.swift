@@ -33,6 +33,33 @@ struct AttributesView: View {
     VStack{
       Group {
         HStack {
+          Text(verbatim: "Username")
+            .fontWeight(.semibold)
+            .foregroundColor(.primary)
+          Spacer()
+          Text(verbatim: "\(self.userObserver.user.username)")
+            .foregroundColor(.primary)
+        }
+        
+        HStack {
+          Text(verbatim: "First Name")
+            .fontWeight(.semibold)
+            .foregroundColor(.primary)
+          Spacer()
+          Text(verbatim: "\(self.userObserver.user.firstName)")
+            .foregroundColor(.primary)
+        }
+        
+        HStack {
+          Text(verbatim: "Last Name")
+            .fontWeight(.semibold)
+            .foregroundColor(.primary)
+          Spacer()
+          Text(verbatim: "\(self.userObserver.user.lastName)")
+            .foregroundColor(.primary)
+        }
+        
+        HStack {
           Text(verbatim: "Gender")
             .fontWeight(.semibold)
             .foregroundColor(.primary)
