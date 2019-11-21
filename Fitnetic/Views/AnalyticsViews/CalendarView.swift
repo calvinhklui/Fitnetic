@@ -26,7 +26,7 @@ struct CalendarView: View {
     
     let calendar = Calendar(identifier: .gregorian)
     let weekDay = calendar.component(.weekday, from: today)
-    startOffset = weekDay - 1 // 0 = Sunday, 6 = Saturday
+    startOffset = weekDay // 0 = Sunday, 6 = Saturday
 
     let range = calendar.range(of: .day, in: .month, for: today)!
     numDaysInMonth = range.count

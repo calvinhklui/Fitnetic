@@ -19,7 +19,7 @@ struct WeekColumnView: View {
       .foregroundColor(Color(UIColor.white))
       
       Text(verbatim: "\(day)")
-      .font(.system(size: 25))
+      .font(.system(size: 23))
       .fontWeight(.semibold)
       .foregroundColor(Color(UIColor.white))
       
@@ -32,8 +32,9 @@ struct WeekColumnView: View {
         .padding(.bottom, 5)
       }
     }
-    .padding(10)
-    .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+    .padding(.horizontal, 15)
+    .padding(.vertical, 10)
+    .background(workedOut ? LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemBackground)]), startPoint: .top, endPoint: .bottom))
     .cornerRadius(10)
   }
 }
