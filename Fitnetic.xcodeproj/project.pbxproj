@@ -15,10 +15,8 @@
 		0603A286237DF1C20076E420 /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0603A285237DF1C20076E420 /* Bridge.m */; };
 		0603A289237E2C9B0076E420 /* SVGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0603A287237E2C6C0076E420 /* SVGKit.framework */; };
 		0603A28A237E2C9B0076E420 /* SVGKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0603A287237E2C6C0076E420 /* SVGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0603A3742384F8DE0021D79C /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603A3732384F8DE0021D79C /* CameraView.swift */; };
 		0603A37B2384FE4F0021D79C /* JointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603A37A2384FE4F0021D79C /* JointViewController.swift */; };
 		0603A37D2384FE6C0021D79C /* DrawingJointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603A37C2384FE6C0021D79C /* DrawingJointView.swift */; };
-		0603A3802384FE900021D79C /* model_hourglass.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 0603A37E2384FE8F0021D79C /* model_hourglass.mlmodel */; };
 		0603A3812384FE900021D79C /* model_cpm.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 0603A37F2384FE900021D79C /* model_cpm.mlmodel */; };
 		0603A3862384FEA70021D79C /* MovingAverageFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603A3822384FEA60021D79C /* MovingAverageFilter.swift */; };
 		0603A3872384FEA70021D79C /* HeatmapPostProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603A3832384FEA60021D79C /* HeatmapPostProcessor.swift */; };
@@ -115,10 +113,8 @@
 		0603A284237DF1C10076E420 /* Fitnetic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fitnetic-Bridging-Header.h"; sourceTree = "<group>"; };
 		0603A285237DF1C20076E420 /* Bridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bridge.m; sourceTree = "<group>"; };
 		0603A287237E2C6C0076E420 /* SVGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SVGKit.framework; sourceTree = "<group>"; };
-		0603A3732384F8DE0021D79C /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		0603A37A2384FE4F0021D79C /* JointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JointViewController.swift; sourceTree = "<group>"; };
 		0603A37C2384FE6C0021D79C /* DrawingJointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingJointView.swift; sourceTree = "<group>"; };
-		0603A37E2384FE8F0021D79C /* model_hourglass.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = model_hourglass.mlmodel; sourceTree = "<group>"; };
 		0603A37F2384FE900021D79C /* model_cpm.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = model_cpm.mlmodel; sourceTree = "<group>"; };
 		0603A3822384FEA60021D79C /* MovingAverageFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovingAverageFilter.swift; sourceTree = "<group>"; };
 		0603A3832384FEA60021D79C /* HeatmapPostProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeatmapPostProcessor.swift; sourceTree = "<group>"; };
@@ -212,7 +208,6 @@
 				0603A37A2384FE4F0021D79C /* JointViewController.swift */,
 				0603A37C2384FE6C0021D79C /* DrawingJointView.swift */,
 				0603A37F2384FE900021D79C /* model_cpm.mlmodel */,
-				0603A37E2384FE8F0021D79C /* model_hourglass.mlmodel */,
 				0603A3832384FEA60021D79C /* HeatmapPostProcessor.swift */,
 				0603A3822384FEA60021D79C /* MovingAverageFilter.swift */,
 				0603A3852384FEA70021D79C /* PredictedPoint.swift */,
@@ -378,7 +373,6 @@
 				0689319B23749E6D00111117 /* WeekView.swift */,
 				0689319D2374A4F500111117 /* WeekColumnView.swift */,
 				06A7960A237F870000730627 /* ExerciseListView.swift */,
-				0603A3732384F8DE0021D79C /* CameraView.swift */,
 			);
 			path = WorkoutViews;
 			sourceTree = "<group>";
@@ -517,7 +511,6 @@
 				06893198237481D500111117 /* CalendarRowView.swift in Sources */,
 				067ED68023692161004FA82D /* NavConfig.swift in Sources */,
 				0603A3812384FE900021D79C /* model_cpm.mlmodel in Sources */,
-				0603A3802384FE900021D79C /* model_hourglass.mlmodel in Sources */,
 				0697A4FF236F63B1000034B5 /* WorkoutSet.swift in Sources */,
 				069124CC237267A6004B2140 /* WorkoutRowView.swift in Sources */,
 				068931A82375382B00111117 /* EditProfileView.swift in Sources */,
@@ -537,7 +530,6 @@
 				0603A3872384FEA70021D79C /* HeatmapPostProcessor.swift in Sources */,
 				069124D12372AEEB004B2140 /* IdentityView.swift in Sources */,
 				067ED675236913AA004FA82D /* WorkoutView.swift in Sources */,
-				0603A3742384F8DE0021D79C /* CameraView.swift in Sources */,
 				069124CA23726706004B2140 /* WorkoutListView.swift in Sources */,
 				0603A37D2384FE6C0021D79C /* DrawingJointView.swift in Sources */,
 				069124B92370C352004B2140 /* UserObserver.swift in Sources */,

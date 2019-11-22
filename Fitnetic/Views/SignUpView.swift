@@ -25,27 +25,23 @@ struct SignUpView: View {
     VStack {
       Form {
         Section (header: Text(verbatim: "Profile Information")) {
-          HStack {
-            Text("Username")
-            Spacer()
-            TextField(self.userObserver.user.username, text: $username)
+          VStack (alignment: .leading) {
+            Text("Username").font(.headline)
+            TextField("", text: $username)
           }
           
-          HStack {
-            Text("First Name")
-            Spacer()
-            TextField(self.userObserver.user.firstName, text: $firstName)
+          VStack (alignment: .leading) {
+            Text("First Name").font(.headline)
+            TextField("", text: $firstName)
           }
           
-          HStack {
-            Text("Last Name")
-            Spacer()
-            TextField(self.userObserver.user.lastName, text: $lastName)
+          VStack (alignment: .leading) {
+            Text("Last Name").font(.headline)
+            TextField("", text: $lastName)
           }
-        
-          HStack {
-            Text("Gender")
-            Spacer()
+          
+          VStack (alignment: .leading) {
+            Text("Gender").font(.headline)
             Picker(selection: $genderSelection, label: Text("Gender")) {
               ForEach(0 ..< genders.count) {
                 Text(self.genders[$0]).tag($0)
@@ -53,15 +49,20 @@ struct SignUpView: View {
             }.pickerStyle(SegmentedPickerStyle())
           }
           
-          DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) { Text("Date of Birth") }
+          VStack (alignment: .leading) {
+            Text("Date of Birth").font(.headline)
+            DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) { EmptyView() }
+          }
           
-          HStack {
-            Text("Goal")
-            Spacer()
+          VStack (alignment: .leading) {
+            Text("Goal").font(.headline)
             TextField(self.userObserver.user.goal, text: $goal)
           }
         }
       }
+      .frame(height: 550)
+      
+      Spacer()
       
       Button(action: {
         let dateFormatter = DateFormatter()
@@ -84,21 +85,25 @@ struct SignUpView: View {
         
         self.presentationMode.wrappedValue.dismiss()
       }) {
-        VStack {
-          HStack {
-            VStack {
-              Text(verbatim: "Save")
-                .font(.title)
-                .fontWeight(.black)
-                .foregroundColor(Color(UIColor.white))
+        GeometryReader { geometry in
+          VStack {
+            HStack {
+              VStack {
+                Text(verbatim: "Save")
+                  .font(.title)
+                  .fontWeight(.black)
+                  .foregroundColor(Color(UIColor.white))
+              }
             }
           }
+          .frame(width: geometry.size.width)
+          .padding(.horizontal, 30)
+          .padding(.vertical, 15)
+          .foregroundColor(.primary)
+          .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+          .cornerRadius(10)
         }
-        .padding(.horizontal, 30)
-        .padding(.vertical, 15)
-        .foregroundColor(.primary)
-        .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
-        .cornerRadius(30)
+        .padding(.horizontal, 50)
       }
     }
     .navigationBarTitle("Sign Up")

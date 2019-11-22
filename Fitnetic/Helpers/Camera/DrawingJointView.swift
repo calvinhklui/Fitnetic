@@ -4,7 +4,7 @@ import UIKit
 
 class DrawingJointView: UIView {
   
-  static let threshold = 0.23
+  static let threshold = 0.2
   
   private var keypointLabelBGViews: [UIView] = []
   
@@ -20,12 +20,30 @@ class DrawingJointView: UIView {
         }
       }
       
+      printData()
+      
       if bodyDetected {
         self.drawKeypoints(with: bodyPoints)
       } else {
         self.clearKeypoints(with: bodyPoints)
       }
     }
+  }
+  
+  public func printData(label: Int = 0) {
+    var outputArr: [String] = []
+    
+    for bodyPoint in bodyPoints {
+      if let bp = bodyPoint {
+        outputArr.append("\(bp.maxPoint.x), \(bp.maxPoint.y), \(bp.maxConfidence)")
+      } else {
+        outputArr.append("-1, -1, -1")
+      }
+    }
+    
+    outputArr.append("\(label)")
+    
+    print(outputArr)
   }
   
   private func setUpLabels(with keypointsCount: Int) {

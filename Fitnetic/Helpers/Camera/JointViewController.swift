@@ -1,6 +1,7 @@
 // Source: https://github.com/tucan9389/PoseEstimation-CoreML
 
 import UIKit
+import SwiftUI
 import Vision
 import CoreMedia
 import os.signpost
@@ -11,7 +12,7 @@ final class JointViewController: UIViewController {
   
   public typealias DetectObjectsCompletion = ([PredictedPoint?]?, Error?) -> Void
   
-  var jointView: DrawingJointView! = DrawingJointView()
+  var jointView: DrawingJointView! // = DrawingJointView()
   
   // MARK: - Performance Measurement Property
   private let 👨‍🔧 = 📏()
@@ -32,8 +33,14 @@ final class JointViewController: UIViewController {
   var postProcessor: HeatmapPostProcessor = HeatmapPostProcessor()
   var mvfilters: [MovingAverageFilter] = []
   
-  // Inference Result Data
-  private var tableData: [PredictedPoint?] = []
+  init(jointView: DrawingJointView!) {
+    self.jointView = jointView
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   // MARK: - View Controller Life Cycle
   override func viewDidLoad() {
@@ -181,5 +188,37 @@ extension JointViewController {
       }
     }
   }
+}
+
+
+// Source: https://github.com/owingst/SwiftUIScanner/blob/master/SwiftUIScanner/
+//extension JointViewController: UIViewControllerRepresentable {
+//
+//  public typealias UIViewControllerType = JointViewController
+//
+//  func makeUIViewController(context: UIViewControllerRepresentableContext<JointViewController>) -> JointViewController {
+//    return JointViewController(jointView: )
+//  }
+//
+//  func updateUIViewController(_ uiViewController: JointViewController, context: UIViewControllerRepresentableContext<JointViewController>) {
+//  }
+//}
+
+// Source: https://dev.to/kevinmaarek/working-with-your-uiviewcontroller-and-swiftui-2917
+struct JointViewControllerWrapper: UIViewControllerRepresentable {
   
+  var jointView: DrawingJointView!
+  
+  init (jointView: DrawingJointView!) {
+    self.jointView = jointView
+  }
+  
+  public typealias UIViewControllerType = JointViewController
+  
+  func makeUIViewController(context: UIViewControllerRepresentableContext<JointViewControllerWrapper>) -> JointViewControllerWrapper.UIViewControllerType {
+    return JointViewController(jointView: self.jointView)
+  }
+  
+  func updateUIViewController(_ uiViewController: JointViewControllerWrapper.UIViewControllerType, context: UIViewControllerRepresentableContext<JointViewControllerWrapper>) {
+  }
 }

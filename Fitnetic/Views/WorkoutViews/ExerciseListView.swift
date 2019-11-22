@@ -49,7 +49,6 @@ struct ExerciseListView: View {
       .background(Color(UIColor.systemBackground))
       
       Spacer()
-      .padding(.bottom, 5)
       
       Button(action: {
         if (self.exercisesObserver.exercises.count > 0 && self.selection[0] != "0" && self.selection[1] != "") {
@@ -79,11 +78,11 @@ struct ExerciseListView: View {
           .padding(.vertical, 15)
           .foregroundColor(.primary)
           .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
-          .cornerRadius(30)
+          .cornerRadius(10)
         }
       }
       .padding(.horizontal, 50)
-      .padding(.bottom, 20)
+      .padding(.top, 65)
     }
     .navigationBarTitle("New Set")
     .background(Color(UIColor.systemGray6))

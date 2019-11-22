@@ -12,8 +12,9 @@ struct TodayDetailView: View {
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
   
   @State var isPreWorkout: Bool = true
-  @State private var showPopover: Bool = false
-  @State private var isCameraMode: Bool = false
+  @State var showPopover: Bool = false
+  @State var restTimeSelection: Int = 0
+  @State var restTimes = [15, 30, 60]
   
   @ObservedObject var workoutObserver: WorkoutObserver
   @ObservedObject var exercisesObserver: ExercisesObserver
@@ -37,10 +38,29 @@ struct TodayDetailView: View {
       Spacer()
       
       SetListView(exercisesObserver: self.exercisesObserver, workoutObserver: self.workoutObserver, workout: self.workout)
-        .frame(height: 450)
+        .frame(height: 400)
       
       Spacer()
-        .padding(.bottom, 5)
+      
+      VStack(alignment: .leading) {
+        Text(verbatim: "Rest Time")
+          .font(.title)
+          .fontWeight(.semibold)
+          .foregroundColor(.primary)
+        
+        Divider()
+          .padding(.top, -5)
+        
+        Picker(selection: $restTimeSelection, label: Text("Rest Time")) {
+          ForEach(0 ..< self.restTimes.count) {
+            Text("\(self.restTimes[$0])s").tag($0)
+          }
+        }.pickerStyle(SegmentedPickerStyle())
+      }
+      .padding(20)
+      .background(Color(UIColor.systemBackground))
+      
+      Spacer()
       
       if (self.isPreWorkout) {
         Button(action: {
@@ -65,11 +85,11 @@ struct TodayDetailView: View {
             .padding(.vertical, 15)
             .foregroundColor(.primary)
             .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
-            .cornerRadius(30)
+            .cornerRadius(10)
           }
         }
         .padding(.horizontal, 50)
-        .padding(.bottom, 20)
+        .padding(.bottom, 5)
       } else {
         Button(action: {
           self.presentationMode.wrappedValue.dismiss()
@@ -91,11 +111,11 @@ struct TodayDetailView: View {
             .padding(.vertical, 15)
             .foregroundColor(.primary)
             .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
-            .cornerRadius(30)
+            .cornerRadius(10)
           }
         }
         .padding(.horizontal, 50)
-        .padding(.bottom, 20)
+          .padding(.bottom, 5)
         .navigationBarBackButtonHidden(true)
       }
     }
@@ -103,7 +123,11 @@ struct TodayDetailView: View {
       isPresented: self.$showPopover,
       arrowEdge: .bottom
     ) {
-      if (self.isCameraMode) {
+      ZStack {
+        SetDetailView(exercisesObserver: self.exercisesObserver,
+                      workoutObserver: self.workoutObserver,
+                      restTime: self.restTimes[self.restTimeSelection])
+        
         VStack {
           HStack {
             Button(action: {
@@ -121,56 +145,13 @@ struct TodayDetailView: View {
             
             Spacer()
             
-            Button(action: {
-              self.isCameraMode = false
-            }) {
-              HStack {
-                Image(systemName: "camera.fill")
-                  .font(.title)
-                  .foregroundColor(.gray)
-              }
-            }
-            .padding(.vertical, 20)
-            .padding(.horizontal, 15)
+            // pause button?
           }
-          CameraView()
-        }
-      } else {
-        VStack {
-          HStack {
-            Button(action: {
-              self.isPreWorkout = true
-              self.showPopover = false
-            }) {
-              HStack {
-                Image(systemName: "xmark.circle.fill")
-                  .font(.title)
-                  .foregroundColor(Color(UIColor.systemRed))
-              }
-            }
-            .padding(.vertical, 20)
-            .padding(.horizontal, 10)
-            
-            Spacer()
-            
-            Button(action: {
-              self.isCameraMode = true
-            }) {
-              HStack {
-                Image(systemName: "camera.fill")
-                  .font(.title)
-                  .foregroundColor(.gray)
-              }
-            }
-            .padding(.vertical, 20)
-            .padding(.horizontal, 10)
-          }
-          SetDetailView(exercisesObserver: self.exercisesObserver,
-                        workoutObserver: self.workoutObserver)
+          Spacer()
         }
       }
     }
-    .navigationBarTitle(Text("Today"))
+    .navigationBarTitle("Today", displayMode: .inline)
     .background(Color(UIColor.systemGray6))
   }
 }

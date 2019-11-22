@@ -81,7 +81,9 @@ struct EditProfileView: View {
         }
       }
       .frame(height: 300)
-      .padding(.bottom, 25)
+      .padding(.bottom, 70)
+      
+      Spacer()
       
       Button(action: {
         let dateFormatter = DateFormatter()
@@ -119,13 +121,13 @@ struct EditProfileView: View {
           .padding(.vertical, 15)
           .foregroundColor(.primary)
           .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
-          .cornerRadius(30)
+          .cornerRadius(10)
           .padding(.top, 5)
         }
         .padding(.horizontal, 50)
       }
       .alert(isPresented: $showingAlert) {
-        Alert(title: Text("Changes Saved"), message: Text("Refresh the page to see your updated profile."), dismissButton: .default(Text("Cool")))
+        Alert(title: Text("Changes Saved"), message: Text("Refresh the page to view your updated profile."), dismissButton: .default(Text("Cool")))
       }
     }
   }
