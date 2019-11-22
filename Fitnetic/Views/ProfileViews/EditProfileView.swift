@@ -42,7 +42,7 @@ struct EditProfileView: View {
       IdentityView(userObserver: self.userObserver)
       Spacer()
       Form {
-        Section {
+        Section (header: Text(verbatim: "Profile Information")) {
           HStack {
             Text("Username")
             Spacer()
@@ -80,7 +80,8 @@ struct EditProfileView: View {
           }
         }
       }
-      .frame(height: 335)
+      .frame(height: 300)
+      .padding(.bottom, 25)
       
       Button(action: {
         let dateFormatter = DateFormatter()
@@ -102,25 +103,29 @@ struct EditProfileView: View {
         self.userObserver.updateData()
         self.showingAlert = true
       }) {
-        VStack {
-          HStack {
-            VStack {
-              Text(verbatim: "Save")
-                .font(.title)
-                .fontWeight(.black)
-                .foregroundColor(Color(UIColor.white))
+        GeometryReader { geometry in
+          VStack {
+            HStack {
+              VStack {
+                Text(verbatim: "Save")
+                  .font(.title)
+                  .fontWeight(.black)
+                  .foregroundColor(Color(UIColor.white))
+              }
             }
           }
+          .frame(width: geometry.size.width)
+          .padding(.horizontal, 30)
+          .padding(.vertical, 15)
+          .foregroundColor(.primary)
+          .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+          .cornerRadius(30)
+          .padding(.top, 5)
         }
-        .padding(.horizontal, 30)
-        .padding(.vertical, 15)
-        .foregroundColor(.primary)
-        .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
-        .cornerRadius(30)
-        .padding(.top, 5)
+        .padding(.horizontal, 50)
       }
       .alert(isPresented: $showingAlert) {
-        Alert(title: Text("Profile Updated"), message: Text("You're good to go!"), dismissButton: .default(Text("Okay")))
+        Alert(title: Text("Changes Saved"), message: Text("Refresh the page to see your updated profile."), dismissButton: .default(Text("Cool")))
       }
     }
   }

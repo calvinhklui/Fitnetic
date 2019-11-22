@@ -31,9 +31,13 @@ struct GraphicView: View {
       if selectedTab == 0 {
         CalendarView(workoutsObserver: self.workoutsObserver)
       } else {
-        Image(uiImage: self.analyticsObserver.heatmap ?? UIImage(systemName: "photo")!)
-        .resizable()
-        .aspectRatio(contentMode: .fit)
+        VStack {
+          Image(uiImage: self.analyticsObserver.heatmap ?? UIImage(systemName: "photo")!)
+          .resizable()
+          .aspectRatio(contentMode: .fit)
+          
+          
+        }
       }
     }
     .background(Color(UIColor.systemBackground))

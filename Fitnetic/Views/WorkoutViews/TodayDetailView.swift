@@ -40,7 +40,7 @@ struct TodayDetailView: View {
         .frame(height: 450)
       
       Spacer()
-      .padding(.bottom, 5)
+        .padding(.bottom, 5)
       
       if (self.isPreWorkout) {
         Button(action: {
@@ -49,45 +49,53 @@ struct TodayDetailView: View {
             self.isPreWorkout = false
           }
         }) {
-          VStack {
-            HStack {
-              VStack {
-                Text(verbatim: "Start")
-                  .font(.title)
-                  .fontWeight(.black)
-                  .foregroundColor(Color(UIColor.white))
+          GeometryReader { geometry in
+            VStack {
+              HStack {
+                VStack {
+                  Text(verbatim: "Start")
+                    .font(.title)
+                    .fontWeight(.black)
+                    .foregroundColor(Color(UIColor.white))
+                }
               }
             }
+            .frame(width: geometry.size.width)
+            .padding(.horizontal, 30)
+            .padding(.vertical, 15)
+            .foregroundColor(.primary)
+            .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+            .cornerRadius(30)
           }
-          .padding(.horizontal, 30)
-          .padding(.vertical, 15)
-          .foregroundColor(.primary)
-          .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
-          .cornerRadius(30)
         }
-        .padding(.bottom, 35)
+        .padding(.horizontal, 50)
+        .padding(.bottom, 20)
       } else {
         Button(action: {
           self.presentationMode.wrappedValue.dismiss()
           self.workoutObserver.postData()
         }) {
-          VStack {
-            HStack {
-              VStack {
-                Text(verbatim: "Save")
-                  .font(.title)
-                  .fontWeight(.black)
-                  .foregroundColor(Color(UIColor.white))
+          GeometryReader { geometry in
+            VStack {
+              HStack {
+                VStack {
+                  Text(verbatim: "Save")
+                    .font(.title)
+                    .fontWeight(.black)
+                    .foregroundColor(Color(UIColor.white))
+                }
               }
             }
+            .frame(width: geometry.size.width)
+            .padding(.horizontal, 30)
+            .padding(.vertical, 15)
+            .foregroundColor(.primary)
+            .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+            .cornerRadius(30)
           }
-          .padding(.horizontal, 30)
-          .padding(.vertical, 15)
-          .foregroundColor(.primary)
-          .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
-          .cornerRadius(30)
         }
-        .padding(.bottom, 35)
+        .padding(.horizontal, 50)
+        .padding(.bottom, 20)
         .navigationBarBackButtonHidden(true)
       }
     }
@@ -104,8 +112,8 @@ struct TodayDetailView: View {
             }) {
               HStack {
                 Image(systemName: "xmark.circle.fill")
-                .font(.title)
-                .foregroundColor(Color(UIColor.systemRed))
+                  .font(.title)
+                  .foregroundColor(Color(UIColor.systemRed))
               }
             }
             .padding(.vertical, 20)
@@ -118,7 +126,7 @@ struct TodayDetailView: View {
             }) {
               HStack {
                 Image(systemName: "camera.fill")
-                .font(.title)
+                  .font(.title)
                   .foregroundColor(.gray)
               }
             }
@@ -136,12 +144,12 @@ struct TodayDetailView: View {
             }) {
               HStack {
                 Image(systemName: "xmark.circle.fill")
-                .font(.title)
-                .foregroundColor(Color(UIColor.systemRed))
+                  .font(.title)
+                  .foregroundColor(Color(UIColor.systemRed))
               }
             }
             .padding(.vertical, 20)
-            .padding(.horizontal, 15)
+            .padding(.horizontal, 10)
             
             Spacer()
             
@@ -150,12 +158,12 @@ struct TodayDetailView: View {
             }) {
               HStack {
                 Image(systemName: "camera.fill")
-                .font(.title)
+                  .font(.title)
                   .foregroundColor(.gray)
               }
             }
             .padding(.vertical, 20)
-            .padding(.horizontal, 15)
+            .padding(.horizontal, 10)
           }
           SetDetailView(exercisesObserver: self.exercisesObserver,
                         workoutObserver: self.workoutObserver)

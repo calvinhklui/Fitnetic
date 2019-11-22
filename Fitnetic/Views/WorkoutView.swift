@@ -25,8 +25,6 @@ struct WorkoutView: View {
     self.analyticsObserver = analyticsObserver
     self.userObserver = userObserver
     self.workedOutToday = workedOutToday
-    
-    UINavigationBar.appearance().titleTextAttributes = [.font: UIFont(name: "SirinStencil-Regular", size: 25)!]
   }
   
   var body: some View {
@@ -51,7 +49,26 @@ struct WorkoutView: View {
                       exercisesObserver: self.exercisesObserver,
                       workoutObserver: self.workoutObserver,
                       analyticsObserver: self.analyticsObserver) }
-        .navigationBarTitle("Fitnetic", displayMode: .inline)
+        .navigationBarTitle("Workout", displayMode: .large)
+        .navigationBarItems(trailing:
+            VStack {
+              HStack {
+                VStack {
+                  if (workedOutToday) {
+                    Image(systemName: "checkmark.circle.fill")
+                      .font(.system(size: 30))
+                      .foregroundColor(Color(UIColor.systemBlue))
+                  } else {
+                    Image(systemName: "circle")
+                    .font(.system(size: 30))
+                    .foregroundColor(Color(UIColor.systemBlue))
+                  }
+                }
+              }
+            }
+            .padding(.top, 95)
+            .padding(.bottom, 5)
+        )
         .background(Color(UIColor.systemGray6))
     }
     .navigationViewStyle(StackNavigationViewStyle())

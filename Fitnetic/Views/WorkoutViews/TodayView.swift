@@ -80,9 +80,7 @@ struct TodayView: View {
                                                           }
                                                         }
           }
-          .padding(.top, 80)
-          .padding(.horizontal, 20)
-          .padding(.bottom, 20)
+          .padding(20)
           .background(
             Image("recommendedFaded")
               .resizable()

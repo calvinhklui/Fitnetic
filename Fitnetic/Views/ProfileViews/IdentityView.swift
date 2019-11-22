@@ -21,15 +21,9 @@ struct IdentityView: View {
         VStack(alignment: .center) {
           Image(systemName: "person.circle.fill").resizable()
             .frame(width: 100, height: 100)
-            .padding(.top, 10)
-          Text(verbatim: "\(self.userObserver.user.firstName) \(self.userObserver.user.lastName)")
-            .font(.system(size: 30))
-            .fontWeight(.semibold)
-            .foregroundColor(.primary)
         }
         .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
         .layoutPriority(100)
-        Spacer()
       }
       .padding(20)
     }

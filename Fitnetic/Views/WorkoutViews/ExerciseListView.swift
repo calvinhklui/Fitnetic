@@ -15,8 +15,8 @@ struct ExerciseListView: View {
   @State private var exercise: String = ""
   
   @State var data: [(String, [String])] = [
-      ("Reps", Array(0...100).map { "\($0)" }),
-      ("Exercises", [""])
+    ("Reps", Array(0...100).map { "\($0)" }),
+    ("Exercises", [""])
   ]
   @State var selection: [String] = [0, ""].map { "\($0)" }
   
@@ -25,36 +25,45 @@ struct ExerciseListView: View {
   
   var body: some View {
     VStack {
+      Spacer()
+      
       Form {
-        Section {
+        Section (header: Text(verbatim: "Set Information")) {
           MultiPicker(data: data, selection: $selection)
             .frame(height: 250)
         }
-        
+      }
+      .frame(height: 295)
+      
+      GeometryReader { geometry in
         HStack {
-          Text(verbatim: "\(selection[0])")
+          Text(verbatim: "\(self.selection[0])")
             .font(.title)
             .foregroundColor(.gray)
-          Text(verbatim: "\(selection[1])")
+          Text(verbatim: "\(self.selection[1])")
+          Spacer()
         }
-        .padding(.vertical, 10)
-        .padding(.horizontal, 20)
+        .frame(width: geometry.size.width)
       }
-      .frame(height: 400)
+      .padding(.horizontal, 20)
+      .background(Color(UIColor.systemBackground))
       
-      HStack (alignment: .bottom) {
-        Button(action: {
-          if (self.exercisesObserver.exercises.count > 0 && self.selection[0] != "0" && self.selection[1] != "") {
-            let newWorkoutSet = WorkoutSet(
-              exercise: self.exercisesObserver.exercises.first(where: { $0.name == self.selection[1] })!,
-              reps: Int(self.selection[0]),
-              difficulty: 0
-            )
-            
-            self.workoutObserver.workout.sets.append(newWorkoutSet)
-            self.presentationMode.wrappedValue.dismiss()
-          }
-        }) {
+      Spacer()
+      .padding(.bottom, 5)
+      
+      Button(action: {
+        if (self.exercisesObserver.exercises.count > 0 && self.selection[0] != "0" && self.selection[1] != "") {
+          let newWorkoutSet = WorkoutSet(
+            exercise: self.exercisesObserver.exercises.first(where: { $0.name == self.selection[1] })!,
+            reps: Int(self.selection[0]),
+            difficulty: 0
+          )
+          
+          self.workoutObserver.workout.sets.append(newWorkoutSet)
+          self.presentationMode.wrappedValue.dismiss()
+        }
+      }) {
+        GeometryReader { geometry in
           VStack {
             HStack {
               VStack {
@@ -65,39 +74,23 @@ struct ExerciseListView: View {
               }
             }
           }
+          .frame(width: geometry.size.width)
           .padding(.horizontal, 30)
           .padding(.vertical, 15)
           .foregroundColor(.primary)
           .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
           .cornerRadius(30)
         }
-        
-        Button(action: {
-              self.presentationMode.wrappedValue.dismiss()
-              }) {
-                VStack {
-                  HStack {
-                    VStack {
-                      Text(verbatim: "Cancel")
-                        .font(.headline)
-                        .foregroundColor(Color(UIColor.white))
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .foregroundColor(.primary)
-                        .background(Color(UIColor.systemRed))
-                        .cornerRadius(30)
-                    }
-                  }
-                }
-              }
       }
+      .padding(.horizontal, 50)
       .padding(.bottom, 20)
     }
     .navigationBarTitle("New Set")
+    .background(Color(UIColor.systemGray6))
     .onAppear(perform: {
       self.data = [
-          ("Reps", Array(0...100).map { "\($0)" }),
-          ("Exercises", self.exercisesObserver.exercises.map { "\($0.name)" })
+        ("Reps", Array(0...100).map { "\($0)" }),
+        ("Exercises", self.exercisesObserver.exercises.map { "\($0.name)" })
       ]
     })
   }
@@ -105,34 +98,34 @@ struct ExerciseListView: View {
 
 // Source: https://stackoverflow.com/questions/56567539/multi-component-picker-uipickerview-in-swiftui
 struct MultiPicker: View  {
-
-    typealias Label = String
-    typealias Entry = String
-
-    let data: [ (Label, [Entry]) ]
-    @Binding var selection: [Entry]
-
-    var body: some View {
-        GeometryReader { geometry in
-            HStack {
-                ForEach(0..<self.data.count) { column in
-                    Picker(self.data[column].0, selection: self.$selection[column]) {
-                        ForEach(0..<self.data[column].1.count) { row in
-                            Text(verbatim: self.data[column].1[row])
-                            .tag(self.data[column].1[row])
-                        }
-                    }
-                    .pickerStyle(WheelPickerStyle())
-                    .frame(width: geometry.size.width / CGFloat(self.data.count), height: geometry.size.height)
-                    .clipped()
-                }
+  
+  typealias Label = String
+  typealias Entry = String
+  
+  let data: [ (Label, [Entry]) ]
+  @Binding var selection: [Entry]
+  
+  var body: some View {
+    GeometryReader { geometry in
+      HStack {
+        ForEach(0..<self.data.count) { column in
+          Picker(self.data[column].0, selection: self.$selection[column]) {
+            ForEach(0..<self.data[column].1.count) { row in
+              Text(verbatim: self.data[column].1[row])
+                .tag(self.data[column].1[row])
             }
+          }
+          .pickerStyle(WheelPickerStyle())
+          .frame(width: geometry.size.width / CGFloat(self.data.count), height: geometry.size.height)
+          .clipped()
         }
+      }
     }
+  }
 }
 
 struct ExerciseListView_Previews: PreviewProvider {
   static var previews: some View {
-      ExerciseListView(exercisesObserver: ExercisesObserver(), workoutObserver: WorkoutObserver())
+    ExerciseListView(exercisesObserver: ExercisesObserver(), workoutObserver: WorkoutObserver())
   }
 }

@@ -24,7 +24,7 @@ struct SignUpView: View {
   var body: some View {
     VStack {
       Form {
-        Section {
+        Section (header: Text(verbatim: "Profile Information")) {
           HStack {
             Text("Username")
             Spacer()

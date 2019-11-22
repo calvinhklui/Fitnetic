@@ -15,8 +15,6 @@ struct ProfileView: View {
   
   init(userObserver: UserObserver) {
     self.userObserver = userObserver
-    
-    UINavigationBar.appearance().titleTextAttributes = [.font: UIFont(name: "SirinStencil-Regular", size: 25)!]
   }
   
   var body: some View {
@@ -32,7 +30,7 @@ struct ProfileView: View {
           EditProfileView(userObserver: self.userObserver)
         }
       }
-      .navigationBarTitle("Fitnetic", displayMode: .inline)
+      .navigationBarTitle("\(self.userObserver.user.firstName) \(self.userObserver.user.lastName)", displayMode: .large)
       .navigationBarItems(trailing:
         Button(action: {
           if (self.isEditMode == .inactive) {
