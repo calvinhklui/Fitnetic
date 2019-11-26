@@ -33,14 +33,18 @@ struct AnalyticsView: View {
           VStack {
             HStack {
               VStack {
-                if (workedOutToday) {
-                  Image(systemName: "checkmark.circle.fill")
+                if (self.workoutsObserver.loading || self.analyticsObserver.loading) {
+                  ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                } else {
+                  if (workedOutToday) {
+                    Image(systemName: "checkmark.circle.fill")
+                      .font(.system(size: 30))
+                      .foregroundColor(Color(UIColor.systemBlue))
+                  } else {
+                    Image(systemName: "circle")
                     .font(.system(size: 30))
                     .foregroundColor(Color(UIColor.systemBlue))
-                } else {
-                  Image(systemName: "circle")
-                  .font(.system(size: 30))
-                  .foregroundColor(Color(UIColor.systemBlue))
+                  }
                 }
               }
             }

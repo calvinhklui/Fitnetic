@@ -42,27 +42,27 @@ struct TodayDetailView: View {
       
       Spacer()
       
-      VStack(alignment: .leading) {
-        Text(verbatim: "Rest Time")
-          .font(.title)
-          .fontWeight(.semibold)
-          .foregroundColor(.primary)
-        
-        Divider()
-          .padding(.top, -5)
-        
-        Picker(selection: $restTimeSelection, label: Text("Rest Time")) {
-          ForEach(0 ..< self.restTimes.count) {
-            Text("\(self.restTimes[$0])s").tag($0)
-          }
-        }.pickerStyle(SegmentedPickerStyle())
-      }
-      .padding(20)
-      .background(Color(UIColor.systemBackground))
-      
-      Spacer()
-      
       if (self.isPreWorkout) {
+        VStack(alignment: .leading) {
+          Text(verbatim: "Rest Time")
+            .font(.title)
+            .fontWeight(.semibold)
+            .foregroundColor(.primary)
+          
+          Divider()
+            .padding(.top, -5)
+          
+          Picker(selection: $restTimeSelection, label: Text("Rest Time")) {
+            ForEach(0 ..< self.restTimes.count) {
+              Text("\(self.restTimes[$0])s").tag($0)
+            }
+          }.pickerStyle(SegmentedPickerStyle())
+        }
+        .padding(20)
+        .background(Color(UIColor.systemBackground))
+        
+        Spacer()
+      
         Button(action: {
           if (self.workoutObserver.workout.sets.count > 0) {
             self.showPopover = true
@@ -92,17 +92,25 @@ struct TodayDetailView: View {
         .padding(.bottom, 5)
       } else {
         Button(action: {
-          self.presentationMode.wrappedValue.dismiss()
-          self.workoutObserver.postData()
+          self.workoutObserver.postData(completion: { (success) -> Void in
+            if success {
+              self.workoutObserver.fetchData()
+              self.presentationMode.wrappedValue.dismiss()
+            }
+          })
         }) {
           GeometryReader { geometry in
             VStack {
               HStack {
                 VStack {
-                  Text(verbatim: "Save")
-                    .font(.title)
-                    .fontWeight(.black)
-                    .foregroundColor(Color(UIColor.white))
+                  if (self.workoutObserver.loading) {
+                    ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                  } else {
+                    Text(verbatim: "Save")
+                      .font(.title)
+                      .fontWeight(.black)
+                      .foregroundColor(Color(UIColor.white))
+                  }
                 }
               }
             }

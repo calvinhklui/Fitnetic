@@ -17,27 +17,35 @@ class WorkoutObserver: ObservableObject {
   private var fetchURL: String = "https://fitnetic-api.herokuapp.com/recommendations/"
   private var postURL: String = "https://fitnetic-api.herokuapp.com/workouts/"
   @Published var workout: Workout = dummyRecommendation
+  @Published var loading: Bool = false
   
   init() {
     self.fetchData()
   }
   
   func fetchData() -> Void {
-    self.cancellable = URLSession.shared.dataTaskPublisher(for: URL(string: self.fetchURL + globalUserID)!)
-    .map { $0.data }
-    .decode(type: Workout.self, decoder: JSONDecoder())
-    .replaceError(with: dummyRecommendation)
-    .eraseToAnyPublisher()
-    .receive(on: DispatchQueue.main)
-    .assign(to: \.workout, on: self)
+    if let globalUserID = UserDefaults.standard.string(forKey: "globalUserID") {
+      self.loading = true
+      self.cancellable = URLSession.shared.dataTaskPublisher(for: URL(string: self.fetchURL + globalUserID)!)
+      .map { $0.data }
+      .decode(type: Workout.self, decoder: JSONDecoder())
+      .replaceError(with: dummyRecommendation)
+      .eraseToAnyPublisher()
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { workout in
+        self.workout = workout
+        self.loading = false
+      })
+    }
   }
   
-  func postData() -> Void {
+  func postData(completion: @escaping (_ success: Bool) -> Void) -> Void {
     let dateFormatter = DateFormatter()
     dateFormatter.locale = Locale(identifier: "en_US")
     dateFormatter.setLocalizedDateFormatFromTemplate("yyyy-MM-dd'T'HH:mm:ssZZZZZ")
     let dateText = dateFormatter.string(from: Date())
     
+    self.loading = true
     do {
       let headers = [
         "Content-Type": "application/json",
@@ -74,8 +82,15 @@ class WorkoutObserver: ObservableObject {
       .replaceError(with: dummyRecommendation)
       .eraseToAnyPublisher()
       .receive(on: DispatchQueue.main)
-      .assign(to: \.workout, on: self)
-    } catch { print("Failed to Post Workout!") }
+      .sink(receiveValue: { workout in
+        self.workout = workout
+        self.loading = false
+        completion(true)
+      })
+    } catch {
+      completion(false)
+      print("Failed to Post Workout!")
+    }
   }
   
   func setWorkout(_ workout: Workout) -> Void {

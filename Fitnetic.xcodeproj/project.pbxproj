@@ -79,6 +79,7 @@
 		0697A50C236F6B92000034B5 /* SetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697A50B236F6B92000034B5 /* SetDetailView.swift */; };
 		06A7960B237F870000730627 /* ExerciseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A7960A237F870000730627 /* ExerciseListView.swift */; };
 		06C295C4236A937300B189E4 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C295C3236A937300B189E4 /* TodayView.swift */; };
+		06CDCB5B238D11D1007801CB /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CDCB5A238D11D1007801CB /* ActivityIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +173,7 @@
 		0697A50B236F6B92000034B5 /* SetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDetailView.swift; sourceTree = "<group>"; };
 		06A7960A237F870000730627 /* ExerciseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListView.swift; sourceTree = "<group>"; };
 		06C295C3236A937300B189E4 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		06CDCB5A238D11D1007801CB /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,6 +322,7 @@
 				067ED68323692FF3004FA82D /* HostingController.swift */,
 				0603A285237DF1C20076E420 /* Bridge.m */,
 				0603A284237DF1C10076E420 /* Fitnetic-Bridging-Header.h */,
+				06CDCB5A238D11D1007801CB /* ActivityIndicator.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				068931942373F90100111117 /* Analytics.swift in Sources */,
 				069124C52370C5EE004B2140 /* WorkoutObserver.swift in Sources */,
 				068931A6237501A200111117 /* SignUpView.swift in Sources */,
+				06CDCB5B238D11D1007801CB /* ActivityIndicator.swift in Sources */,
 				0603A38C2384FEB30021D79C /* VideoCapture.swift in Sources */,
 				06A7960B237F870000730627 /* ExerciseListView.swift in Sources */,
 				068931A22374BF8D00111117 /* CalendarView.swift in Sources */,

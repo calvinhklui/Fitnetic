@@ -15,18 +15,25 @@ class WorkoutsObserver: ObservableObject {
   private var cancellable: AnyCancellable?
   private var url: String = "https://fitnetic-api.herokuapp.com/workouts?user="
   @Published var workouts: [Workout] = [Workout]()
+  @Published var loading: Bool = false
   
   init() {
     self.fetchData()
   }
   
   func fetchData() -> Void {
-    self.cancellable = URLSession.shared.dataTaskPublisher(for: URL(string: self.url + globalUserID)!)
-    .map { $0.data }
-    .decode(type: [Workout].self, decoder: JSONDecoder())
-    .replaceError(with: [])
-    .eraseToAnyPublisher()
-    .receive(on: DispatchQueue.main)
-    .assign(to: \.workouts, on: self)
+    if let globalUserID = UserDefaults.standard.string(forKey: "globalUserID") {
+      self.loading = true
+      self.cancellable = URLSession.shared.dataTaskPublisher(for: URL(string: self.url + globalUserID)!)
+        .map { $0.data }
+        .decode(type: [Workout].self, decoder: JSONDecoder())
+        .replaceError(with: [])
+        .eraseToAnyPublisher()
+        .receive(on: DispatchQueue.main)
+        .sink(receiveValue: { workouts in
+          self.workouts = workouts
+          self.loading = false
+        })
+    }
   }
 }

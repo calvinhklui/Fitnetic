@@ -102,17 +102,25 @@ struct EditProfileView: View {
         )
         
         self.userObserver.setUser(updatedUser)
-        self.userObserver.updateData()
-        self.showingAlert = true
+        self.userObserver.updateData(completion: { (success) -> Void in
+          if success {
+            self.userObserver.fetchData()
+            self.showingAlert = true
+          }
+        })
       }) {
         GeometryReader { geometry in
           VStack {
             HStack {
               VStack {
-                Text(verbatim: "Save")
+                if (self.userObserver.loading) {
+                  ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                } else {
+                  Text(verbatim: "Save")
                   .font(.title)
                   .fontWeight(.black)
                   .foregroundColor(Color(UIColor.white))
+                }
               }
             }
           }

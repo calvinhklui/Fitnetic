@@ -18,30 +18,41 @@ class AnalyticsObserver: ObservableObject {
   private var urlSVG: String = "https://fitnetic-api.herokuapp.com/heatmap/"
   @Published var analytics: Analytics = dummyAnalytics
   @Published var heatmap: UIImage?
+  @Published var loading: Bool = false
   
   init() {
     self.fetchData()
   }
   
   func fetchData() -> Void {
-    self.cancellable = URLSession.shared.dataTaskPublisher(for: URL(string: self.url + globalUserID)!)
-    .map { $0.data }
-    .decode(type: Analytics.self, decoder: JSONDecoder())
-    .replaceError(with: dummyAnalytics)
-    .eraseToAnyPublisher()
-    .receive(on: DispatchQueue.main)
-    .assign(to: \.analytics, on: self)
+    if let globalUserID = UserDefaults.standard.string(forKey: "globalUserID") {
+      self.loading = true
+      self.cancellable = URLSession.shared.dataTaskPublisher(for: URL(string: self.url + globalUserID)!)
+      .map { $0.data }
+      .decode(type: Analytics.self, decoder: JSONDecoder())
+      .replaceError(with: dummyAnalytics)
+      .eraseToAnyPublisher()
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { analytics in
+        self.analytics = analytics
+        self.loading = false
+      })
+    }
   }
   
   func fetchSVG() -> Void {
-    self.cancellable = URLSession.shared.dataTaskPublisher(for: URL(string: self.urlSVG + globalUserID)!)
-    .map { $0.data }
-    .replaceError(with: Data())
-    .eraseToAnyPublisher()
-    .receive(on: DispatchQueue.main)
-    .sink(receiveValue: { data in
-      self.heatmap = SVGKImage(data: data).uiImage
-    })
+    if let globalUserID = UserDefaults.standard.string(forKey: "globalUserID") {
+      self.loading = true
+      self.cancellable = URLSession.shared.dataTaskPublisher(for: URL(string: self.urlSVG + globalUserID)!)
+      .map { $0.data }
+      .replaceError(with: Data())
+      .eraseToAnyPublisher()
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { data in
+        self.heatmap = SVGKImage(data: data).uiImage
+        self.loading = false
+      })
+    }
   }
 }
 

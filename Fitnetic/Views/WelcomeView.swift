@@ -59,6 +59,9 @@ struct WelcomeView: View {
         .padding(.horizontal, 80)
         
         Button(action: {
+          let demoUserID: String = "5dbf3ac810fe5000041aef80"
+          UserDefaults.standard.set(demoUserID, forKey: "globalUserID")
+          
           self.userObserver.fetchData()
           self.workoutsObserver.fetchData()
           self.workoutObserver.fetchData()

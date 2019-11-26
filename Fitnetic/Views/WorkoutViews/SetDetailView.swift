@@ -37,7 +37,7 @@ struct SetDetailView: View {
   }
   
   var body: some View {
-    VStack {
+    ZStack {
       if (timeRemaining == -1 && self.setCounter < self.workoutObserver.workout.sets.count - 1) {
         if (isCameraMode) {
           ZStack {
@@ -113,6 +113,126 @@ struct SetDetailView: View {
             }
           }
         } else {
+          VStack {
+            HStack {
+              Text(verbatim: self.workoutObserver.workout.sets[setCounter].exercise.name)
+                .font(.system(size: 40))
+                .fontWeight(.semibold)
+                .foregroundColor(.primary)
+                .padding(.all, 20)
+              
+              Button(action: {
+                self.isCameraMode = true
+              }) {
+                VStack {
+                  HStack {
+                    VStack {
+                      Image(systemName: "camera.fill")
+                        .font(.title)
+                        .foregroundColor(.gray)
+                    }
+                  }
+                }
+              }
+            }
+            .padding(.top, 50)
+            
+            Spacer()
+            
+            Text(verbatim: "\(self.workoutObserver.workout.sets[setCounter].reps ?? 0)")
+              .font(.system(size: 100))
+              .fontWeight(.bold)
+              .foregroundColor(.gray)
+            
+            Spacer()
+            
+            Button(action: {
+              self.timeRemaining = self.restTime
+              self.timer.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+            }) {
+              GeometryReader { geometry in
+                VStack {
+                  HStack {
+                    VStack {
+                      Text(verbatim: "Done")
+                        .font(.title)
+                        .fontWeight(.black)
+                        .foregroundColor(Color(UIColor.white))
+                    }
+                  }
+                }
+                .frame(width: geometry.size.width)
+                .padding(.horizontal, 30)
+                .padding(.vertical, 15)
+                .foregroundColor(.primary)
+                .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+                .cornerRadius(10)
+              }
+            }
+            .offset(y: 50)
+          }
+        }
+      } else if (timeRemaining >= 0 && self.setCounter < self.workoutObserver.workout.sets.count - 1) {
+        VStack {
+          Text(verbatim: "Rest Timer")
+            .font(.system(size: 40))
+            .fontWeight(.semibold)
+            .foregroundColor(.primary)
+            .padding(.all, 20)
+          
+          Spacer()
+          
+          Text(verbatim: "\(timeRemaining)")
+            .font(.system(size: 100))
+            .fontWeight(.bold)
+            .foregroundColor(.gray)
+            .onReceive(timer.timer) { _ in
+              if self.timeRemaining > 0 {
+                self.timeRemaining -= 1
+              } else if self.timeRemaining == 0 {
+                self.setCounter = self.setCounter + 1
+                self.timeRemaining = -1
+              }
+          }
+          
+          Spacer()
+          
+          Button(action: {
+            self.timeRemaining = -1
+            self.setCounter = self.setCounter + 1
+          }) {
+            VStack {
+              GeometryReader { geometry in
+                VStack {
+                  HStack {
+                    VStack {
+                      Text(verbatim: "I'm Ready")
+                        .font(.title)
+                        .fontWeight(.black)
+                        .foregroundColor(Color(UIColor.white))
+                    }
+                  }
+                }
+                .frame(width: geometry.size.width)
+                .padding(.horizontal, 30)
+                .padding(.vertical, 15)
+                .foregroundColor(.primary)
+                .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+                .cornerRadius(10)
+              }
+              .padding(.horizontal, 50)
+              
+              Text(verbatim: "Next: \(self.workoutObserver.workout.sets[setCounter + 1].exercise.name)")
+                .font(.caption)
+                .foregroundColor(.secondary)
+                .padding(.top, 10)
+                .padding(.bottom, 50)
+            }
+          }
+        }
+        .offset(y: 50)
+      } else {
+        VStack {
           HStack {
             Text(verbatim: self.workoutObserver.workout.sets[setCounter].exercise.name)
               .font(.system(size: 40))
@@ -134,7 +254,6 @@ struct SetDetailView: View {
               }
             }
           }
-          .padding(.top, 50)
           
           Spacer()
           
@@ -145,15 +264,12 @@ struct SetDetailView: View {
           
           Spacer()
           
-          Button(action: {
-            self.timeRemaining = self.restTime
-            self.timer.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-          }) {
+          Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
             GeometryReader { geometry in
               VStack {
                 HStack {
                   VStack {
-                    Text(verbatim: "Done")
+                    Text(verbatim: "Finish")
                       .font(.title)
                       .fontWeight(.black)
                       .foregroundColor(Color(UIColor.white))
@@ -168,119 +284,8 @@ struct SetDetailView: View {
               .cornerRadius(10)
             }
           }
-          .padding(.horizontal, 50)
         }
-      } else if (timeRemaining >= 0 && self.setCounter < self.workoutObserver.workout.sets.count - 1) {
-        Text(verbatim: "Rest Timer")
-          .font(.system(size: 40))
-          .fontWeight(.semibold)
-          .foregroundColor(.primary)
-          .padding(.all, 20)
-          .padding(.top, 50)
-        
-        Spacer()
-        
-        Text(verbatim: "\(timeRemaining)")
-          .font(.system(size: 100))
-          .fontWeight(.bold)
-          .foregroundColor(.gray)
-          .onReceive(timer.timer) { _ in
-            if self.timeRemaining > 0 {
-              self.timeRemaining -= 1
-            } else if self.timeRemaining == 0 {
-              self.setCounter = self.setCounter + 1
-              self.timeRemaining = -1
-            }
-        }
-        
-        Spacer()
-        
-        Button(action: {
-          self.timeRemaining = -1
-          self.setCounter = self.setCounter + 1
-        }) {
-          VStack {
-            GeometryReader { geometry in
-              VStack {
-                HStack {
-                  VStack {
-                    Text(verbatim: "I'm Ready")
-                      .font(.title)
-                      .fontWeight(.black)
-                      .foregroundColor(Color(UIColor.white))
-                  }
-                }
-              }
-              .frame(width: geometry.size.width)
-              .padding(.horizontal, 30)
-              .padding(.vertical, 15)
-              .foregroundColor(.primary)
-              .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
-              .cornerRadius(10)
-            }
-            .padding(.horizontal, 50)
-            
-            Text(verbatim: "Next: \(self.workoutObserver.workout.sets[setCounter + 1].exercise.name)")
-              .font(.caption)
-              .foregroundColor(.secondary)
-              .padding(.top, 10)
-              .padding(.bottom, 50)
-          }
-        }
-      } else {
-        HStack {
-          Text(verbatim: self.workoutObserver.workout.sets[setCounter].exercise.name)
-            .font(.system(size: 40))
-            .fontWeight(.semibold)
-            .foregroundColor(.primary)
-            .padding(.all, 20)
-          
-          Button(action: {
-            self.isCameraMode = true
-          }) {
-            VStack {
-              HStack {
-                VStack {
-                  Image(systemName: "camera.fill")
-                    .font(.title)
-                    .foregroundColor(.gray)
-                }
-              }
-            }
-          }
-        }
-        .padding(.top, 50)
-        
-        Spacer()
-        
-        Text(verbatim: "\(self.workoutObserver.workout.sets[setCounter].reps ?? 0)")
-          .font(.system(size: 100))
-          .fontWeight(.bold)
-          .foregroundColor(.gray)
-        
-        Spacer()
-        
-        Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
-          GeometryReader { geometry in
-            VStack {
-              HStack {
-                VStack {
-                  Text(verbatim: "Finish")
-                    .font(.title)
-                    .fontWeight(.black)
-                    .foregroundColor(Color(UIColor.white))
-                }
-              }
-            }
-            .frame(width: geometry.size.width)
-            .padding(.horizontal, 30)
-            .padding(.vertical, 15)
-            .foregroundColor(.primary)
-            .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
-            .cornerRadius(10)
-          }
-          .padding(.horizontal, 50)
-        }
+        .offset(y: 50)
       }
     }
   }

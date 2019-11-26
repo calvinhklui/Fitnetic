@@ -9,8 +9,6 @@
 import UIKit
 import SwiftUI
 
-var globalUserID: String = "5dbf3ac810fe5000041aef80"
-
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?

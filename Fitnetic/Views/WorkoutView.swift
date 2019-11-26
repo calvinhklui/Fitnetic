@@ -9,14 +9,15 @@
 import SwiftUI
 
 struct WorkoutView: View {
-  @State private var showWelcome: Bool = true
-  
   @ObservedObject var workoutsObserver: WorkoutsObserver
   @ObservedObject var exercisesObserver: ExercisesObserver
   @ObservedObject var workoutObserver: WorkoutObserver
   @ObservedObject var analyticsObserver: AnalyticsObserver
   @ObservedObject var userObserver: UserObserver
+  
   var workedOutToday: Bool
+  
+  @State private var showWelcome: Bool = false
   
   init(workoutsObserver: WorkoutsObserver, exercisesObserver: ExercisesObserver, workoutObserver: WorkoutObserver, analyticsObserver: AnalyticsObserver, userObserver: UserObserver, workedOutToday: Bool) {
     self.workoutsObserver = workoutsObserver
@@ -54,14 +55,18 @@ struct WorkoutView: View {
             VStack {
               HStack {
                 VStack {
-                  if (workedOutToday) {
-                    Image(systemName: "checkmark.circle.fill")
+                  if (self.workoutsObserver.loading || self.exercisesObserver.loading || self.workoutObserver.loading || self.analyticsObserver.loading || self.userObserver.loading) {
+                    ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                  } else {
+                    if (workedOutToday) {
+                      Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 30))
+                        .foregroundColor(Color(UIColor.systemBlue))
+                    } else {
+                      Image(systemName: "circle")
                       .font(.system(size: 30))
                       .foregroundColor(Color(UIColor.systemBlue))
-                  } else {
-                    Image(systemName: "circle")
-                    .font(.system(size: 30))
-                    .foregroundColor(Color(UIColor.systemBlue))
+                    }
                   }
                 }
               }
@@ -78,6 +83,7 @@ struct WorkoutView: View {
       self.workoutObserver.fetchData()
       self.analyticsObserver.fetchData()
       self.userObserver.fetchData()
+      self.showWelcome = UserDefaults.standard.string(forKey: "globalUserID") == nil
     })
   }
 }

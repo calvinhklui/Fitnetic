@@ -21,38 +21,44 @@ struct ProfileView: View {
     NavigationView {
       ScrollView {
         if self.isEditMode == .inactive {
-            Spacer()
-            IdentityView(userObserver: self.userObserver)
-            Spacer()
-            AttributesView(userObserver: self.userObserver)
-            Spacer()
+          Spacer()
+          IdentityView(userObserver: self.userObserver)
+          Spacer()
+          AttributesView(userObserver: self.userObserver)
+          Spacer()
         } else {
           EditProfileView(userObserver: self.userObserver)
         }
       }
       .navigationBarTitle("\(self.userObserver.user.firstName) \(self.userObserver.user.lastName)", displayMode: .large)
       .navigationBarItems(trailing:
-        Button(action: {
-          if (self.isEditMode == .inactive) {
-            self.isEditMode = .active
+        VStack {
+          if (self.userObserver.loading) {
+            ActivityIndicator(isAnimating: .constant(true), style: .medium)
           } else {
-            self.isEditMode = .inactive
-          }
-        }) {
-          VStack {
-            HStack {
+            Button(action: {
+              if (self.isEditMode == .inactive) {
+                self.isEditMode = .active
+              } else {
+                self.isEditMode = .inactive
+              }
+            }) {
               VStack {
-                Image(systemName: "pencil.circle.fill")
-                  .font(.title)
-                  .foregroundColor(Color(UIColor.systemBlue))
-                  .foregroundColor(.primary)
+                HStack {
+                  VStack {
+                    Image(systemName: "pencil.circle.fill")
+                      .font(.title)
+                      .foregroundColor(Color(UIColor.systemBlue))
+                      .foregroundColor(.primary)
+                  }
+                }
               }
             }
           }
         }
       )
-      .environment(\.editMode, self.$isEditMode)
-      .background(Color(UIColor.systemGray6))
+        .environment(\.editMode, self.$isEditMode)
+        .background(Color(UIColor.systemGray6))
     }
     .navigationViewStyle(StackNavigationViewStyle())
     .onAppear(perform: {

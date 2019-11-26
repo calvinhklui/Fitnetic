@@ -56,7 +56,7 @@ struct SignUpView: View {
           
           VStack (alignment: .leading) {
             Text("Goal").font(.headline)
-            TextField(self.userObserver.user.goal, text: $goal)
+            TextField("", text: $goal)
           }
         }
       }
@@ -81,18 +81,25 @@ struct SignUpView: View {
         )
         
         self.userObserver.setUser(newUser)
-        self.userObserver.postData()
-        
-        self.presentationMode.wrappedValue.dismiss()
+        self.userObserver.postData(completion: { (success) -> Void in
+          if success {
+            self.userObserver.fetchData()
+            self.presentationMode.wrappedValue.dismiss()
+          }
+        })
       }) {
         GeometryReader { geometry in
           VStack {
             HStack {
               VStack {
-                Text(verbatim: "Save")
-                  .font(.title)
-                  .fontWeight(.black)
-                  .foregroundColor(Color(UIColor.white))
+                if (self.userObserver.loading) {
+                  ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                } else {
+                  Text(verbatim: "Save")
+                    .font(.title)
+                    .fontWeight(.black)
+                    .foregroundColor(Color(UIColor.white))
+                }
               }
             }
           }

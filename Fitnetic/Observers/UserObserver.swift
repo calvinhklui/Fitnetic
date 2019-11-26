@@ -16,22 +16,31 @@ class UserObserver: ObservableObject {
   private var fetchURL: String = "https://fitnetic-api.herokuapp.com/users/"
   private var postURL: String = "https://fitnetic-api.herokuapp.com/users/"
   @Published var user: User = dummyUser
+  @Published var loading: Bool = false
   
   init() {
     self.fetchData()
   }
   
   func fetchData() -> Void {
-    self.cancellable = URLSession.shared.dataTaskPublisher(for: URL(string: self.fetchURL + globalUserID)!)
-    .map { $0.data }
-    .decode(type: User.self, decoder: JSONDecoder())
-    .replaceError(with: dummyUser)
-    .eraseToAnyPublisher()
-    .receive(on: DispatchQueue.main)
-    .assign(to: \.user, on: self)
+    if let globalUserID = UserDefaults.standard.string(forKey: "globalUserID") {
+      self.loading = true
+      self.cancellable = URLSession.shared.dataTaskPublisher(for: URL(string: self.fetchURL + globalUserID)!)
+      .map { $0.data }
+      .decode(type: User.self, decoder: JSONDecoder())
+      .replaceError(with: dummyUser)
+      .eraseToAnyPublisher()
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { user in
+        self.user = user
+        UserDefaults.standard.set(user.id, forKey: "globalUserID")
+        self.loading = false
+      })
+    }
   }
   
-  func postData() -> Void {
+  func postData(completion: @escaping (_ success: Bool) -> Void) -> Void {
+    self.loading = true
     do {
       let headers = [
         "Content-Type": "application/json",
@@ -66,12 +75,19 @@ class UserObserver: ObservableObject {
       .receive(on: DispatchQueue.main)
       .sink(receiveValue: { user in
         self.user = user
-        globalUserID = user.id
+        UserDefaults.standard.set(user.id, forKey: "globalUserID")
+        self.loading = false
+        completion(true)
       })
-    } catch { print("Failed to Post User!") }
+    } catch {
+      self.loading = false
+      completion(false)
+      print("Failed to Post User!")
+    }
   }
   
-  func updateData() -> Void {
+  func updateData(completion: @escaping (_ success: Bool) -> Void) -> Void {
+    self.loading = true
     do {
       let headers = [
         "Content-Type": "application/json",
@@ -91,8 +107,6 @@ class UserObserver: ObservableObject {
         "goal": self.user.goal
       ] as [String : Any]
       
-      print(userDict)
-      
       let jsonData = try JSONSerialization.data(withJSONObject: userDict, options: .prettyPrinted)
     
       var request = URLRequest(url: URL(string: self.postURL + self.user.id)!)
@@ -108,9 +122,15 @@ class UserObserver: ObservableObject {
       .receive(on: DispatchQueue.main)
       .sink(receiveValue: { user in
         self.user = user
-        globalUserID = user.id
+        UserDefaults.standard.set(user.id, forKey: "globalUserID")
+        self.loading = false
+        completion(true)
       })
-    } catch { print("Failed to Post User!") }
+    } catch {
+      self.loading = false
+      completion(false)
+      print("Failed to Post User!")
+    }
   }
   
   func setUser(_ user: User) -> Void {
