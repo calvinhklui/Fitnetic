@@ -42,6 +42,10 @@ struct SetDetailView: View {
         if (isCameraMode) {
           ZStack {
             JointViewControllerWrapper(jointView: self.jointViewStruct.jointView)
+              .onAppear(perform: {
+                // set peak points in the future
+                self.jointViewStruct.jointView.targetReps = self.workoutObserver.workout.sets[self.setCounter].reps ?? 10
+              })
             
             VStack {
               HStack {
@@ -65,52 +69,44 @@ struct SetDetailView: View {
                   }
                 }
               }
-              .padding(.top, 50)
               
               Spacer()
               
-              HStack {
-                Button(action: {
-                  self.jointViewStruct.jointView.printData(label: 1)
-                }) {
+              Text(verbatim: "\(self.jointViewStruct.jointView.targetReps - self.jointViewStruct.jointView.currentRep)")
+                .font(.system(size: 100))
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+              
+              Spacer()
+              
+              Button(action: {
+                self.timeRemaining = self.restTime
+                self.timer.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+              }) {
+                GeometryReader { geometry in
                   VStack {
                     HStack {
                       VStack {
-                        Text(verbatim: "Peak")
-                          .font(.headline)
+                        Text(verbatim: "Done")
+                          .font(.title)
+                          .fontWeight(.black)
                           .foregroundColor(Color(UIColor.white))
-                          .padding(.horizontal, 20)
-                          .padding(.vertical, 10)
-                          .foregroundColor(.primary)
-                          .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
-                          .cornerRadius(30)
-                          .padding(.bottom, 50)
                       }
                     }
                   }
+                  .frame(width: geometry.size.width)
+                  .padding(.horizontal, 30)
+                  .padding(.vertical, 15)
+                  .foregroundColor(.primary)
+                  .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+                  .cornerRadius(10)
                 }
-                
-                Button(action: {
-                  self.jointViewStruct.jointView.printData(label: -1)
-                }) {
-                  VStack {
-                    HStack {
-                      VStack {
-                        Text(verbatim: "Trough")
-                          .font(.headline)
-                          .foregroundColor(Color(UIColor.white))
-                          .padding(.horizontal, 20)
-                          .padding(.vertical, 10)
-                          .foregroundColor(.primary)
-                          .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemRed), Color(UIColor.systemOrange)]), startPoint: .top, endPoint: .bottom))
-                          .cornerRadius(30)
-                          .padding(.bottom, 50)
-                      }
-                    }
-                  }
-                }
+                .padding(.horizontal, 50)
+                .frame(height: 50)
               }
+              .padding(.vertical, 50)
             }
+            .offset(y: 50)
           }
         } else {
           VStack {
@@ -135,7 +131,6 @@ struct SetDetailView: View {
                 }
               }
             }
-            .padding(.top, 50)
             
             Spacer()
             
@@ -168,9 +163,12 @@ struct SetDetailView: View {
                 .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
                 .cornerRadius(10)
               }
+              .padding(.horizontal, 50)
+              .frame(height: 50)
             }
-            .offset(y: 50)
+            .padding(.vertical, 50)
           }
+          .offset(y: 50)
         }
       } else if (timeRemaining >= 0 && self.setCounter < self.workoutObserver.workout.sets.count - 1) {
         VStack {
@@ -221,6 +219,7 @@ struct SetDetailView: View {
                 .cornerRadius(10)
               }
               .padding(.horizontal, 50)
+              .frame(height: 50)
               
               Text(verbatim: "Next: \(self.workoutObserver.workout.sets[setCounter + 1].exercise.name)")
                 .font(.caption)
@@ -229,6 +228,7 @@ struct SetDetailView: View {
                 .padding(.bottom, 50)
             }
           }
+          .padding(.top, 50)
         }
         .offset(y: 50)
       } else {
@@ -283,7 +283,10 @@ struct SetDetailView: View {
               .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
               .cornerRadius(10)
             }
+            .padding(.horizontal, 50)
+            .frame(height: 50)
           }
+          .padding(.vertical, 50)
         }
         .offset(y: 50)
       }

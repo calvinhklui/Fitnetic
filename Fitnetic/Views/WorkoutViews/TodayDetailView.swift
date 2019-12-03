@@ -121,9 +121,10 @@ struct TodayDetailView: View {
             .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
             .cornerRadius(10)
           }
+          .frame(height: 50)
         }
         .padding(.horizontal, 50)
-          .padding(.bottom, 5)
+        .padding(.bottom, 20)
         .navigationBarBackButtonHidden(true)
       }
     }
