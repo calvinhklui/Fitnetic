@@ -24,6 +24,7 @@ struct SetDetailView: View {
   @ObservedObject var jointViewStruct: DrawingJointViewStruct
   @State private var isCameraMode: Bool = false
   @State private var setCounter: Int = 0
+  @State private var currentRep: Int = 0
   
   @State var timeRemaining = -1
   var timer = TimerStruct()
@@ -69,6 +70,7 @@ struct SetDetailView: View {
                   }
                 }
               }
+              .padding(.horizontal, 20)
               
               Spacer()
               
@@ -131,6 +133,7 @@ struct SetDetailView: View {
                 }
               }
             }
+            .padding(.horizontal, 20)
             
             Spacer()
             
@@ -232,63 +235,133 @@ struct SetDetailView: View {
         }
         .offset(y: 50)
       } else {
-        VStack {
-          HStack {
-            Text(verbatim: self.workoutObserver.workout.sets[setCounter].exercise.name)
-              .font(.system(size: 40))
-              .fontWeight(.semibold)
-              .foregroundColor(.primary)
-              .padding(.all, 20)
+        if (isCameraMode) {
+          ZStack {
+            JointViewControllerWrapper(jointView: self.jointViewStruct.jointView)
+              .onAppear(perform: {
+                // set peak points in the future
+                self.jointViewStruct.jointView.targetReps = self.workoutObserver.workout.sets[self.setCounter].reps ?? 10
+              })
             
-            Button(action: {
-              self.isCameraMode = true
-            }) {
-              VStack {
-                HStack {
+            VStack {
+              HStack {
+                Text(verbatim: self.workoutObserver.workout.sets[setCounter].exercise.name)
+                  .font(.system(size: 40))
+                  .fontWeight(.semibold)
+                  .foregroundColor(.primary)
+                  .padding(.all, 20)
+                
+                Button(action: {
+                  self.isCameraMode = false
+                }) {
                   VStack {
-                    Image(systemName: "camera.fill")
-                      .font(.title)
-                      .foregroundColor(.gray)
+                    HStack {
+                      VStack {
+                        Image(systemName: "camera.fill")
+                          .font(.title)
+                          .foregroundColor(.white)
+                      }
+                    }
+                  }
+                }
+              }
+              .padding(.horizontal, 20)
+              
+              Spacer()
+              
+              Text(verbatim: "\(self.workoutObserver.workout.sets[setCounter].reps ?? 0)")
+                .font(.system(size: 100))
+                .fontWeight(.bold)
+                .foregroundColor(.gray)
+              
+              Spacer()
+              
+              Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
+                GeometryReader { geometry in
+                  VStack {
+                    HStack {
+                      VStack {
+                        Text(verbatim: "Finish")
+                          .font(.title)
+                          .fontWeight(.black)
+                          .foregroundColor(Color(UIColor.white))
+                      }
+                    }
+                  }
+                  .frame(width: geometry.size.width)
+                  .padding(.horizontal, 30)
+                  .padding(.vertical, 15)
+                  .foregroundColor(.primary)
+                  .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+                  .cornerRadius(10)
+                }
+                .padding(.horizontal, 50)
+                .frame(height: 50)
+              }
+              .padding(.vertical, 50)
+            }
+            .offset(y: 50)
+          }
+        } else {
+          VStack {
+            HStack {
+              Text(verbatim: self.workoutObserver.workout.sets[setCounter].exercise.name)
+                .font(.system(size: 40))
+                .fontWeight(.semibold)
+                .foregroundColor(.primary)
+                .padding(.all, 20)
+              
+              Button(action: {
+                self.isCameraMode = true
+              }) {
+                VStack {
+                  HStack {
+                    VStack {
+                      Image(systemName: "camera.fill")
+                        .font(.title)
+                        .foregroundColor(.gray)
+                    }
                   }
                 }
               }
             }
-          }
-          
-          Spacer()
-          
-          Text(verbatim: "\(self.workoutObserver.workout.sets[setCounter].reps ?? 0)")
-            .font(.system(size: 100))
-            .fontWeight(.bold)
-            .foregroundColor(.gray)
-          
-          Spacer()
-          
-          Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
-            GeometryReader { geometry in
-              VStack {
-                HStack {
-                  VStack {
-                    Text(verbatim: "Finish")
-                      .font(.title)
-                      .fontWeight(.black)
-                      .foregroundColor(Color(UIColor.white))
+            .padding(.horizontal, 20)
+            
+            Spacer()
+            
+            Text(verbatim: "\(self.workoutObserver.workout.sets[setCounter].reps ?? 0)")
+              .font(.system(size: 100))
+              .fontWeight(.bold)
+              .foregroundColor(.gray)
+            
+            Spacer()
+            
+            Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
+              GeometryReader { geometry in
+                VStack {
+                  HStack {
+                    VStack {
+                      Text(verbatim: "Finish")
+                        .font(.title)
+                        .fontWeight(.black)
+                        .foregroundColor(Color(UIColor.white))
+                    }
                   }
                 }
+                .frame(width: geometry.size.width)
+                .padding(.horizontal, 30)
+                .padding(.vertical, 15)
+                .foregroundColor(.primary)
+                .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+                .cornerRadius(10)
               }
-              .frame(width: geometry.size.width)
-              .padding(.horizontal, 30)
-              .padding(.vertical, 15)
-              .foregroundColor(.primary)
-              .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
-              .cornerRadius(10)
+              .padding(.horizontal, 50)
+              .frame(height: 50)
             }
-            .padding(.horizontal, 50)
-            .frame(height: 50)
+            .padding(.vertical, 50)
           }
-          .padding(.vertical, 50)
+          .offset(y: 50)
         }
-        .offset(y: 50)
       }
     }
   }

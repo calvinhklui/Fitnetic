@@ -19,7 +19,7 @@ struct IdentityView: View {
     VStack {
       HStack {
         VStack(alignment: .center) {
-          Image(systemName: "person.circle.fill").resizable()
+          Image("avatar").resizable()
             .frame(width: 100, height: 100)
         }
         .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)

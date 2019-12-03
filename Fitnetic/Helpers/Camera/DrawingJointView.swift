@@ -39,7 +39,7 @@ class DrawingJointView: UIView {
   var targetReps = 10
   var startedSet = false
   var nextGoal = 1
-  var repThreshold: Float = 0.1
+  var repThreshold: Float = 0.01
   
   public func convertDataToArray() -> [Float] {
     var outputArr: [Float] = []
@@ -113,17 +113,22 @@ class DrawingJointView: UIView {
     let peakCosineSimilarity = self.cosineSimilarity(points, peakPoints)
     let troughCosineSimilarity = self.cosineSimilarity(points, troughPoints)
     
-    if (nextGoal == 1 && peakCosineSimilarity < 1 - repThreshold) {
+    if (nextGoal == 1 && peakCosineSimilarity > 1 - repThreshold) {
       if (startedSet == false) {
         startedSet = true
       } else {
         currentRep += 1
         nextGoal = 0
       }
-    } else if (nextGoal == 0 && troughCosineSimilarity < 1 - repThreshold) {
-      currentRep += 1
+    } else if (nextGoal == 0 && troughCosineSimilarity > 1 - repThreshold) {
       nextGoal = 1
     }
+    
+    print("Cosine", peakCosineSimilarity)
+    print("Trough", troughCosineSimilarity)
+    print(currentRep)
+    print(nextGoal)
+    print()
   }
   
   private func setUpLabels(with keypointsCount: Int) {

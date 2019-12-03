@@ -34,7 +34,7 @@ struct TodayDetailView: View {
   }
   
   var body: some View {
-    VStack {
+    ScrollView {
       Spacer()
       
       SetListView(exercisesObserver: self.exercisesObserver, workoutObserver: self.workoutObserver, workout: self.workout)
@@ -87,9 +87,10 @@ struct TodayDetailView: View {
             .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
             .cornerRadius(10)
           }
+          .padding(.horizontal, 50)
+          .frame(height: 50)
         }
-        .padding(.horizontal, 50)
-        .padding(.bottom, 5)
+        .padding(.top, 10)
       } else {
         Button(action: {
           self.workoutObserver.postData(completion: { (success) -> Void in
@@ -121,10 +122,10 @@ struct TodayDetailView: View {
             .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
             .cornerRadius(10)
           }
+          .padding(.horizontal, 50)
           .frame(height: 50)
         }
-        .padding(.horizontal, 50)
-        .padding(.bottom, 20)
+        .padding(.top, 10)
         .navigationBarBackButtonHidden(true)
       }
     }

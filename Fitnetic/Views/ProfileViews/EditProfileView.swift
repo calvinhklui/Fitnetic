@@ -37,7 +37,7 @@ struct EditProfileView: View {
   }
   
   var body: some View {
-    VStack {
+    ScrollView {
       Spacer()
       IdentityView(userObserver: self.userObserver)
       Spacer()
@@ -81,7 +81,6 @@ struct EditProfileView: View {
         }
       }
       .frame(height: 300)
-      .padding(.bottom, 70)
       
       Spacer()
       
@@ -130,10 +129,11 @@ struct EditProfileView: View {
           .foregroundColor(.primary)
           .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
           .cornerRadius(10)
-          .padding(.top, 5)
         }
         .padding(.horizontal, 50)
+        .frame(height: 50)
       }
+      .padding(.vertical, 10)
       .alert(isPresented: $showingAlert) {
         Alert(title: Text("Changes Saved"), message: Text("Refresh the page to view your updated profile."), dismissButton: .default(Text("Cool")))
       }
