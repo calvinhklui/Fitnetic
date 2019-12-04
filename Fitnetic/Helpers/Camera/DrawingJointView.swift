@@ -1,13 +1,12 @@
 // Source: https://github.com/tucan9389/PoseEstimation-CoreML
 
 import UIKit
+import SwiftUI
+import Combine
 
-class DrawingJointView: UIView {
-  
+class DrawingJointView: UIView, ObservableObject {
   static let threshold = 0.2
-  
   private var keypointLabelBGViews: [UIView] = []
-  
   public var bodyPoints: [PredictedPoint?] = [] {
     didSet {
       self.setNeedsDisplay()
@@ -20,8 +19,6 @@ class DrawingJointView: UIView {
         }
       }
       
-//      printData()
-      
       if bodyDetected {
         self.drawKeypoints(with: bodyPoints)
       } else {
@@ -32,11 +29,19 @@ class DrawingJointView: UIView {
     }
   }
   
-  // for rep tracking
-  var peakPoints: [Float] = [0, 0, 0, 0.12499999999999997, -0.027777777777777846, 0.16666666666666666, -0.013888888888888895, 0.2777777777777778, -0.055555555555555636, 0.36111111111111116, 0.02777777777777768, 0.16666666666666666, 0.04166666666666663, 0.2777777777777778, 0.04166666666666663, 0.375, -0.041666666666666685, 0.375, -0.041666666666666685, 0.5, -0.041666666666666685, 0.625, 0.04166666666666663, 0.375, 0.08333333333333326, 0.5, 0.08333333333333326, 0.625]
-  var troughPoints: [Float] = [0, 0, 0, 0.11458333333333331, -0.08333333333333337, 0.11458333333333331, -0.12500000000000006, 0.15625, -0.11111111111111122, 0.15625, 0.08333333333333326, 0.11458333333333331, 0.125, 0.1701388888888889, 0.125, 0.22569444444444448, -0.041666666666666685, 0.28124999999999994, -0.08333333333333337, 0.3229166666666667, -0.08333333333333337, 0.40624999999999994, 0.04166666666666663, 0.28124999999999994, 0.0972222222222221, 0.3229166666666667, 0.08333333333333326, 0.40624999999999994]
-  var currentRep = 0
-  var targetReps = 10
+  var peakPoints: [Float]
+  var troughPoints: [Float]
+  required init (peakPoints: [Float], troughPoints: [Float]) {
+    self.peakPoints = peakPoints
+    self.troughPoints = troughPoints
+    super.init(frame: CGRect.zero)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  @Published var currentRep = 0
   var startedSet = false
   var nextGoal = 1
   var repThreshold: Float = 0.01
@@ -108,27 +113,30 @@ class DrawingJointView: UIView {
   }
   
   private func processRep() {
-    let points = self.convertDataToArray()
-    
-    let peakCosineSimilarity = self.cosineSimilarity(points, peakPoints)
-    let troughCosineSimilarity = self.cosineSimilarity(points, troughPoints)
-    
-    if (nextGoal == 1 && peakCosineSimilarity > 1 - repThreshold) {
-      if (startedSet == false) {
-        startedSet = true
-      } else {
-        currentRep += 1
-        nextGoal = 0
+    if (peakPoints.count > 0 && troughPoints.count > 0) {
+      let points = self.convertDataToArray()
+      
+      let peakCosineSimilarity = self.cosineSimilarity(points, peakPoints)
+      let troughCosineSimilarity = self.cosineSimilarity(points, troughPoints)
+      
+      if (nextGoal == 1 && peakCosineSimilarity > 1 - repThreshold) {
+        if (startedSet == false) {
+          startedSet = true
+        } else {
+          currentRep += 1
+          nextGoal = 0
+        }
+      } else if (nextGoal == 0 && troughCosineSimilarity > 1 - repThreshold) {
+        nextGoal = 1
       }
-    } else if (nextGoal == 0 && troughCosineSimilarity > 1 - repThreshold) {
-      nextGoal = 1
+      
+      currentRep = currentRep + 1
+  //    print("Cosine", peakCosineSimilarity)
+  //    print("Trough", troughCosineSimilarity)
+  //    print(currentRep)
+  //    print(nextGoal)
+  //    print()
     }
-    
-    print("Cosine", peakCosineSimilarity)
-    print("Trough", troughCosineSimilarity)
-    print(currentRep)
-    print(nextGoal)
-    print()
   }
   
   private func setUpLabels(with keypointsCount: Int) {

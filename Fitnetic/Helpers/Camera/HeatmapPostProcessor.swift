@@ -42,7 +42,6 @@ class HeatmapPostProcessor {
       }
     }
     
-    // transpose to (1.0, 1.0)
     n_kpoints = n_kpoints.map { kpoint -> PredictedPoint? in
       if let kp = kpoint {
         var x: CGFloat = (kp.maxPoint.x+0.5)/CGFloat(heatmap_w)

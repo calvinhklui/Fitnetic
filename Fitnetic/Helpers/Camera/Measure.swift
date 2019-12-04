@@ -14,9 +14,7 @@ protocol 📏Delegate {
 
 // Performance Measurement
 class 📏 {
-  
   var delegate: 📏Delegate?
-  
   var index: Int = -1
   var measurements: [Dictionary<String, Double>]
   
@@ -28,7 +26,6 @@ class 📏 {
     measurements = Array<Dictionary<String, Double>>(repeating: measurement, count: 30)
   }
   
-  // start
   func 🎬👏() {
     index += 1
     index %= 30
@@ -37,7 +34,6 @@ class 📏 {
     🏷(for: index, with: "start")
   }
   
-  // stop
   func 🎬🤚() {
     🏷(for: index, with: "end")
     
@@ -51,10 +47,8 @@ class 📏 {
                               executionTime: endTime - startTime,
                               fps: Int(1/(startTime - beforeStartTime)))
     }
-    
   }
   
-  // labeling with
   func 🏷(with msg: String? = "") {
     🏷(for: index, with: msg)
   }
@@ -69,19 +63,14 @@ class 📏 {
     return measurements[(index + 30 - 1) % 30]
   }
   
-  // log
-  func 🖨() {
-    
-  }
+  func 🖨() {}
 }
 
 class MeasureLogView: UIView {
   let etimeLabel = UILabel(frame: .zero)
   let fpsLabel = UILabel(frame: .zero)
   
-  
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
 }
