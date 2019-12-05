@@ -90,7 +90,7 @@ struct TodayDetailView: View {
           .padding(.horizontal, 50)
           .frame(height: 50)
         }
-        .padding(.top, 10)
+        .padding(.top, 15)
       } else {
         Button(action: {
           self.workoutObserver.postData(completion: { (success) -> Void in
@@ -125,7 +125,7 @@ struct TodayDetailView: View {
           .padding(.horizontal, 50)
           .frame(height: 50)
         }
-        .padding(.top, 10)
+        .padding(.top, 15)
         .navigationBarBackButtonHidden(true)
       }
     }

@@ -30,6 +30,9 @@ struct SetDetailView: View {
   @State private var setCounter: Int = 0
   @State var targetReps: Int = 10
   @State var repsRemaining: Int = 10
+  @State var timeFromStart: Float = 0
+  @State var timePerRep: Float = 0
+  @State var bodyPosition: String = "N/A"
   
   @State var timeRemaining = -1
   var timer = TimerStruct()
@@ -52,6 +55,9 @@ struct SetDetailView: View {
     self.jointViewStruct.jointView = DrawingJointView(peakPoints: peakPoints, troughPoints: troughPoints)
     self.targetReps = self.workoutObserver.workout.sets[self.setCounter + 1].reps!
     self.repsRemaining = self.targetReps
+    self.timeFromStart = 0
+    self.timePerRep = 0
+    self.bodyPosition = "N.A"
   }
   
   private func startNextSet() {
@@ -73,6 +79,135 @@ struct SetDetailView: View {
                   .fontWeight(.semibold)
                   .foregroundColor(.primary)
                   .padding(.all, 20)
+              }
+              .padding(.horizontal, 20)
+              .padding(.top, 50)
+              .padding(.bottom, 25)
+              .frame(minWidth: 0, maxWidth: .infinity)
+              .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemGray6), Color(UIColor.clear)]), startPoint: .top, endPoint: .bottom))
+              
+              Spacer()
+              
+              VStack {
+                Button(action: {
+                  self.jointViewStruct.jointView.printData(label: 0)
+                }) {
+                  VStack {
+                    HStack {
+                      VStack {
+                        Text(verbatim: "0")
+                          .font(.title)
+                          .fontWeight(.black)
+                          .foregroundColor(Color(UIColor.white))
+                      }
+                    }
+                  }
+                  .padding(.horizontal, 30)
+                  .padding(.vertical, 15)
+                  .foregroundColor(.primary)
+                  .background(LinearGradient(gradient: Gradient(colors: [.black, Color(UIColor.systemGray)]), startPoint: .top, endPoint: .bottom))
+                  .cornerRadius(10)
+                }
+                .padding()
+                  
+                Button(action: {
+                  self.jointViewStruct.jointView.printData(label: 1)
+                }) {
+                  VStack {
+                    HStack {
+                      VStack {
+                        Text(verbatim: "1")
+                          .font(.title)
+                          .fontWeight(.black)
+                          .foregroundColor(Color(UIColor.white))
+                      }
+                    }
+                  }
+                  .padding(.horizontal, 30)
+                  .padding(.vertical, 15)
+                  .foregroundColor(.primary)
+                  .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemRed), Color(UIColor.systemOrange)]), startPoint: .top, endPoint: .bottom))
+                  .cornerRadius(10)
+                }
+                .padding()
+              }
+              .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
+              
+              Spacer()
+              
+              HStack {
+                VStack(alignment: .leading) {
+                  HStack {
+                    Text(verbatim: String(format: "%.1f", Double(self.timePerRep)))
+                      .font(.title)
+                      .fontWeight(.black)
+                      .foregroundColor(.primary)
+                      .onReceive(self.jointViewStruct.jointView.timer) { _ in
+                        self.timeFromStart = self.timeFromStart + 0.1
+                        let denominator = (self.targetReps - self.repsRemaining)
+                        self.timePerRep = self.timeFromStart / Float(denominator == 0 ? 1 : denominator)
+                      }
+                    Image(systemName: "circle.fill")
+                      .foregroundColor((5 > self.timePerRep && self.timePerRep > 2) ? .green : .red)
+                  }
+                  Text(verbatim: "Seconds/Rep")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                }
+                
+                Spacer()
+                
+                VStack(alignment: .leading) {
+                  HStack {
+                    Text(verbatim: "\(self.repsRemaining)")
+                      .font(.system(size: 40))
+                      .fontWeight(.bold)
+                      .foregroundColor(.white)
+                      .padding()
+                      .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
+                      .clipShape(Circle())
+                      .onReceive(self.jointViewStruct.jointView.objectWillChange) { _ in
+                        self.repsRemaining = self.targetReps - self.jointViewStruct.jointView.currentRep
+                        if (self.repsRemaining <= 0) {
+                          if (self.setCounter == self.workoutObserver.workout.sets.count - 1) {
+                            self.presentationMode.wrappedValue.dismiss()
+                          } else {
+                            self.endCurrentSet()
+                          }
+                        }
+                    }
+                  }
+                }
+                
+                Spacer()
+                
+                VStack(alignment: .leading) {
+                  HStack {
+                    Text(verbatim: self.bodyPosition)
+                      .font(.title)
+                      .fontWeight(.black)
+                      .foregroundColor(.primary)
+                    .onReceive(self.jointViewStruct.jointView.objectWillChange) { _ in
+                        self.bodyPosition = self.jointViewStruct.jointView.position
+                    }
+                    Image(systemName: "circle.fill")
+                      .foregroundColor((self.bodyPosition != "N/A") ? .green : Color(UIColor.systemGray6))
+                  }
+                  Text(verbatim: "Position")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                }
+              }
+              .padding(.horizontal, 25)
+              .padding(.vertical, 50)
+              .frame(minWidth: 0, maxWidth: .infinity)
+              .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.clear), Color(UIColor.systemGray6)]), startPoint: .top, endPoint: .bottom))
+            }
+            .edgesIgnoringSafeArea(.bottom)
+            
+            VStack {
+              HStack {
+                Spacer()
                 
                 Button(action: {
                   self.isCameraMode = false
@@ -87,61 +222,15 @@ struct SetDetailView: View {
                     }
                   }
                 }
+                .padding(.vertical, 20)
+                .padding(.horizontal, 15)
               }
-              .padding(.horizontal, 20)
               
               Spacer()
-              
-              Text(verbatim: "\(self.repsRemaining)")
-                .font(.system(size: 100))
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .onReceive(self.jointViewStruct.jointView.objectWillChange) { _ in
-                  self.repsRemaining = self.targetReps - self.jointViewStruct.jointView.currentRep
-                  if (self.repsRemaining <= 0) {
-                    if (self.setCounter == self.workoutObserver.workout.sets.count - 1) {
-                      self.presentationMode.wrappedValue.dismiss()
-                    } else {
-                      self.endCurrentSet()
-                    }
-                  }
-                }
-              
-              Spacer()
-              
-              Button(action: {
-                if (self.setCounter == self.workoutObserver.workout.sets.count - 1) {
-                  self.presentationMode.wrappedValue.dismiss()
-                } else {
-                  self.endCurrentSet()
-                }
-              }) {
-                GeometryReader { geometry in
-                  VStack {
-                    HStack {
-                      VStack {
-                        Text(verbatim: (self.setCounter == self.workoutObserver.workout.sets.count - 1) ? "Finish" : "Done")
-                          .font(.title)
-                          .fontWeight(.black)
-                          .foregroundColor(Color(UIColor.white))
-                      }
-                    }
-                  }
-                  .frame(width: geometry.size.width)
-                  .padding(.horizontal, 30)
-                  .padding(.vertical, 15)
-                  .foregroundColor(.primary)
-                  .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBlue), Color(UIColor.systemIndigo)]), startPoint: .top, endPoint: .bottom))
-                  .cornerRadius(10)
-                }
-                .padding(.horizontal, 50)
-                .frame(height: 50)
-              }
-              .padding(.vertical, 50)
             }
-            .offset(y: 50)
           }
         } else {
+          ZStack {
           VStack {
             HStack {
               Text(verbatim: self.workoutObserver.workout.sets[setCounter].exercise.name)
@@ -149,20 +238,6 @@ struct SetDetailView: View {
                 .fontWeight(.semibold)
                 .foregroundColor(.primary)
                 .padding(.all, 20)
-              
-              Button(action: {
-                self.isCameraMode = true
-              }) {
-                VStack {
-                  HStack {
-                    VStack {
-                      Image(systemName: "camera.fill")
-                        .font(.title)
-                        .foregroundColor(.gray)
-                    }
-                  }
-                }
-              }
             }
             .padding(.horizontal, 20)
             
@@ -207,6 +282,31 @@ struct SetDetailView: View {
           }
           .offset(y: 50)
         }
+          
+          VStack {
+            HStack {
+              Spacer()
+              
+              Button(action: {
+                self.isCameraMode = true
+              }) {
+                VStack {
+                  HStack {
+                    VStack {
+                      Image(systemName: "camera.fill")
+                        .font(.title)
+                        .foregroundColor(.gray)
+                    }
+                  }
+                }
+              }
+              .padding(.vertical, 20)
+              .padding(.horizontal, 15)
+            }
+            
+            Spacer()
+          }
+        }
       } else {
         VStack {
           Text(verbatim: "Rest Timer")
@@ -217,7 +317,7 @@ struct SetDetailView: View {
           
           Spacer()
           
-          Text(verbatim: "\(timeRemaining)")
+          Text(verbatim: "\(self.timeRemaining)")
             .font(.system(size: 100))
             .fontWeight(.bold)
             .foregroundColor(.gray)
@@ -228,7 +328,7 @@ struct SetDetailView: View {
                 self.setCounter = self.setCounter + 1
                 self.timeRemaining = -1
               }
-            }
+          }
           
           Spacer()
           

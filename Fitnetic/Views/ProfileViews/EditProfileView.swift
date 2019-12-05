@@ -133,7 +133,7 @@ struct EditProfileView: View {
         .padding(.horizontal, 50)
         .frame(height: 50)
       }
-      .padding(.vertical, 10)
+      .padding(.vertical, 15)
       .alert(isPresented: $showingAlert) {
         Alert(title: Text("Changes Saved"), message: Text("Refresh the page to view your updated profile."), dismissButton: .default(Text("Cool")))
       }

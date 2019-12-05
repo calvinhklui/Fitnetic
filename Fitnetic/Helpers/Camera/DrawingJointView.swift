@@ -44,7 +44,9 @@ class DrawingJointView: UIView, ObservableObject {
   @Published var currentRep = 0
   var startedSet = false
   var nextGoal = 1
+  @Published var position = "Peak"
   var repThreshold: Float = 0.01
+  public var timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
   
   public func convertDataToArray() -> [Float] {
     var outputArr: [Float] = []
@@ -97,19 +99,25 @@ class DrawingJointView: UIView, ObservableObject {
   }
   
   public func printData(label: Int = 0) {
-    var outputArr: [String] = []
+    var outputArr: [Float] = []
     
     for bodyPoint in bodyPoints {
       if let bp = bodyPoint {
-        outputArr.append("\(bp.maxPoint.x), \(bp.maxPoint.y), \(bp.maxConfidence)")
+        outputArr.append(Float(bp.maxPoint.x))
+        outputArr.append(Float(bp.maxPoint.y))
       } else {
-        outputArr.append("-1, -1, -1")
+        outputArr.append(-1)
+        outputArr.append(-1)
       }
     }
     
-    outputArr.append("\(label)")
+    var outputStr = ""
+    for number in outputArr {
+      outputStr = outputStr + "\(number),"
+    }
+    outputStr = outputStr + "\(label)"
     
-    print(outputArr)
+    print(outputStr)
   }
   
   private func processRep() {
@@ -125,12 +133,15 @@ class DrawingJointView: UIView, ObservableObject {
         } else {
           currentRep += 1
           nextGoal = 0
+          position = "Trough"
         }
       } else if (nextGoal == 0 && troughCosineSimilarity > 1 - repThreshold) {
         nextGoal = 1
+        position = "Peak"
+      } else {
+        position = "N/A"
       }
       
-      currentRep = currentRep + 1
   //    print("Cosine", peakCosineSimilarity)
   //    print("Trough", troughCosineSimilarity)
   //    print(currentRep)
