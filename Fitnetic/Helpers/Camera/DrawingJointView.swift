@@ -3,6 +3,7 @@
 import UIKit
 import SwiftUI
 import Combine
+import CoreML
 
 class DrawingJointView: UIView, ObservableObject {
   static let threshold = 0.2
@@ -25,9 +26,25 @@ class DrawingJointView: UIView, ObservableObject {
         self.clearKeypoints(with: bodyPoints)
       }
       
-      self.processRep()
+      self.processRepWithML()
     }
   }
+  
+//  func setUpRestModel() {
+//    if let restModel = try? VNCoreMLModel(for: RestModel().model) {
+//      self.restModel = restModel
+//    } else {
+//      fatalError("Cannot load the RestModel.")
+//    }
+//  }
+//
+//  func setUpActionModel() {
+//    if let actionModel = try? VNCoreMLModel(for: ActionModel().model) {
+//      self.actionModel = actionModel
+//    } else {
+//      fatalError("Cannot load the ActionModel.")
+//    }
+//  }
   
   var peakPoints: [Float]
   var troughPoints: [Float]
@@ -45,8 +62,154 @@ class DrawingJointView: UIView, ObservableObject {
   var startedSet = false
   var nextGoal = 1
   @Published var position = "Peak"
+  @Published var positionScore = 0.00
   var repThreshold: Float = 0.01
   public var timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+  
+  private func processRepWithML() {
+    let points = self.convertDataToArrayForML()
+    
+    let restModel = SquatsPeak()
+    let actionModel = SquatsTrough()
+      
+    guard let restOutput = try? restModel.prediction(
+      topX: points[0],
+      topY: points[1],
+      neckX: points[2],
+      neckY: points[3],
+      rShoulderX: points[4],
+      rShouderY: points[5],
+      rElbowX: points[6],
+      rElbowY: points[7],
+      rWristX: points[8],
+      rWristY: points[9],
+      lShoulderX: points[10],
+      lShoulderY: points[11],
+      lElbowX: points[12],
+      lElbowY: points[13],
+      lWristX: points[14],
+      lWristY: points[15],
+      rHipX: points[16],
+      rHipY: points[17],
+      rKneeX: points[18],
+      rKneeY: points[19],
+      rAnkleX: points[20],
+      rAnkleY: points[21],
+      lHipX: points[22],
+      lHipY: points[23],
+      lKneeX: points[24],
+      lKneeY: points[25],
+      lAnkleX: points[26],
+      lAnkleY: points[27]
+    ) else {
+        fatalError("Unexpected runtime error on RestModel.")
+    }
+    
+    guard let actionOutput = try? actionModel.prediction(
+      topX: points[0],
+      topY: points[1],
+      neckX: points[2],
+      neckY: points[3],
+      rShoulderX: points[4],
+      rShouderY: points[5],
+      rElbowX: points[6],
+      rElbowY: points[7],
+      rWristX: points[8],
+      rWristY: points[9],
+      lShoulderX: points[10],
+      lShoulderY: points[11],
+      lElbowX: points[12],
+      lElbowY: points[13],
+      lWristX: points[14],
+      lWristY: points[15],
+      rHipX: points[16],
+      rHipY: points[17],
+      rKneeX: points[18],
+      rKneeY: points[19],
+      rAnkleX: points[20],
+      rAnkleY: points[21],
+      lHipX: points[22],
+      lHipY: points[23],
+      lKneeX: points[24],
+      lKneeY: points[25],
+      lAnkleX: points[26],
+      lAnkleY: points[27]
+    ) else {
+        fatalError("Unexpected runtime error on ActionModel.")
+    }
+    
+    let restOutputClass = restOutput.label
+    let actionOutputClass = actionOutput.label
+    let restOutputScore = restOutput.classProbability[1] ?? 0.00
+    let actionOutputScore = actionOutput.classProbability[1] ?? 0.00
+    print("Rest:", restOutput.classProbability[1] ?? 0.00)
+    print("Action:", actionOutput.classProbability[1] ?? 0.00)
+    print()
+    
+    if (nextGoal == 1 && actionOutputClass == 1) {
+      if (startedSet == false) {
+        startedSet = true
+      } else {
+        currentRep += 1
+        nextGoal = 0
+        position = "Trough"
+        positionScore = actionOutputScore
+      }
+    } else if (nextGoal == 0 && restOutputClass == 1) {
+      nextGoal = 1
+      position = "Peak"
+      positionScore = restOutputScore
+    } else if (restOutputScore < 0.25 && actionOutputScore < 0.25) {
+      position = "N/A"
+      positionScore = 0.00
+    }
+  }
+  
+  public func convertDataToArrayForML() -> [Double] {
+    var outputArr: [Double] = []
+    
+    for bodyPoint in bodyPoints {
+      if let bp = bodyPoint {
+        outputArr.append(Double(bp.maxPoint.x))
+        outputArr.append(Double(bp.maxPoint.y))
+      } else {
+        outputArr.append(-1)
+        outputArr.append(-1)
+      }
+    }
+    
+    return outputArr
+  }
+  
+  private func processRep() {
+    if (peakPoints.count > 0 && troughPoints.count > 0) {
+      let points = self.convertDataToArray()
+      
+      let peakCosineSimilarity = self.cosineSimilarity(points, peakPoints)
+      let troughCosineSimilarity = self.cosineSimilarity(points, troughPoints)
+      
+      if (nextGoal == 1 && peakCosineSimilarity > 1 - repThreshold) {
+        if (startedSet == false) {
+          startedSet = true
+        } else {
+          currentRep += 1
+          nextGoal = 0
+          position = "Trough"
+        }
+      } else if (nextGoal == 0 && troughCosineSimilarity > 1 - repThreshold) {
+        nextGoal = 1
+        position = "Peak"
+      } else {
+        position = "N/A"
+      }
+      
+  //    print("Cosine", peakCosineSimilarity)
+  //    print("Trough", troughCosineSimilarity)
+  //    print(currentRep)
+  //    print(nextGoal)
+  //    print()
+    }
+  }
   
   public func convertDataToArray() -> [Float] {
     var outputArr: [Float] = []
@@ -118,36 +281,6 @@ class DrawingJointView: UIView, ObservableObject {
     outputStr = outputStr + "\(label)"
     
     print(outputStr)
-  }
-  
-  private func processRep() {
-    if (peakPoints.count > 0 && troughPoints.count > 0) {
-      let points = self.convertDataToArray()
-      
-      let peakCosineSimilarity = self.cosineSimilarity(points, peakPoints)
-      let troughCosineSimilarity = self.cosineSimilarity(points, troughPoints)
-      
-      if (nextGoal == 1 && peakCosineSimilarity > 1 - repThreshold) {
-        if (startedSet == false) {
-          startedSet = true
-        } else {
-          currentRep += 1
-          nextGoal = 0
-          position = "Trough"
-        }
-      } else if (nextGoal == 0 && troughCosineSimilarity > 1 - repThreshold) {
-        nextGoal = 1
-        position = "Peak"
-      } else {
-        position = "N/A"
-      }
-      
-  //    print("Cosine", peakCosineSimilarity)
-  //    print("Trough", troughCosineSimilarity)
-  //    print(currentRep)
-  //    print(nextGoal)
-  //    print()
-    }
   }
   
   private func setUpLabels(with keypointsCount: Int) {

@@ -33,6 +33,7 @@ struct SetDetailView: View {
   @State var timeFromStart: Float = 0
   @State var timePerRep: Float = 0
   @State var bodyPosition: String = "N/A"
+  @State var bodyPositionScore: Double = 0.00
   
   @State var timeRemaining = -1
   var timer = TimerStruct()
@@ -57,7 +58,6 @@ struct SetDetailView: View {
     self.repsRemaining = self.targetReps
     self.timeFromStart = 0
     self.timePerRep = 0
-    self.bodyPosition = "N.A"
   }
   
   private func startNextSet() {
@@ -189,9 +189,10 @@ struct SetDetailView: View {
                       .foregroundColor(.primary)
                       .onReceive(self.jointViewStruct.jointView.objectWillChange) { _ in
                           self.bodyPosition = self.jointViewStruct.jointView.position
+                          self.bodyPositionScore = self.jointViewStruct.jointView.positionScore
                       }
                     Image(systemName: "circle.fill")
-                      .foregroundColor((self.bodyPosition != "N/A") ? .green : Color(UIColor.systemGray6))
+                      .foregroundColor((self.bodyPositionScore > 0.75) ? .green : ((self.bodyPositionScore > 0.25) ? .yellow : .red))
                   }
                   Text(verbatim: "Position")
                     .font(.caption)

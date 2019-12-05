@@ -56,7 +56,7 @@ final class JointViewController: UIViewController {
       request = VNCoreMLRequest(model: visionModel, completionHandler: visionRequestDidComplete)
       request?.imageCropAndScaleOption = .scaleFill
     } else {
-      fatalError("cannot load the ml model")
+      fatalError("Cannot load the EstimationModel.")
     }
   }
   
