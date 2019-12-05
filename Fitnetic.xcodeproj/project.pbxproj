@@ -10,10 +10,10 @@
 		0603A273237CF80D0076E420 /* TodayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603A272237CF80D0076E420 /* TodayDetailView.swift */; };
 		0603A279237D251C0076E420 /* SirinStencil-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0603A278237D251C0076E420 /* SirinStencil-Regular.ttf */; };
 		0603A27A237D25270076E420 /* SirinStencil-Regular.ttf in Sources */ = {isa = PBXBuildFile; fileRef = 0603A278237D251C0076E420 /* SirinStencil-Regular.ttf */; };
-		0603A282237DE2670076E420 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0603A280237DE25A0076E420 /* CocoaLumberjack.framework */; };
+		0603A282237DE2670076E420 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0603A280237DE25A0076E420 /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		0603A283237DE2670076E420 /* CocoaLumberjack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0603A280237DE25A0076E420 /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0603A286237DF1C20076E420 /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0603A285237DF1C20076E420 /* Bridge.m */; };
-		0603A289237E2C9B0076E420 /* SVGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0603A287237E2C6C0076E420 /* SVGKit.framework */; };
+		0603A289237E2C9B0076E420 /* SVGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0603A287237E2C6C0076E420 /* SVGKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		0603A28A237E2C9B0076E420 /* SVGKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0603A287237E2C6C0076E420 /* SVGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0603A37B2384FE4F0021D79C /* JointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603A37A2384FE4F0021D79C /* JointViewController.swift */; };
 		0603A37D2384FE6C0021D79C /* DrawingJointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603A37C2384FE6C0021D79C /* DrawingJointView.swift */; };
@@ -756,6 +756,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G7WLDXK54R;
 				INFOPLIST_FILE = FitneticTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -777,6 +778,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G7WLDXK54R;
 				INFOPLIST_FILE = FitneticTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (

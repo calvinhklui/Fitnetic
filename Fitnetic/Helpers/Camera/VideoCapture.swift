@@ -26,7 +26,7 @@ public class VideoCapture: NSObject {
   var lastTimestamp = CMTime()
   
   public func setUp(sessionPreset: AVCaptureSession.Preset = .vga640x480,
-                    cameraPosition: AVCaptureDevice.Position = .back,
+                    cameraPosition: AVCaptureDevice.Position = .front,
                     completion: @escaping (Bool) -> Void) {
     self.setUpCamera(sessionPreset: sessionPreset,
                      cameraPosition: cameraPosition,

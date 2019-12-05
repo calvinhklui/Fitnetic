@@ -187,9 +187,9 @@ struct SetDetailView: View {
                       .font(.title)
                       .fontWeight(.black)
                       .foregroundColor(.primary)
-                    .onReceive(self.jointViewStruct.jointView.objectWillChange) { _ in
-                        self.bodyPosition = self.jointViewStruct.jointView.position
-                    }
+                      .onReceive(self.jointViewStruct.jointView.objectWillChange) { _ in
+                          self.bodyPosition = self.jointViewStruct.jointView.position
+                      }
                     Image(systemName: "circle.fill")
                       .foregroundColor((self.bodyPosition != "N/A") ? .green : Color(UIColor.systemGray6))
                   }

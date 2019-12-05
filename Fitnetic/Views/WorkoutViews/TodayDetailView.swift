@@ -15,6 +15,7 @@ struct TodayDetailView: View {
   @State var showPopover: Bool = false
   @State var restTimeSelection: Int = 0
   @State var restTimes = [15, 30, 60]
+  @State private var showingAlert = false
   
   @ObservedObject var workoutObserver: WorkoutObserver
   @ObservedObject var exercisesObserver: ExercisesObserver
@@ -96,6 +97,7 @@ struct TodayDetailView: View {
           self.workoutObserver.postData(completion: { (success) -> Void in
             if success {
               self.workoutObserver.fetchData()
+              self.showingAlert = true
               self.presentationMode.wrappedValue.dismiss()
             }
           })
@@ -160,6 +162,9 @@ struct TodayDetailView: View {
           Spacer()
         }
       }
+    }
+    .alert(isPresented: $showingAlert) {
+      Alert(title: Text("Workout Saved"), message: Text("Great job today!"), dismissButton: .default(Text("Cool")))
     }
     .navigationBarTitle("Today", displayMode: .inline)
     .background(Color(UIColor.systemGray6))
