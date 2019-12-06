@@ -34,10 +34,14 @@ class FitneticTests: XCTestCase {
         test_user_observer.setUser(dummyUser)
         XCTAssertEqual(test_user_observer.user.id, "edcba123")
       
-      test_user_observer.postData()
+      test_user_observer.postData(completion: { (success) -> Void in
+        print(success)
+      })
       XCTAssertEqual(test_user_observer.user.username, "calvinhklui")
       
-      test_user_observer.updateData()
+      test_user_observer.updateData(completion: { (success) -> Void in
+        print(success)
+      })
       XCTAssertEqual(test_user_observer.user.username, "calvinhklui")
     }
   
@@ -82,7 +86,9 @@ class FitneticTests: XCTestCase {
       test_workout_observer.setWorkout(dummyRecommendation)
       XCTAssertEqual(test_workout_observer.workout.id, "abcde123")
       
-      test_workout_observer.postData()
+      test_workout_observer.postData(completion: { (success) -> Void in
+        print(success)
+      })
       XCTAssertEqual(test_workout_observer.workout.id, "abcde123")
     }
   

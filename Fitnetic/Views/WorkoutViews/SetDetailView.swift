@@ -150,7 +150,7 @@ struct SetDetailView: View {
                         self.timePerRep = self.timeFromStart / Float(denominator == 0 ? 1 : denominator)
                       }
                     Image(systemName: "circle.fill")
-                      .foregroundColor((5 > self.timePerRep && self.timePerRep > 2) ? .green : .red)
+                      .foregroundColor((3 > self.timePerRep && self.timePerRep > 0) ? .green : .red)
                   }
                   Text(verbatim: "Pace")
                     .font(.caption)
@@ -371,7 +371,7 @@ struct SetDetailView: View {
       }
       self.repsRemaining = self.targetReps - self.jointViewStruct.jointView.currentRep
       if (self.repsRemaining <= 0) {
-        let utterance = AVSpeechUtterance(string: "good job")
+        let utterance = AVSpeechUtterance(string: "Good job! Your pace was \(String(format: "%.1f", Double(self.timePerRep))) seconds per rep.")
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         self.synthesizer.speak(utterance)
         if (self.setCounter == self.workoutObserver.workout.sets.count - 1) {
