@@ -156,8 +156,6 @@ struct TodayDetailView: View {
             .padding(.horizontal, 15)
             
             Spacer()
-            
-            // pause button?
           }
           Spacer()
         }

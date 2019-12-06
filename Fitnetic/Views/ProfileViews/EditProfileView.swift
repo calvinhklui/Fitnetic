@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct EditProfileView: View {
+  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+  
   @State private var username: String = ""
   @State private var firstName: String = ""
   @State private var lastName: String = ""
@@ -16,8 +18,6 @@ struct EditProfileView: View {
   @State private var genders = ["Female", "Male"]
   @State private var birthDate = Date()
   @State private var goal: String = ""
-  
-  @State private var showingAlert = false
   
   @ObservedObject var userObserver: UserObserver
   
@@ -38,45 +38,65 @@ struct EditProfileView: View {
   
   var body: some View {
     ScrollView {
-      Spacer()
-      IdentityView(userObserver: self.userObserver)
+      IdentityView(userObserver: self.userObserver, showDetails: false)
+      .padding(.top, 50)
+      
       Spacer()
       Form {
         Section (header: Text(verbatim: "Profile Information")) {
           HStack {
             Text("Username")
+            .font(.system(size: 12))
+            .foregroundColor(Color(UIColor.systemGray2))
             Spacer()
             TextField(self.userObserver.user.username, text: $username)
+            .frame(width: 200)
           }
           
           HStack {
             Text("First Name")
+            .font(.system(size: 12))
+            .foregroundColor(Color(UIColor.systemGray2))
             Spacer()
             TextField(self.userObserver.user.firstName, text: $firstName)
+            .frame(width: 200)
           }
           
           HStack {
             Text("Last Name")
+            .font(.system(size: 12))
+            .foregroundColor(Color(UIColor.systemGray2))
             Spacer()
             TextField(self.userObserver.user.lastName, text: $lastName)
+            .frame(width: 200)
           }
           
           HStack {
             Text("Gender")
+            .font(.system(size: 12))
+            .foregroundColor(Color(UIColor.systemGray2))
             Spacer()
             Picker(selection: $genderSelection, label: Text("Gender")) {
               ForEach(0 ..< genders.count) {
                 Text(self.genders[$0]).tag($0)
               }
             }.pickerStyle(SegmentedPickerStyle())
+            .frame(width: 200)
           }
           
-          DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) { Text("Date of Birth") }
+          DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
+            Text("Date of Birth")
+            .font(.system(size: 12))
+            .foregroundColor(Color(UIColor.systemGray2))
+          }
           
           HStack {
             Text("Goal")
+            .font(.system(size: 12))
+            .foregroundColor(Color(UIColor.systemGray2))
             Spacer()
             TextField(self.userObserver.user.goal, text: $goal)
+            .frame(width: 200)
           }
         }
       }
@@ -104,7 +124,7 @@ struct EditProfileView: View {
         self.userObserver.updateData(completion: { (success) -> Void in
           if success {
             self.userObserver.fetchData()
-            self.showingAlert = true
+            self.presentationMode.wrappedValue.dismiss()
           }
         })
       }) {
@@ -134,10 +154,19 @@ struct EditProfileView: View {
         .frame(height: 50)
       }
       .padding(.vertical, 15)
-      .alert(isPresented: $showingAlert) {
-        Alert(title: Text("Changes Saved"), message: Text("Refresh the page to view your updated profile."), dismissButton: .default(Text("Cool")))
-      }
     }
+    .onAppear(perform: {
+      self.username = self.userObserver.user.username
+      self.firstName = self.userObserver.user.firstName
+      self.lastName = self.userObserver.user.lastName
+      self.genderSelection = self.userObserver.user.gender == "Female" ? 0 : 1
+      
+      let oldDate = self.userObserver.user.dateOfBirth.replacingOccurrences(of: ".", with: "+")
+      let dateFormatterISO8601 = ISO8601DateFormatter()
+      self.birthDate = dateFormatterISO8601.date(from: oldDate) ?? Date()
+      
+      self.goal = self.userObserver.user.goal
+    })
   }
 }
 

@@ -10,20 +10,43 @@ import SwiftUI
 
 struct IdentityView: View {
   @ObservedObject var userObserver: UserObserver
+  var showDetails: Bool
   
-  init(userObserver: UserObserver) {
+  init(userObserver: UserObserver, showDetails: Bool) {
     self.userObserver = userObserver
+    self.showDetails = showDetails
   }
   
   var body: some View {
     VStack {
       HStack {
-        VStack(alignment: .center) {
-          Image("avatar").resizable()
-            .frame(width: 100, height: 100)
+        if (showDetails) {
+          VStack(alignment: .leading) {
+            Image("avatar").resizable()
+              .frame(width: 100, height: 100)
+          }
+          .padding()
+          
+          VStack(alignment: .leading) {
+            Text(verbatim: "\(self.userObserver.user.firstName) \(self.userObserver.user.lastName)")
+              .font(.title)
+              .fontWeight(.semibold)
+              .foregroundColor(.primary)
+            Text(verbatim: "@\(self.userObserver.user.username)")
+              .font(.headline)
+              .fontWeight(.light)
+              .foregroundColor(Color(UIColor.systemGray2))
+          }
+          
+          Spacer()
+        } else {
+          VStack(alignment: .leading) {
+            Image("avatar").resizable()
+              .frame(width: 100, height: 100)
+          }
+          .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+          .layoutPriority(100)
         }
-        .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
-        .layoutPriority(100)
       }
       .padding(20)
     }
@@ -32,7 +55,7 @@ struct IdentityView: View {
 }
 
 struct IdentityView_Previews: PreviewProvider {
-    static var previews: some View {
-        IdentityView(userObserver: UserObserver())
-    }
+  static var previews: some View {
+    IdentityView(userObserver: UserObserver(), showDetails: true)
+  }
 }

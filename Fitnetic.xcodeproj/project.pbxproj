@@ -27,7 +27,7 @@
 		06546B4D2399BC9B00F747DF /* SquatsPeak.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 06546B4B2399BC9B00F747DF /* SquatsPeak.mlmodel */; };
 		06546B4E2399BC9B00F747DF /* SquatsTrough.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 06546B4C2399BC9B00F747DF /* SquatsTrough.mlmodel */; };
 		06546B512399C0FC00F747DF /* JumpingJacksJump.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 06546B4F2399C0FC00F747DF /* JumpingJacksJump.mlmodel */; };
-		06546B522399C0FC00F747DF /* JumpingJacksRest.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 06546B502399C0FC00F747DF /* JumpingJacksRest.mlmodel */; };
+		06546B54239A1D5A00F747DF /* JumpingJacksRest.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 06546B53239A1D5900F747DF /* JumpingJacksRest.mlmodel */; };
 		067ED64D23690E9F004FA82D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ED64C23690E9F004FA82D /* AppDelegate.swift */; };
 		067ED64F23690E9F004FA82D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ED64E23690E9F004FA82D /* SceneDelegate.swift */; };
 		067ED65223690E9F004FA82D /* Fitnetic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 067ED65023690E9F004FA82D /* Fitnetic.xcdatamodeld */; };
@@ -67,7 +67,6 @@
 		069124CC237267A6004B2140 /* WorkoutRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069124CB237267A6004B2140 /* WorkoutRowView.swift */; };
 		069124CE23729DC3004B2140 /* WorkoutSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069124CD23729DC3004B2140 /* WorkoutSummaryView.swift */; };
 		069124D12372AEEB004B2140 /* IdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069124D02372AEEB004B2140 /* IdentityView.swift */; };
-		069124D32372B012004B2140 /* AttributesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069124D22372B012004B2140 /* AttributesView.swift */; };
 		0697A4F5236F5DE9000034B5 /* SetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697A4F4236F5DE9000034B5 /* SetListView.swift */; };
 		0697A4F7236F5EED000034B5 /* SetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697A4F6236F5EED000034B5 /* SetRowView.swift */; };
 		0697A4F9236F627F000034B5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697A4F8236F627F000034B5 /* User.swift */; };
@@ -130,7 +129,7 @@
 		06546B4B2399BC9B00F747DF /* SquatsPeak.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = SquatsPeak.mlmodel; path = MachineLearning/SquatsPeak.mlmodel; sourceTree = SOURCE_ROOT; };
 		06546B4C2399BC9B00F747DF /* SquatsTrough.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = SquatsTrough.mlmodel; path = MachineLearning/SquatsTrough.mlmodel; sourceTree = SOURCE_ROOT; };
 		06546B4F2399C0FC00F747DF /* JumpingJacksJump.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = JumpingJacksJump.mlmodel; path = MachineLearning/JumpingJacksJump.mlmodel; sourceTree = SOURCE_ROOT; };
-		06546B502399C0FC00F747DF /* JumpingJacksRest.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = JumpingJacksRest.mlmodel; path = MachineLearning/JumpingJacksRest.mlmodel; sourceTree = SOURCE_ROOT; };
+		06546B53239A1D5900F747DF /* JumpingJacksRest.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = JumpingJacksRest.mlmodel; path = MachineLearning/JumpingJacksRest.mlmodel; sourceTree = SOURCE_ROOT; };
 		067ED64923690E9F004FA82D /* Fitnetic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fitnetic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		067ED64C23690E9F004FA82D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		067ED64E23690E9F004FA82D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -170,7 +169,6 @@
 		069124CB237267A6004B2140 /* WorkoutRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRowView.swift; sourceTree = "<group>"; };
 		069124CD23729DC3004B2140 /* WorkoutSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSummaryView.swift; sourceTree = "<group>"; };
 		069124D02372AEEB004B2140 /* IdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityView.swift; sourceTree = "<group>"; };
-		069124D22372B012004B2140 /* AttributesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesView.swift; sourceTree = "<group>"; };
 		0697A4F4236F5DE9000034B5 /* SetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetListView.swift; sourceTree = "<group>"; };
 		0697A4F6236F5EED000034B5 /* SetRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRowView.swift; sourceTree = "<group>"; };
 		0697A4F8236F627F000034B5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -234,7 +232,7 @@
 				06546B4B2399BC9B00F747DF /* SquatsPeak.mlmodel */,
 				06546B4C2399BC9B00F747DF /* SquatsTrough.mlmodel */,
 				06546B4F2399C0FC00F747DF /* JumpingJacksJump.mlmodel */,
-				06546B502399C0FC00F747DF /* JumpingJacksRest.mlmodel */,
+				06546B53239A1D5900F747DF /* JumpingJacksRest.mlmodel */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -363,7 +361,6 @@
 			isa = PBXGroup;
 			children = (
 				069124D02372AEEB004B2140 /* IdentityView.swift */,
-				069124D22372B012004B2140 /* AttributesView.swift */,
 				068931A72375382B00111117 /* EditProfileView.swift */,
 			);
 			path = ProfileViews;
@@ -504,6 +501,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06546B54239A1D5A00F747DF /* JumpingJacksRest.mlmodel in Sources */,
 				0603A27A237D25270076E420 /* SirinStencil-Regular.ttf in Sources */,
 				0603A37B2384FE4F0021D79C /* JointViewController.swift in Sources */,
 				0697A50C236F6B92000034B5 /* SetDetailView.swift in Sources */,
@@ -522,7 +520,6 @@
 				069124C52370C5EE004B2140 /* WorkoutObserver.swift in Sources */,
 				068931A6237501A200111117 /* SignUpView.swift in Sources */,
 				06CDCB5B238D11D1007801CB /* ActivityIndicator.swift in Sources */,
-				06546B522399C0FC00F747DF /* JumpingJacksRest.mlmodel in Sources */,
 				0603A38C2384FEB30021D79C /* VideoCapture.swift in Sources */,
 				06A7960B237F870000730627 /* ExerciseListView.swift in Sources */,
 				068931A22374BF8D00111117 /* CalendarView.swift in Sources */,
@@ -544,7 +541,6 @@
 				06C295C4236A937300B189E4 /* TodayView.swift in Sources */,
 				06546B4D2399BC9B00F747DF /* SquatsPeak.mlmodel in Sources */,
 				068931A02374BC6E00111117 /* CalendarHeaderView.swift in Sources */,
-				069124D32372B012004B2140 /* AttributesView.swift in Sources */,
 				0697A4F9236F627F000034B5 /* User.swift in Sources */,
 				067ED68423692FF3004FA82D /* HostingController.swift in Sources */,
 				06546B512399C0FC00F747DF /* JumpingJacksJump.mlmodel in Sources */,

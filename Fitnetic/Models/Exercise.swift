@@ -13,10 +13,12 @@ struct Exercise: Codable {
   var id: String
   var name: String
   var muscles: [Muscle]?
+  var arEligible: Bool
   
   enum CodingKeys : String, CodingKey {
     case id = "_id"
     case name
     case muscles
+    case arEligible
   }
 }
