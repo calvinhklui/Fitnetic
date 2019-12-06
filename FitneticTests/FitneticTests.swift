@@ -87,16 +87,31 @@ class FitneticTests: XCTestCase {
       XCTAssertEqual(test_workout_observer.workout.id, "abcde123")
       
       test_workout_observer.postData(completion: { (success) -> Void in
-        print(success)
+        if (success == true) {
+          XCTAssertNotNil(test_workout_observer.workout)
+          XCTAssertEqual(test_workout_observer.loading, false)
+          XCTAssertEqual(test_workout_observer.workout.user.id, "5dbf3ac810fe5000041aef80")
+        } else {
+          XCTAssertEqual(test_workout_observer.loading, true)
+        }
       })
       XCTAssertEqual(test_workout_observer.workout.id, "abcde123")
     }
   
     func testAnalyticsObserver() {
-      let test_analytic_observer = AnalyticsObserver()
-      XCTAssertNotNil(test_analytic_observer)
-      XCTAssertNotNil(test_analytic_observer.analytics)
-      XCTAssert((test_analytic_observer.analytics as Any) is Analytics)
+      let test_analytics_observer = AnalyticsObserver()
+      XCTAssertNotNil(test_analytics_observer)
+      XCTAssertNotNil(test_analytics_observer.analytics)
+      XCTAssert((test_analytics_observer.analytics as Any) is Analytics)
+      test_analytics_observer.fetchData()
+      XCTAssertEqual(test_analytics_observer.loading, true)
+      test_analytics_observer.fetchSVG()
+      
+      DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+        XCTAssertNotNil(test_analytics_observer.analytics)
+        XCTAssertNotNil(test_analytics_observer.heatmap)
+        XCTAssertEqual(test_analytics_observer.loading, false)
+      }
   }
 
     func testExample() {
