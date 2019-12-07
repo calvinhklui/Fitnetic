@@ -84,6 +84,8 @@ struct SignUpView: View {
         self.userObserver.postData(completion: { (success) -> Void in
           if success {
             self.userObserver.fetchData()
+            let newUserID = self.userObserver.user.id
+            UserDefaults.standard.set(newUserID, forKey: "globalUserID")
             self.presentationMode.wrappedValue.dismiss()
           }
         })

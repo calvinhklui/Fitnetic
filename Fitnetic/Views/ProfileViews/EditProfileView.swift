@@ -50,8 +50,10 @@ struct EditProfileView: View {
             .foregroundColor(Color(UIColor.systemGray2))
             Spacer()
             TextField(self.userObserver.user.username, text: $username)
+            .foregroundColor(Color(UIColor.systemGray2))
             .frame(width: 200)
           }
+          .disabled(true)
           
           HStack {
             Text("First Name")
