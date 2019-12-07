@@ -23,9 +23,11 @@ Developed by Calvin Lui, Christina Chou, and Wilson Yu for 67-442 iOS Engineerin
 - Support for light and dark mode
 
 ## Dependencies
-This app was developed with the help of the open source community. Special thanks to the developers of:
+We created Fitnetic with the help of the open source community. Special thanks to the developers of:
 - [PoseEstimation](https://github.com/tucan9389/PoseEstimation-CoreML)
 - [SVGKit](https://github.com/SVGKit/SVGKit)
+
+Fitnetic connects to the [Fitnetic API](https://github.com/wiyu98/fitnetic-api) to fetch and push data.
 
 ## Requirements
 - Xcode 11+
