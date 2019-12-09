@@ -36,7 +36,7 @@ Fitnetic connects to the [Fitnetic API](https://github.com/wiyu98/fitnetic-api) 
 **NOTE:** These requirements exist because Fitnetic was built with SwiftUI.
 
 ## For Graders
-Currently, we support AR/ML on two exercises: squats and jumping jacks (*not working well yet*). To activate AR/ML mode, tap the camera button during your workout. We recommend that you place your phone on the floor leaning against the wall, at an angle where your entire body is visible to the camera. The app will provide audio feedback.
+Currently, we support AR/ML on two exercises: squats and jumping jacks. To activate AR/ML mode, tap the camera button during your workout. We recommend that you place your phone on the floor leaning against the wall, at an angle where your entire body is visible to the camera. The app will provide audio feedback.
 
 **NOTE**: Your arms must be extended or touching your head while doing squats (see GIF). This is part of our form checking, and improper reps will not be counted.
 

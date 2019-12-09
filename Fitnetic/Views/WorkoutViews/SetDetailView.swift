@@ -56,6 +56,9 @@ struct SetDetailView: View {
     self.jointViewStruct.jointView = DrawingJointView(exerciseName: self.workoutObserver.workout.sets[setCounter + 1].exercise.name)
     self.targetReps = self.workoutObserver.workout.sets[self.setCounter + 1].reps!
     self.repsRemaining = self.targetReps
+    if (self.isCameraMode) {
+     self.isCameraMode = self.workoutObserver.workout.sets[self.setCounter + 1].exercise.arEligible
+    }
     self.timeFromStart = 0
     self.timePerRep = 0
   }
@@ -145,7 +148,9 @@ struct SetDetailView: View {
                       .fontWeight(.black)
                       .foregroundColor(.primary)
                       .onReceive(self.jointViewStruct.jointView.timer) { _ in
-                        self.timeFromStart = self.timeFromStart + 0.1
+                        if (self.bodyPosition != "Absent") {
+                          self.timeFromStart = self.timeFromStart + 0.1
+                        }
                         let denominator = (self.targetReps - self.repsRemaining)
                         self.timePerRep = self.timeFromStart / Float(denominator == 0 ? 1 : denominator)
                       }

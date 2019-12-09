@@ -103,8 +103,9 @@ class FitneticTests: XCTestCase {
       XCTAssertNotNil(test_analytics_observer)
       XCTAssertNotNil(test_analytics_observer.analytics)
       XCTAssert((test_analytics_observer.analytics as Any) is Analytics)
-      test_analytics_observer.fetchData()
+      test_analytics_observer.loading = true
       XCTAssertEqual(test_analytics_observer.loading, true)
+      test_analytics_observer.fetchData()
       test_analytics_observer.fetchSVG()
       
       DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
