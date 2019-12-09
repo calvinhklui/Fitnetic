@@ -4,13 +4,13 @@ Supercharge your 7-Minute Workout with Fitnetic, a data-driven application that 
 Developed by Calvin Lui, Christina Chou, and Wilson Yu for 67-442 iOS Engineering at Carnegie Mellon University.
 
 ## Screenshots
-| Home | Workout | Squats |
+| Home | Calendar | Body Map |
 | :----: | :----: | :----: |
-| <img src="Screenshots/fitneticHome.jpeg"> | <img src="Screenshots/fitneticWorkout.jpeg"> | <img src="Screenshots/fitneticSquats.gif" width="1125"> |
+| <img src="Screenshots/fitneticHome.jpeg"> | <img src="Screenshots/fitneticCalendar.jpeg"> | <img src="Screenshots/fitneticBodymap.jpeg"> |
 
-| Calendar | Body Map | History |
+| Workout | Squats | Jumping Jacks |
 | :----: | :----: | :----: |
-| <img src="Screenshots/fitneticCalendar.jpeg"> | <img src="Screenshots/fitneticBodymap.jpeg"> | <img src="Screenshots/fitneticHistory.jpeg"> |
+| <img src="Screenshots/fitneticWorkout.jpeg"> | <img src="Screenshots/fitneticSquats.gif" width="1125"> | <img src="Screenshots/fitneticJumping.gif" width="1125"> |
 
 ## Features
 - Recommended workout based on past workouts
